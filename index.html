@@ -732,13 +732,45 @@
     gap: 2rem;
     max-width: var(--container);
     margin: 0 auto;
+    transition: opacity 0.42s ease-in-out, transform 0.42s ease-in-out, max-height 0.42s ease-in-out, margin 0.42s ease-in-out;
+    max-height: 2200px;
+    overflow: hidden;
+  }
+  .journal-grid.is-hidden {
+    opacity: 0;
+    transform: translateY(24px);
+    max-height: 0;
+    margin-bottom: 0;
+    pointer-events: none;
   }
   .article {
     cursor: pointer;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    display: block;
   }
   .article:hover { transform: translateY(-4px); }
   .article.featured { grid-row: span 2; }
+  .journal-card {
+    color: inherit;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+    min-height: 100%;
+  }
+  .journal-card:nth-child(odd) {
+    background: #0b1f3a;
+    box-shadow: 0 20px 44px rgba(15, 28, 51, 0.18);
+  }
+  .journal-card:nth-child(even) {
+    background: #ffffff;
+    box-shadow: 0 18px 36px rgba(15, 28, 51, 0.08);
+  }
+  .journal-card .article-copy {
+    padding: 0 1.35rem 1.4rem;
+  }
+  .journal-card:nth-child(odd) .article-copy {
+    background: linear-gradient(180deg, rgba(11, 31, 58, 0) 0%, rgba(11, 31, 58, 0.18) 100%);
+  }
   .article-image {
     aspect-ratio: 4/5;
     background-size: cover;
@@ -747,10 +779,28 @@
     margin-bottom: 1.4rem;
     transition: filter 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     overflow: hidden;
+    position: relative;
+  }
+  .journal-card:nth-child(odd) .article-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 20, 38, 0.06) 0%, rgba(10, 20, 38, 0.36) 100%);
   }
   .article.featured .article-image { aspect-ratio: 4/5.4; }
   .article:not(.featured) .article-image { aspect-ratio: 4/3; }
   .article:hover .article-image { filter: brightness(0.93); }
+  .journal-card:nth-child(odd):hover {
+    background: #163053;
+    transform: translateY(-4px) scale(1.02);
+  }
+  .journal-card:nth-child(even):hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 26px 56px rgba(15, 28, 51, 0.14);
+  }
+  .journal-card.is-activating {
+    transform: translateY(-4px) scale(1.03) !important;
+  }
 
   .article-tag {
     font-size: 0.7rem;
@@ -782,13 +832,213 @@
     font-size: 0.9rem;
     color: rgba(15, 28, 51, 0.55);
   }
+  .journal-card:nth-child(odd) .article-title { color: var(--offwhite); }
+  .journal-card:nth-child(odd) .article-tag { color: #d7bf91; }
+  .journal-card:nth-child(odd) .article-date { color: rgba(250, 246, 238, 0.68); }
+  .journal-card:nth-child(odd) .article-excerpt { color: rgba(250, 246, 238, 0.76); }
+  .journal-card:nth-child(even) .article-title { color: var(--navy); }
+  .journal-card:nth-child(even) .article-tag { color: var(--gold); }
+  .journal-card:nth-child(even) .article-date { color: rgba(15, 28, 51, 0.55); }
+  .journal-article-view {
+    max-width: var(--container);
+    margin: 0 auto;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transform: translateY(24px);
+    transition: opacity 0.42s ease-in-out, transform 0.42s ease-in-out, max-height 0.42s ease-in-out, margin 0.42s ease-in-out;
+  }
+  .journal-article-view.active {
+    opacity: 1;
+    max-height: 9000px;
+    transform: translateY(0);
+    margin-top: 2rem;
+  }
+  .journal-article-shell {
+    background: rgba(250, 246, 238, 0.72);
+    border: 1px solid rgba(20, 22, 26, 0.08);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(14px);
+  }
+  .journal-article-hero {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 8;
+    min-height: 320px;
+    background: var(--navy-deep);
+  }
+  .journal-article-hero-media {
+    position: absolute;
+    inset: -4%;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.04);
+    will-change: transform;
+  }
+  .journal-article-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 20, 38, 0.12) 0%, rgba(10, 20, 38, 0.38) 100%);
+    pointer-events: none;
+  }
+  .journal-article-intro {
+    max-width: 760px;
+    margin: -5rem auto 0;
+    position: relative;
+    z-index: 2;
+    background: rgba(250, 246, 238, 0.96);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+  }
+  .journal-article-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 1.15rem;
+  }
+  .journal-article-back:hover { color: var(--gold); }
+  .journal-article-kicker {
+    display: block;
+    margin-bottom: 0.9rem;
+    color: var(--gold);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .journal-article-title {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    line-height: 1.06;
+    color: var(--navy);
+    margin: 0;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+  }
+  .journal-article-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.2rem;
+    margin-top: 1.25rem;
+    font-size: 0.88rem;
+    color: rgba(15, 28, 51, 0.7);
+  }
+  .journal-article-meta span + span::before {
+    content: "•";
+    margin-right: 1.2rem;
+    color: rgba(15, 28, 51, 0.28);
+  }
+  .journal-article-body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem 1.6rem 4rem;
+  }
+  .journal-article-paragraph {
+    font-size: clamp(1.02rem, 1.6vw, 1.15rem);
+    line-height: 1.9;
+    color: rgba(15, 28, 51, 0.9);
+    margin: 0 0 1.75rem;
+  }
+  .journal-article-related {
+    padding: 0 1.6rem 3rem;
+  }
+  .journal-related-head {
+    max-width: 1180px;
+    margin: 0 auto 1.8rem;
+  }
+  .journal-related-head h3 {
+    margin: 0.8rem 0 0;
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 3vw, 2.7rem);
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .journal-related-grid {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem;
+  }
+  .journal-related-card {
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(20, 22, 26, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+    width: 100%;
+    padding: 0;
+  }
+  .journal-related-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  .journal-related-image {
+    aspect-ratio: 4 / 3;
+    background-size: cover;
+    background-position: center;
+  }
+  .journal-related-copy {
+    padding: 1.2rem 1.2rem 1.35rem;
+  }
+  .journal-related-tag {
+    display: block;
+    margin-bottom: 0.55rem;
+    color: var(--gold);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .journal-related-title {
+    font-family: var(--serif);
+    font-size: 1.22rem;
+    line-height: 1.22;
+    color: var(--navy);
+    margin: 0 0 0.55rem;
+    font-weight: 700;
+  }
+  .journal-related-date {
+    font-size: 0.84rem;
+    color: rgba(15, 28, 51, 0.62);
+  }
+  .article-reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .article-reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
   @media (max-width: 1000px) {
     .journal-grid { grid-template-columns: 1fr 1fr; }
     .article.featured { grid-row: auto; grid-column: span 2; }
+    .journal-related-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
     .journal-grid { grid-template-columns: 1fr; }
     .article.featured { grid-column: auto; }
+    .journal-article-intro {
+      margin-top: 0;
+      box-shadow: none;
+      padding-inline: 1.35rem;
+    }
+    .journal-article-hero {
+      aspect-ratio: 4 / 5;
+      min-height: 280px;
+    }
+    .journal-article-body,
+    .journal-article-related { padding-inline: 1.1rem; }
   }
 
   /* ============================================================
@@ -1639,59 +1889,68 @@
         </p>
       </div>
 
-      <div class="journal-grid">
-        <article class="article featured reveal">
-          <div class="article-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.28.11%20(1).jpeg')"></div>
-          <span class="article-tag" data-lang-en>Reference</span>
-          <span class="article-tag" data-lang-es>Referencia</span>
-          <h3 class="article-title">
-            <span data-lang-en>Why the Submariner 14060 Is a Collector Favorite</span>
-            <span data-lang-es>Por Qué el Submariner 14060 Es Favorito de los Coleccionistas</span>
-          </h3>
-          <p class="article-excerpt">
-            <span data-lang-en>The last of the four-line dials, the last with a tritium-free aluminum bezel, and arguably the purest expression of the Submariner — a reference that quietly stole hearts for two decades.</span>
-            <span data-lang-es>El último de los diales de cuatro líneas, el último con bisel de aluminio sin tritio, y posiblemente la expresión más pura del Submariner — una referencia que conquistó corazones durante dos décadas.</span>
-          </p>
-          <span class="article-date" data-lang-en>March 2025 · 6 min read</span>
-          <span class="article-date" data-lang-es>Marzo 2025 · 6 min de lectura</span>
+      <div class="journal-grid" id="journalGrid">
+        <article class="article journal-card featured reveal" data-article="submariner-14060" tabindex="0" role="button" aria-label="Why the Submariner 14060 Is a Collector Favorite">
+          <div class="article-image" style="background-image:url('https://www.watchclub.com/upload/watches/originali/watch-club-rolex-rolex-14060m-nosfinalseries-ref-14060m-year-2012-1715340602562-15733-7.jpg')"></div>
+          <div class="article-copy">
+            <span class="article-tag" data-lang-en>Reference</span>
+            <span class="article-tag" data-lang-es>Referencia</span>
+            <h3 class="article-title">
+              <span data-lang-en>Why the Submariner 14060 Is a Collector Favorite</span>
+              <span data-lang-es>Por Qué el Submariner 14060 Es Favorito de los Coleccionistas</span>
+            </h3>
+            <p class="article-excerpt">
+              <span data-lang-en>The last of the four-line dials, the last with a tritium-free aluminum bezel, and arguably the purest expression of the Submariner — a reference that quietly stole hearts for two decades.</span>
+              <span data-lang-es>El último de los diales de cuatro líneas, el último con bisel de aluminio sin tritio, y posiblemente la expresión más pura del Submariner — una referencia que conquistó corazones durante dos décadas.</span>
+            </p>
+            <span class="article-date" data-lang-en>March 2025 · 6 min read</span>
+            <span class="article-date" data-lang-es>Marzo 2025 · 6 min de lectura</span>
+          </div>
         </article>
 
-        <article class="article reveal">
+        <article class="article journal-card reveal" data-article="seamaster-300" tabindex="0" role="button" aria-label="Seamaster 300: Tool Watch, Timeless Design">
           <div class="article-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.27.04%20(1).jpeg')"></div>
-          <span class="article-tag" data-lang-en>Modern</span>
-          <span class="article-tag" data-lang-es>Moderno</span>
-          <h3 class="article-title">
-            <span data-lang-en>Seamaster 300: Tool Watch, Timeless Design</span>
-            <span data-lang-es>Seamaster 300: Reloj Herramienta, Diseño Atemporal</span>
-          </h3>
-          <span class="article-date" data-lang-en>February 2025</span>
-          <span class="article-date" data-lang-es>Febrero 2025</span>
+          <div class="article-copy">
+            <span class="article-tag" data-lang-en>Modern</span>
+            <span class="article-tag" data-lang-es>Moderno</span>
+            <h3 class="article-title">
+              <span data-lang-en>Seamaster 300: Tool Watch, Timeless Design</span>
+              <span data-lang-es>Seamaster 300: Reloj Herramienta, Diseño Atemporal</span>
+            </h3>
+            <span class="article-date" data-lang-en>February 2025</span>
+            <span class="article-date" data-lang-es>Febrero 2025</span>
+          </div>
         </article>
 
-        <article class="article reveal">
+        <article class="article journal-card reveal" data-article="vintage-rolex" tabindex="0" role="button" aria-label="The Beauty of Vintage Rolex">
           <div class="article-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.29.35%20(1).jpeg')"></div>
-          <span class="article-tag" data-lang-en>Vintage</span>
-          <span class="article-tag" data-lang-es>Vintage</span>
-          <h3 class="article-title">
-            <span data-lang-en>The Beauty of Vintage Rolex</span>
-            <span data-lang-es>La Belleza del Rolex Vintage</span>
-          </h3>
-          <span class="article-date" data-lang-en>January 2025</span>
-          <span class="article-date" data-lang-es>Enero 2025</span>
+          <div class="article-copy">
+            <span class="article-tag" data-lang-en>Vintage</span>
+            <span class="article-tag" data-lang-es>Vintage</span>
+            <h3 class="article-title">
+              <span data-lang-en>The Beauty of Vintage Rolex</span>
+              <span data-lang-es>La Belleza del Rolex Vintage</span>
+            </h3>
+            <span class="article-date" data-lang-en>January 2025</span>
+            <span class="article-date" data-lang-es>Enero 2025</span>
+          </div>
         </article>
 
-        <article class="article reveal">
+        <article class="article journal-card reveal" data-article="buying-first-luxury-watch" tabindex="0" role="button" aria-label="Buying Your First Luxury Watch">
           <div class="article-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.35.24%20(1).jpeg')"></div>
-          <span class="article-tag" data-lang-en>Guide</span>
-          <span class="article-tag" data-lang-es>Guía</span>
-          <h3 class="article-title">
-            <span data-lang-en>Buying Your First Luxury Watch</span>
-            <span data-lang-es>Comprando Tu Primer Reloj de Lujo</span>
-          </h3>
-          <span class="article-date" data-lang-en>December 2024</span>
-          <span class="article-date" data-lang-es>Diciembre 2024</span>
+          <div class="article-copy">
+            <span class="article-tag" data-lang-en>Guide</span>
+            <span class="article-tag" data-lang-es>Guía</span>
+            <h3 class="article-title">
+              <span data-lang-en>Buying Your First Luxury Watch</span>
+              <span data-lang-es>Comprando Tu Primer Reloj de Lujo</span>
+            </h3>
+            <span class="article-date" data-lang-en>December 2024</span>
+            <span class="article-date" data-lang-es>Diciembre 2024</span>
+          </div>
         </article>
       </div>
+      <div id="journal-article-view" class="journal-article-view" aria-live="polite"></div>
     </div>
   </section>
 
@@ -1732,7 +1991,7 @@
             </div>
           </li>
         </ol>
-        <a href="https://wa.me/" class="btn btn-ghost">
+        <a href="https://wa.me/593982210111" class="btn btn-ghost">
           <span data-lang-en>Contact via WhatsApp</span>
           <span data-lang-es>Contactar por WhatsApp</span>
         </a>
@@ -1891,7 +2150,7 @@
         <div class="contact-list">
           <div class="row">
             <span class="label">WhatsApp</span>
-            <a class="value" href="https://wa.me/" target="_blank">
+            <a class="value" href="https://wa.me/593982210111" target="_blank">
               <span data-lang-en>Open Chat</span>
               <span data-lang-es>Abrir Chat</span>
             </a>
@@ -1988,7 +2247,7 @@
         <h5 data-lang-es>Conectar</h5>
         <ul>
           <li><a href="https://instagram.com/jdc_watches">Instagram</a></li>
-          <li><a href="https://wa.me/">WhatsApp</a></li>
+          <li><a href="https://wa.me/593982210111">WhatsApp</a></li>
           <li><a href="#contact">Email</a></li>
         </ul>
       </div>
@@ -2029,13 +2288,13 @@
             <span class="modal-value" id="modalCondition"></span>
           </div>
         </div>
-        <a href="https://wa.me/" class="btn modal-cta" id="modalCta" target="_blank" rel="noopener"></a>
+        <a href="https://wa.me/593982210111" class="btn modal-cta" id="modalCta" target="_blank" rel="noopener"></a>
       </div>
     </div>
   </div>
 
   <!-- WhatsApp FAB -->
-  <a href="https://wa.me/" class="whatsapp-fab" aria-label="WhatsApp">
+  <a href="https://wa.me/593982210111" class="whatsapp-fab" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9s-.5-.1-.7.1c-.2.3-.7.9-.9 1.1s-.3.2-.6.1c-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1s0-.5.1-.6c.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5s.1-.4 0-.5-.7-1.6-.9-2.2c-.2-.5-.5-.5-.7-.5-.2 0-.4 0-.6 0s-.5.1-.8.4c-.3.3-1 1-1 2.4s1.1 2.8 1.2 3 2.1 3.2 5.1 4.5c.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.5.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
   </a>
 
@@ -2163,7 +2422,7 @@
       } else {
         mCta.textContent = lang === 'es' ? 'Solicitar Info por WhatsApp →' : 'Request Info via WhatsApp →';
       }
-      mCta.href = 'https://wa.me/';
+      mCta.href = 'https://wa.me/593982210111';
 
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -2185,6 +2444,252 @@
     mClose.addEventListener('click', closeModal);
     overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+  })();
+
+  // ===== Journal Inline Articles =====
+  (function () {
+    const journalGrid = document.getElementById('journalGrid');
+    const journalView = document.getElementById('journal-article-view');
+    const journalSection = document.getElementById('journal');
+    if (!journalGrid || !journalView || !journalSection) return;
+
+    const journalArticles = {
+      'submariner-14060': {
+        category: 'REFERENCE',
+        title: 'Why the Submariner 14060 Is a Collector Favorite',
+        date: 'March 2025',
+        readTime: '6 min read',
+        image: 'https://www.watchclub.com/upload/watches/originali/watch-club-rolex-rolex-14060m-nosfinalseries-ref-14060m-year-2012-1715340602562-15733-7.jpg',
+        paragraphs: [
+          'There are watches that define categories—and then there are watches that quietly define taste. The Submariner 14060 belongs to the second group. It was never the loudest Rolex in the room, never the most complicated, and never the most hyped. Yet among collectors, it has become something far more important: a reference point.',
+          'This isn’t about status. It’s about clarity.',
+          'At its core, the 14060 represents the Submariner in its most distilled form. No date window interrupting the dial. No cyclops lens magnifying anything unnecessarily. Just symmetry, balance, and purpose. It feels intentional in a way that modern watches often struggle to replicate.',
+          'The aluminum bezel plays a quiet but crucial role. Unlike ceramic, it ages. It fades. It tells a story. Over time, the deep black can soften into something warmer, something more personal. That transformation isn’t a flaw—it’s the entire point. Each piece becomes unique to its owner.',
+          'Produced in the 1990s and early 2000s, the 14060 sits in a transitional era. It carries vintage proportions but benefits from modern reliability. Sapphire crystal. Solid engineering. Everyday usability. It’s a watch you can live with—not just store.',
+          'And then there’s how it wears.',
+          'At 40mm, it sits closer to the wrist than its modern counterparts. The absence of polished elements keeps it understated. It doesn’t demand attention—it earns it slowly.',
+          'Collectors often debate between the two-line and four-line dial variants. But that debate is part of what makes this reference alive. It invites nuance. It rewards attention.',
+          'In a world where watches are increasingly designed to be noticed, the 14060 does the opposite. It disappears. And somehow, that’s exactly why it stands out.'
+        ]
+      },
+      'seamaster-300': {
+        category: 'MODERN',
+        title: 'Seamaster 300: Tool Watch, Timeless Design',
+        date: 'February 2025',
+        readTime: '6 min read',
+        image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.27.04%20(1).jpeg',
+        paragraphs: [
+          'Some watches evolve. Others adapt. And a few manage to do both without losing their identity. The Seamaster 300 is one of them.',
+          'From a distance, it’s immediately recognizable. The wave dial. The helium escape valve. The bold hands and indices. But what makes the modern Seamaster compelling isn’t just its design—it’s how confidently it blends heritage with innovation.',
+          'This is not a nostalgic reissue. It’s a forward-looking tool watch.',
+          'The ceramic bezel and dial bring durability and depth. Light plays across the surface in a way that feels dynamic, almost architectural. It’s not static like older dive watches—it moves with you.',
+          'Then there’s the movement. Precision, anti-magnetic resistance, and real-world reliability. This is a watch built for modern environments, not just underwater exploration.',
+          'And yet, despite all of that technology, it never feels over-engineered.',
+          'The Seamaster wears with presence. Slightly larger, slightly bolder than traditional divers, but balanced. It’s confident without being aggressive.',
+          'It’s also versatile in a way many tool watches aren’t. Steel bracelet, rubber strap—it adapts. Casual, travel, business—it fits.',
+          'The genius of the Seamaster 300 is that it doesn’t try to be vintage. It respects its past, but it’s clearly built for today.',
+          'And that’s exactly why it works.'
+        ]
+      },
+      'vintage-rolex': {
+        category: 'VINTAGE',
+        title: 'The Beauty of Vintage Rolex',
+        date: 'January 2025',
+        readTime: '6 min read',
+        image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.29.35%20(1).jpeg',
+        paragraphs: [
+          'Vintage Rolex isn’t about perfection. It’s about character.',
+          'Every mark, every fade, every imperfection tells a story. And in a world obsessed with flawless finishes, that story becomes incredibly valuable.',
+          'What defines a vintage Rolex isn’t just age—it’s presence. The way the dial has aged. The warmth of tritium markers. The slight inconsistencies that modern manufacturing has eliminated.',
+          'These watches feel human.',
+          'There’s also a certain unpredictability. No two pieces are identical. Even references produced in the same year can age completely differently. That individuality creates connection. Ownership becomes personal.',
+          'But beyond aesthetics, there’s something deeper: restraint.',
+          'Vintage Rolex watches were built as tools first. Function dictated design. Proportions were practical. Materials were chosen for purpose, not luxury.',
+          'That philosophy is becoming increasingly rare.',
+          'Wearing a vintage Rolex is a different experience. Lighter. Simpler. More tactile. It doesn’t try to impress—it simply exists.',
+          'And in doing so, it creates a different kind of appreciation. One that isn’t immediate, but grows over time.',
+          'That’s the beauty of vintage. It doesn’t shout. It stays.'
+        ]
+      },
+      'buying-first-luxury-watch': {
+        category: 'GUIDE',
+        title: 'Buying Your First Luxury Watch',
+        date: 'December 2024',
+        readTime: '6 min read',
+        image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.35.24%20(1).jpeg',
+        paragraphs: [
+          'Buying your first luxury watch isn’t just a purchase—it’s an entry point.',
+          'It’s easy to get overwhelmed. Brands, references, movements, resale value. The noise is endless. But the truth is much simpler than it seems.',
+          'Start with how it makes you feel.',
+          'A great watch isn’t defined by price or complexity. It’s defined by connection. The moment you put it on and it feels right—that’s what matters.',
+          'There are, of course, practical considerations.',
+          'Size is critical. A watch should sit comfortably on your wrist. Not too large, not too small. Proportion matters more than trends.',
+          'Versatility is another key factor. Your first watch should work in multiple environments. Daily wear, travel, formal settings. The more adaptable it is, the more value it brings.',
+          'Then comes brand and history. Not for status—but for understanding. Knowing where a watch comes from adds depth to ownership.',
+          'And finally, patience.',
+          'The right watch isn’t always the first one you see. Take time. Research. Try pieces on. Let your taste develop.',
+          'Because once you buy your first, it rarely stops there.',
+          'A watch collection doesn’t begin with logic.',
+          'It begins with instinct.'
+        ]
+      }
+    };
+
+    const articleOrder = ['submariner-14060', 'seamaster-300', 'vintage-rolex', 'buying-first-luxury-watch'];
+    let activeArticleId = null;
+    let activeHeroMedia = null;
+    let articleSwapTimer = null;
+
+    function renderRelatedCards(currentArticleId) {
+      return articleOrder
+        .filter(function (articleId) { return articleId !== currentArticleId; })
+        .map(function (articleId) {
+          const article = journalArticles[articleId];
+          return [
+            '<button class="journal-related-card" type="button" data-related-article="', articleId, '">',
+              '<div class="journal-related-image" style="background-image:url(\'', article.image, '\')"></div>',
+              '<div class="journal-related-copy">',
+                '<span class="journal-related-tag">', article.category, '</span>',
+                '<h4 class="journal-related-title">', article.title, '</h4>',
+                '<span class="journal-related-date">', article.date, ' · ', article.readTime, '</span>',
+              '</div>',
+            '</button>'
+          ].join('');
+        })
+        .join('');
+    }
+
+    function renderArticle(articleId) {
+      const article = journalArticles[articleId];
+      if (!article) return '';
+
+      const paragraphs = article.paragraphs.map(function (paragraph) {
+        return '<p class="journal-article-paragraph article-reveal">' + paragraph + '</p>';
+      }).join('');
+
+      return [
+        '<div class="journal-article-shell">',
+          '<div class="journal-article-hero article-reveal in">',
+            '<div class="journal-article-hero-media" data-journal-parallax style="background-image:url(\'', article.image, '\')"></div>',
+          '</div>',
+          '<div class="journal-article-intro article-reveal">',
+            '<button class="journal-article-back" id="journalArticleBack" type="button">',
+              '<span data-lang-en>← Back to Journal</span>',
+              '<span data-lang-es>← Volver al Diario</span>',
+            '</button>',
+            '<span class="journal-article-kicker">', article.category, '</span>',
+            '<h3 class="journal-article-title">', article.title, '</h3>',
+            '<div class="journal-article-meta">',
+              '<span>', article.date, '</span>',
+              '<span>', article.readTime, '</span>',
+            '</div>',
+          '</div>',
+          '<div class="journal-article-body">', paragraphs, '</div>',
+          '<div class="journal-article-related article-reveal">',
+            '<div class="journal-related-head">',
+              '<span class="eyebrow"><span data-lang-en>Related Articles</span><span data-lang-es>Artículos Relacionados</span></span>',
+              '<h3><span data-lang-en>Continue Reading</span><span data-lang-es>Seguir Leyendo</span></h3>',
+            '</div>',
+            '<div class="journal-related-grid">', renderRelatedCards(articleId), '</div>',
+          '</div>',
+        '</div>'
+      ].join('');
+    }
+
+    function updateArticleParallax() {
+      if (!activeHeroMedia) return;
+      const frame = activeHeroMedia.parentElement.getBoundingClientRect();
+      const offset = Math.max(-18, Math.min(28, frame.top * -0.08));
+      const scale = 1.04 + Math.min(0.035, Math.abs(frame.top) / 2200);
+      activeHeroMedia.style.transform = 'translate3d(0, ' + offset + 'px, 0) scale(' + scale + ')';
+    }
+
+    function revealArticleContent() {
+      activeHeroMedia = journalView.querySelector('[data-journal-parallax]');
+      updateArticleParallax();
+      journalView.querySelectorAll('.article-reveal').forEach(function (element, index) {
+        window.setTimeout(function () {
+          element.classList.add('in');
+        }, 70 + index * 80);
+      });
+    }
+
+    function bindArticleViewEvents() {
+      const backButton = document.getElementById('journalArticleBack');
+      if (backButton) {
+        backButton.addEventListener('click', closeArticleView);
+      }
+      journalView.querySelectorAll('[data-related-article]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          openArticleView(button.dataset.relatedArticle);
+        });
+      });
+    }
+
+    function mountArticle(articleId) {
+      journalView.innerHTML = renderArticle(articleId);
+      bindArticleViewEvents();
+      requestAnimationFrame(function () {
+        journalView.classList.add('active');
+        revealArticleContent();
+        journalView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    function openArticleView(articleId, card) {
+      if (!journalArticles[articleId]) return;
+      window.clearTimeout(articleSwapTimer);
+
+      if (activeArticleId && activeArticleId !== articleId) {
+        journalView.classList.remove('active');
+        articleSwapTimer = window.setTimeout(function () {
+          activeArticleId = articleId;
+          mountArticle(articleId);
+        }, 220);
+        return;
+      }
+
+      activeArticleId = articleId;
+      if (card) {
+        card.classList.add('is-activating');
+        window.setTimeout(function () {
+          card.classList.remove('is-activating');
+        }, 320);
+      }
+      journalGrid.classList.add('is-hidden');
+      articleSwapTimer = window.setTimeout(function () {
+        mountArticle(articleId);
+      }, 220);
+    }
+
+    function closeArticleView() {
+      activeArticleId = null;
+      activeHeroMedia = null;
+      journalView.classList.remove('active');
+      window.setTimeout(function () {
+        journalView.innerHTML = '';
+        journalGrid.classList.remove('is-hidden');
+        journalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 240);
+    }
+
+    function activateCard(card) {
+      openArticleView(card.dataset.article, card);
+    }
+
+    journalGrid.querySelectorAll('.journal-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        activateCard(card);
+      });
+      card.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          activateCard(card);
+        }
+      });
+    });
+
+    window.addEventListener('scroll', updateArticleParallax, { passive: true });
   })();
 
 </script>
