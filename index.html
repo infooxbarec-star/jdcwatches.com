@@ -1,1209 +1,2191 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Q2 Saloon — Encuentra el auto de tus sueños| Quito Ecuador</title>
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/infooxbarec-star/pruebaq2saloon/refs/heads/main/logo.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JDC Watches — Curated Timepieces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#07101e;
-  --surface:#0b1729;
-  --card:#0e1d33;
-  --card2:#121f38;
-  --line:rgba(200,184,154,0.1);
-  --line-h:rgba(200,184,154,0.28);
-  --beige:#c8b89a;
-  --beige-d:#a89070;
-  --beige-l:#dfd0b4;
-  --white:#f0ebe2;
-  --gray-l:#8fa5c4;
-  --gray:#506480;
-  --green:#25D366;
-  --radius:12px;
-  --radius-lg:22px;
-  --ease:cubic-bezier(0.22,1,0.36,1);
-}
-html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;font-optical-sizing:auto;overflow-x:hidden;line-height:1.6}
-a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-button{cursor:pointer;font-family:inherit}
+  /* ============================================================
+     JDC WATCHES — Premium luxury watch dealer
+     Palette: warm beige, deep navy, off-white, charcoal, gold
+     Type: Inter (all weights — 400 · 500 · 600 · 700 · 800)
+     ============================================================ */
 
-/* ─── SCROLLBAR ─── */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--beige-d);border-radius:3px}
+  :root {
+    --beige: #ede4d3;
+    --beige-deep: #e2d6bf;
+    --beige-soft: #f4ede0;
+    --offwhite: #faf6ee;
+    --navy: #0f1c33;
+    --navy-deep: #0a1426;
+    --charcoal: #1f1f23;
+    --ink: #14161a;
+    --gold: #b8965a;
+    --gold-soft: #c9a872;
+    --line: rgba(20, 22, 26, 0.12);
+    --line-strong: rgba(20, 22, 26, 0.22);
+    --shadow-sm: 0 1px 2px rgba(15, 28, 51, 0.04), 0 2px 8px rgba(15, 28, 51, 0.04);
+    --shadow-md: 0 4px 24px rgba(15, 28, 51, 0.08);
+    --shadow-lg: 0 24px 60px -20px rgba(15, 28, 51, 0.25);
 
-/* ─── FLOATING WA ─── */
-.wa-float{
-  position:fixed;bottom:28px;right:28px;z-index:9000;
-  width:56px;height:56px;border-radius:50%;
-  background:var(--green);display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 24px rgba(37,211,102,0.45);
-  transition:transform 0.3s var(--ease),box-shadow 0.3s;
-}
-.wa-float:hover{transform:scale(1.12);box-shadow:0 6px 32px rgba(37,211,102,0.6)}
-.wa-float svg{width:28px;height:28px;fill:#fff}
+    --serif: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-/* ─── NAV ─── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:8000;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;height:68px;
-  transition:background 0.4s,backdrop-filter 0.4s,border-bottom 0.4s;
-}
-nav.scrolled{
-  background:rgba(7,16,30,0.88);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
-}
-.nav-logo{display:flex;align-items:center}
-.nav-logo-img{
-  display:block;
-  height:clamp(40px,4.2vw,56px);
-  width:auto;
-  max-width:170px;
-  object-fit:contain;
-}
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{font-size:0.875rem;font-weight:500;letter-spacing:0.04em;color:rgba(240,235,226,0.78);transition:color 0.2s}
-.nav-links a:hover{color:var(--beige)}
-.nav-right{display:flex;align-items:center;gap:16px}
-.nav-wa{
-  display:flex;align-items:center;gap:8px;
-  background:var(--green);color:#fff;font-size:0.82rem;font-weight:600;
-  padding:8px 16px;border-radius:99px;transition:opacity 0.2s;
-}
-.nav-wa:hover{opacity:0.88}
-.nav-wa svg{width:16px;height:16px;fill:#fff}
-.nav-cta{
-  background:transparent;border:1px solid var(--beige);color:var(--beige);
-  font-size:0.82rem;font-weight:500;padding:8px 18px;border-radius:99px;
-  transition:background 0.2s,color 0.2s;
-}
-.nav-cta:hover{background:var(--beige);color:var(--bg)}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
-.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:0.3s}
+    --container: 1400px;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+  }
 
-/* ─── MOBILE MENU ─── */
-.mobile-menu{
-  display:none;position:fixed;inset:0;z-index:7900;
-  background:rgba(7,16,30,0.97);backdrop-filter:blur(20px);
-  flex-direction:column;align-items:center;justify-content:center;gap:32px;
-}
-.mobile-menu.open{display:flex}
-.mobile-menu a{font-size:1.5rem;font-weight:300;color:var(--white);letter-spacing:0.06em}
-.mobile-menu a:hover{color:var(--beige)}
-.mobile-menu-close{
-  position:absolute;top:24px;right:28px;background:none;border:none;
-  color:var(--white);font-size:2rem;line-height:1;
-}
+  *, *::before, *::after { box-sizing: border-box; }
 
-/* ─── MODAL ─── */
-.modal-ov{
-  position:fixed;inset:0;z-index:9500;
-  background:rgba(7,16,30,0.92);backdrop-filter:blur(12px);
-  display:none;align-items:center;justify-content:center;padding:20px;
-}
-.modal-ov.open{display:flex}
-.modal-box{
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
-  max-width:860px;width:100%;max-height:92vh;overflow-y:auto;position:relative;
-}
-.modal-close{
-  position:sticky;top:12px;left:100%;margin-right:16px;
-  background:rgba(255,255,255,0.08);border:none;color:var(--white);
-  width:36px;height:36px;border-radius:50%;font-size:1.2rem;
-  display:flex;align-items:center;justify-content:center;
-  transition:background 0.2s;z-index:1;
-}
-.modal-close:hover{background:rgba(255,255,255,0.15)}
-.modal-img{width:100%;height:340px;object-fit:cover;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
-.modal-body{padding:32px}
-.modal-badge{
-  display:inline-block;background:rgba(200,184,154,0.12);color:var(--beige);
-  font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
-  padding:4px 12px;border-radius:99px;margin-bottom:12px;
-}
-.modal-title{font-size:1.8rem;font-weight:700;margin-bottom:6px}
-.modal-price{font-size:2rem;font-weight:800;color:var(--beige);margin-bottom:24px}
-.modal-specs{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;
-  margin-bottom:28px;
-}
-.modal-spec{background:var(--card);border-radius:var(--radius);padding:14px 16px}
-.modal-spec-label{font-size:0.72rem;color:var(--gray-l);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
-.modal-spec-val{font-size:0.95rem;font-weight:600}
-.modal-wa{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  background:var(--green);color:#fff;font-size:1rem;font-weight:700;
-  width:100%;padding:16px;border-radius:var(--radius);border:none;
-  transition:opacity 0.2s;
-}
-.modal-wa:hover{opacity:0.88}
-.modal-wa svg{width:22px;height:22px;fill:#fff}
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
-/* ─── HERO ─── */
-.hero{
-  position:relative;height:100vh;min-height:640px;
-  display:flex;align-items:flex-end;padding-bottom:80px;overflow:hidden;
-}
-.hero-bg-wrap{
-  position:absolute;inset:0;overflow:hidden;
-}
-.hero-bg{
-  width:100%;height:100%;object-fit:cover;object-position:center;
-  animation:kenBurns 18s ease-in-out infinite alternate;
-  transform-origin:center center;
-}
-@keyframes kenBurns{
-  0%{transform:scale(1.06) translate(0%,0%)}
-  100%{transform:scale(1.0) translate(-1%,-0.5%)}
-}
-.hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(7,16,30,0.95) 0%,rgba(7,16,30,0.5) 50%,rgba(7,16,30,0.18) 100%);
-}
-.hero-content{
-  position:relative;z-index:1;width:100%;max-width:1280px;padding:0 40px;
-}
-.hero-logo{
-  position:absolute;top:88px;left:40px;z-index:3;display:inline-flex;align-items:center;justify-content:center;
-  padding:10px 14px;
-  background:linear-gradient(180deg,rgba(7,16,30,0.82) 0%,rgba(7,16,30,0.68) 100%);
-  border:1px solid rgba(255,255,255,0.18);
-  border-radius:999px;backdrop-filter:blur(12px);
-  box-shadow:0 8px 24px rgba(0,0,0,0.35);
-  transition:transform 0.2s ease;
-}
-.hero-logo img{
-  display:block;
-  height:clamp(44px,5vw,64px);
-  width:auto;
-  max-width:min(46vw,240px);
-  object-fit:contain;
-  filter:drop-shadow(0 1px 4px rgba(0,0,0,0.35));
-}
-.hero-logo-fallback{
-  display:none;
-  font-size:clamp(1.15rem,2.4vw,1.95rem);
-  font-weight:700;
-  letter-spacing:0.02em;
-  color:var(--white);
-  line-height:1;
-}
-.hero-logo:hover{transform:translateY(-1px)}
-@media(max-width:900px){
-  .hero-logo{top:82px;left:22px;padding:8px 12px;}
-  .hero-logo img{height:30px;max-width:170px;}
-}
-@media(max-width:600px){
-  .hero-logo{top:72px;left:18px;padding:8px 10px;}
-  .hero-logo img{height:28px;max-width:150px;}
-}
-.hero-badge{
-  display:inline-block;background:rgba(200,184,154,0.15);color:var(--beige);
-  font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
-  padding:6px 16px;border-radius:99px;margin-bottom:20px;border:1px solid var(--line-h);
-  animation:heroUp 0.9s var(--ease) 0.2s both;
-}
-.hero-title{
-  font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:800;line-height:1.08;
-  letter-spacing:-0.02em;margin-bottom:18px;
-  animation:heroUp 0.9s var(--ease) 0.5s both;
-}
-.hero-title em{font-style:normal;color:var(--beige)}
-.hero-sub{
-  font-size:1.05rem;font-weight:300;color:var(--gray-l);max-width:520px;
-  margin-bottom:32px;
-  animation:heroSlideIn 0.52s ease-out 0.02s both;
-}
-.hero-actions{
-  display:flex;gap:14px;flex-wrap:wrap;
-  animation:heroSlideIn 0.54s ease-out 0.10s both;
-}
-.hero-sub,.hero-actions{will-change:transform,opacity}
-.hero-bottom-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:32px;
-  margin-top:18px;
-}
-.hero-actions-group{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  flex-wrap:wrap;
-}
-@keyframes heroUp{
-  from{opacity:0;transform:translateY(22px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes heroSlideIn{
-  from{opacity:0;transform:translate3d(-18px,0,0)}
-  to{opacity:1;transform:translate3d(0,0,0)}
-}
-.btn-primary{
-  background:var(--beige);color:var(--bg);font-weight:700;font-size:0.92rem;
-  padding:14px 28px;border-radius:99px;border:none;
-  transition:background 0.2s,transform 0.2s;letter-spacing:0.02em;
-}
-.btn-primary:hover{background:var(--beige-l);transform:translateY(-1px)}
-.btn-ghost{
-  background:transparent;border:1px solid rgba(240,235,226,0.35);color:var(--white);
-  font-size:0.92rem;font-weight:500;padding:14px 28px;border-radius:99px;
-  transition:border-color 0.2s,background 0.2s;
-}
-.btn-ghost:hover{border-color:var(--beige);background:rgba(200,184,154,0.08)}
-.hero-stats{
-  position:static;z-index:1;
-  display:flex;align-items:center;gap:40px;
-  animation:heroUp 0.5s var(--ease) 0.08s both;
-}
-.hero-stat{display:flex;flex-direction:column;align-items:center;text-align:center}
-.hero-stat-num{font-size:1.8rem;font-weight:800;color:var(--beige);line-height:1;font-variant-numeric:tabular-nums;min-width:4ch}
-.hero-stat-label{font-size:0.72rem;color:var(--gray-l);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px}
+  body {
+    margin: 0;
+    background: var(--beige);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.55;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
 
-/* ─── MARQUEE ─── */
-.marquee-strip{
-  background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding:16px 0;overflow:hidden;
-}
-.marquee-track{
-  display:flex;gap:48px;width:max-content;
-  animation:marquee 22s linear infinite;
-}
-.marquee-track:hover{animation-play-state:paused}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.marquee-item{font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray);white-space:nowrap}
-.marquee-sep{color:var(--beige);opacity:0.4}
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
-/* ─── STICKY WA BAR ─── */
-.sticky-wa{
-  position:fixed;bottom:0;left:0;right:0;z-index:7800;
-  background:rgba(7,16,30,0.95);backdrop-filter:blur(12px);
-  border-top:1px solid var(--line);
-  padding:14px 40px;
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  transform:translateY(100%);transition:transform 0.5s var(--ease);
-}
-.sticky-wa.show{transform:translateY(0)}
-.sticky-wa-text{font-size:0.9rem;color:var(--gray-l)}
-.sticky-wa-text strong{color:var(--white)}
-.sticky-wa-btns{display:flex;gap:10px}
-.sticky-wa-btn{
-  display:flex;align-items:center;gap:8px;
-  background:var(--green);color:#fff;font-size:0.82rem;font-weight:700;
-  padding:10px 18px;border-radius:99px;border:none;white-space:nowrap;
-  transition:opacity 0.2s;
-}
-.sticky-wa-btn:hover{opacity:0.88}
-.sticky-wa-btn svg{width:16px;height:16px;fill:#fff}
+  /* ---------- Type ---------- */
+  .display {
+    font-family: var(--serif);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--navy);
+  }
+  .eyebrow.muted { color: rgba(15, 28, 51, 0.55); }
 
-/* ─── SECTIONS ─── */
-section{padding:100px 40px}
-.section-label{
-  font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--beige);margin-bottom:12px;
-}
-.section-title{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.12;letter-spacing:-0.02em}
-.section-sub{font-size:1rem;color:var(--gray-l);margin-top:12px;max-width:540px}
-.section-head{margin-bottom:56px}
-.container{max-width:1280px;margin:0 auto}
+  /* ---------- Layout helpers ---------- */
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  section { position: relative; }
 
-/* ─── VEHICLE CARD ─── */
-.vcard{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);
-  overflow:hidden;cursor:pointer;transition:transform 0.3s var(--ease),box-shadow 0.3s,border-color 0.3s;
-}
-.vcard:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.5);border-color:var(--line-h)}
-.vcard-img-wrap{position:relative;height:220px;overflow:hidden}
-.vcard-img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s var(--ease)}
-.vcard:hover .vcard-img{transform:scale(1.05)}
-.vcard-badge{
-  position:absolute;top:12px;left:12px;
-  background:rgba(7,16,30,0.78);backdrop-filter:blur(6px);
-  color:var(--beige);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  padding:4px 10px;border-radius:99px;border:1px solid var(--line-h);
-}
-.vcard-feat-tag{
-  position:absolute;top:12px;right:12px;
-  background:var(--beige);color:var(--bg);
-  font-size:0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;
-  padding:4px 10px;border-radius:99px;
-}
-.vcard-body{padding:20px}
-.vcard-brand{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-l);margin-bottom:4px}
-.vcard-model{font-size:1.1rem;font-weight:700;margin-bottom:4px;line-height:1.2}
-.vcard-year{font-size:0.82rem;color:var(--gray);margin-bottom:14px}
-.vcard-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.vcard-meta span{
-  font-size:0.72rem;color:var(--gray-l);
-  background:rgba(255,255,255,0.04);padding:3px 8px;border-radius:6px;
-}
-.vcard-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:14px}
-.vcard-price-label{font-size:0.65rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.08em}
-.vcard-price{font-size:1.25rem;font-weight:800;color:var(--beige)}
-.vcard-wa{
-  display:flex;align-items:center;gap:6px;
-  background:var(--green);color:#fff;font-size:0.75rem;font-weight:700;
-  padding:8px 14px;border-radius:99px;border:none;
-  transition:opacity 0.2s;flex-shrink:0;
-}
-.vcard-wa:hover{opacity:0.88}
-.vcard-wa svg{width:14px;height:14px;fill:#fff}
+  /* ============================================================
+     NAVIGATION
+     ============================================================ */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem var(--gutter);
+    background: rgba(237, 228, 211, 0);
+    backdrop-filter: blur(0px);
+    transition: background 0.4s ease, backdrop-filter 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.scrolled {
+    background: rgba(237, 228, 211, 0.92);
+    backdrop-filter: blur(14px);
+    padding: 0.85rem var(--gutter);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 2rem;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .logo .mark {
+    display: inline-block;
+    width: 26px; height: 26px;
+    border: 1px solid var(--navy);
+    border-radius: 50%;
+    position: relative;
+  }
+  .logo .mark::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 6px; height: 6px;
+    background: var(--navy);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 2.4rem;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    letter-spacing: 0.02em;
+    position: relative;
+    padding: 0.4rem 0;
+    transition: color 0.3s ease;
+  }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--navy);
+    transition: width 0.35s ease;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a:hover::after { width: 100%; }
 
-/* ─── FEATURED SECTION ─── */
-#featured{background:var(--surface);border-top:1px solid var(--line)}
-.featured-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;
-}
+  .nav-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+  }
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--charcoal);
+  }
+  .lang-switch button {
+    padding: 0.35rem 0.55rem;
+    color: rgba(15, 28, 51, 0.45);
+    transition: color 0.25s ease;
+    font-weight: 500;
+  }
+  .lang-switch button.active { color: var(--navy); }
+  .lang-switch .sep { color: rgba(15, 28, 51, 0.25); margin: 0 0.1rem; }
 
-/* ─── FILTERS ─── */
-.filters{
-  display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;
-  padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
-}
-.filter-select{
-  background:var(--card);border:1px solid var(--line);color:var(--white);
-  font-family:inherit;font-size:0.85rem;padding:10px 16px;border-radius:var(--radius);
-  flex:1;min-width:160px;appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fa5c4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 12px center;
-  padding-right:36px;cursor:pointer;transition:border-color 0.2s;
-}
-.filter-select:focus{outline:none;border-color:var(--beige)}
-.inventory-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;
-}
-.no-results{
-  grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray);
-}
-.no-results h3{font-size:1.2rem;margin-bottom:8px;color:var(--white)}
+  .menu-toggle {
+    display: none;
+    width: 28px; height: 22px;
+    position: relative;
+  }
+  .menu-toggle span {
+    position: absolute;
+    left: 0; right: 0;
+    height: 1.5px;
+    background: var(--navy);
+    transition: transform 0.35s ease, opacity 0.35s ease, top 0.35s ease;
+  }
+  .menu-toggle span:nth-child(1) { top: 4px; }
+  .menu-toggle span:nth-child(2) { top: 10px; }
+  .menu-toggle span:nth-child(3) { top: 16px; }
+  .menu-toggle.open span:nth-child(1) { top: 10px; transform: rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
 
-/* ─── TRUST SECTION ─── */
-#trust{background:linear-gradient(135deg,var(--surface) 0%,var(--bg) 100%);border-top:1px solid var(--line)}
-.trust-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}
-.trust-card{background:var(--surface);padding:48px 36px;transition:background 0.3s}
-.trust-card:hover{background:var(--card)}
-.trust-icon{width:48px;height:48px;margin-bottom:20px;color:var(--beige)}
-.trust-icon svg{width:100%;height:100%;stroke:var(--beige)}
-.trust-title{font-size:1.2rem;font-weight:700;margin-bottom:10px}
-.trust-desc{font-size:0.9rem;color:var(--gray-l);line-height:1.65}
+  @media (max-width: 900px) {
+    .nav-inner { grid-template-columns: 1fr 1fr; }
+    .nav-links {
+      position: fixed;
+      top: 0; right: 0;
+      width: min(85%, 360px);
+      height: 100vh;
+      background: var(--offwhite);
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 2.5rem;
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+      gap: 1.6rem;
+      box-shadow: -20px 0 60px rgba(15, 28, 51, 0.15);
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links a { font-size: 1.4rem; font-family: var(--serif); }
+    .menu-toggle { display: block; }
+  }
 
-/* ─── VIDEO SECTION ─── */
-#video{
-  position:relative;padding:0;height:520px;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
-  background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-}
-.video-bg{
-  position:absolute;inset:0;
-  background:url('https://lh3.googleusercontent.com/sitesv/AA5AbUDA6pobrYNROht_yKAv60AB0IbHdi2uXfi7wWBoOTAgivSeljkts6UfXFBd4s69Chik8uDJWxpx8Whgl7eM9v0vCuDI2CKd_AtFbIj85-2KpK_iP8udqBj0ALQyHbPWhohN7ZCCr6Dm8n-Pi_7d44AiuGRbnWMkbFA=w1920') center/cover no-repeat;
-  filter:brightness(0.25);
-}
-.video-content{position:relative;z-index:1;text-align:center;padding:40px}
-.video-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;margin-bottom:16px;letter-spacing:-0.02em}
-.video-sub{font-size:1rem;color:var(--gray-l);margin-bottom:32px}
-.video-btn{
-  display:inline-flex;align-items:center;gap:12px;
-  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);
-  color:var(--white);font-size:0.95rem;font-weight:600;
-  padding:16px 32px;border-radius:99px;
-  backdrop-filter:blur(8px);transition:background 0.2s,transform 0.2s;
-}
-.video-btn:hover{background:rgba(255,255,255,0.18);transform:scale(1.03)}
-.video-play{
-  width:48px;height:48px;background:var(--beige);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-}
-.video-play svg{width:18px;height:18px;fill:var(--bg);margin-left:3px}
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 8rem var(--gutter) 4rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #1a2845 0%, #0f1c33 60%, #0a1426 100%);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 40%, rgba(184, 150, 90, 0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 20% 80%, rgba(237, 228, 211, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-watch {
+    position: absolute;
+    right: -10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70%;
+    max-width: 900px;
+    aspect-ratio: 1/1;
+    background-image: url('https://static.wixstatic.com/media/f91f7b_bd7ed5b189be4b1ba1294a44a73592ca~mv2.jpg/v1/fill/w_800,h_1000,al_c,q_85,usm_0.66_1.00_0.01/f91f7b_bd7ed5b189be4b1ba1294a44a73592ca~mv2.jpg');
+    background-size: cover;
+    background-position: center top;
+    border-radius: 50%;
+    filter: brightness(0.85) contrast(1.05) saturate(0.92);
+    box-shadow:
+      inset 0 0 120px rgba(10, 20, 38, 0.5),
+      0 0 200px rgba(184, 150, 90, 0.15);
+    opacity: 0.85;
+  }
+  .hero-watch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, transparent 30%, rgba(10, 20, 38, 0.45) 75%);
+  }
 
-/* ─── NOSOTROS ─── */
-#nosotros{background:var(--surface);border-top:1px solid var(--line)}
-.nosotros-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.nosotros-img{
-  position:relative;
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  height:460px;
-  box-shadow:0 18px 40px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.06) inset;
-}
-.nosotros-img::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(180deg,rgba(7,16,30,0.06) 10%,rgba(7,16,30,0.30) 100%);
-}
-.nosotros-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-}
-.nosotros-text .section-label{display:block}
-.nosotros-list{margin-top:28px;display:flex;flex-direction:column;gap:16px}
-.nosotros-item{display:flex;gap:14px;align-items:flex-start}
-.nosotros-dot{
-  width:8px;height:8px;border-radius:50%;background:var(--beige);
-  flex-shrink:0;margin-top:6px;
-}
-.nosotros-item p{font-size:0.9rem;color:var(--gray-l);line-height:1.6}
-.nosotros-item strong{color:var(--white)}
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.92 0 0 0 0 0.86 0 0 0 0 0.74 0 0 0 0.18 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
 
-/* ─── CONTACT ─── */
-#contacto{background:var(--bg);border-top:1px solid var(--line)}
-.contact-wa-hero{
-  background:linear-gradient(135deg,#0d2e1a 0%,#0a1f12 100%);
-  border:1px solid rgba(37,211,102,0.2);border-radius:var(--radius-lg);
-  padding:48px 40px;text-align:center;margin-bottom:64px;
-}
-.contact-wa-hero h2{font-size:1.8rem;font-weight:800;margin-bottom:10px}
-.contact-wa-hero p{color:var(--gray-l);margin-bottom:28px}
-.contact-wa-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.contact-wa-btn{
-  display:flex;align-items:center;gap:10px;
-  background:var(--green);color:#fff;font-size:0.95rem;font-weight:700;
-  padding:14px 26px;border-radius:99px;border:none;transition:opacity 0.2s;
-}
-.contact-wa-btn:hover{opacity:0.88}
-.contact-wa-btn svg{width:20px;height:20px;fill:#fff}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
-.contact-info h3{font-size:1.2rem;font-weight:700;margin-bottom:24px}
-.contact-info-list{display:flex;flex-direction:column;gap:18px}
-.contact-info-item{display:flex;gap:14px;align-items:flex-start}
-.contact-info-icon{
-  width:40px;height:40px;background:var(--card);border:1px solid var(--line);
-  border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  font-size:1.1rem;
-}
-.contact-info-label{font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px}
-.contact-info-val{font-size:0.9rem;font-weight:500}
-.contact-map{border-radius:var(--radius-lg);overflow:hidden;height:100%;min-height:320px;border:1px solid var(--line)}
-.contact-map iframe{width:100%;height:100%;min-height:320px;border:none;filter:grayscale(1) invert(1) hue-rotate(180deg)}
-.contact-form{margin-top:48px}
-.contact-form h3{font-size:1.2rem;font-weight:700;margin-bottom:24px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-group{display:flex;flex-direction:column;gap:6px}
-.form-group.full{grid-column:1/-1}
-.form-label{font-size:0.75rem;font-weight:500;color:var(--gray-l);letter-spacing:0.04em}
-.form-input,.form-textarea{
-  background:var(--card);border:1px solid var(--line);color:var(--white);
-  font-family:inherit;font-size:0.9rem;padding:12px 16px;border-radius:var(--radius);
-  transition:border-color 0.2s;
-}
-.form-textarea{resize:vertical;min-height:100px}
-.form-input:focus,.form-textarea:focus{outline:none;border-color:var(--beige)}
-.form-submit{
-  background:var(--beige);color:var(--bg);font-size:0.95rem;font-weight:700;
-  padding:14px 32px;border-radius:99px;border:none;margin-top:8px;
-  transition:background 0.2s;
-}
-.form-submit:hover{background:var(--beige-l)}
+  .hero-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    color: var(--gold-soft);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: "";
+    width: 32px; height: 1px;
+    background: var(--gold-soft);
+  }
+  .hero h1 {
+    color: var(--offwhite);
+    font-size: clamp(2.5rem, 6.5vw, 5.5rem);
+    margin: 0 0 1.5rem;
+    max-width: 18ch;
+    font-weight: 800;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-soft);
+    font-weight: 600;
+  }
+  .hero p.lede {
+    color: rgba(250, 246, 238, 0.75);
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    max-width: 48ch;
+    margin: 0 0 2.5rem;
+    line-height: 1.6;
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
 
-/* ─── FOOTER ─── */
-footer{
-  background:var(--surface);border-top:1px solid var(--line);
-  padding:48px 40px 32px;
-}
-.footer-inner{
-  max-width:1280px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
-}
-.footer-logo img{height:40px;width:auto;max-width:155px;object-fit:contain;opacity:0.85}
-.footer-links{display:flex;gap:28px}
-.footer-links a{font-size:0.82rem;color:var(--gray);transition:color 0.2s}
-.footer-links a:hover{color:var(--beige)}
-.footer-social{display:flex;gap:12px}
-.footer-social a{
-  width:36px;height:36px;background:var(--card);border:1px solid var(--line);
-  border-radius:9px;display:flex;align-items:center;justify-content:center;
-  font-size:0.85rem;transition:background 0.2s,border-color 0.2s;
-}
-.footer-social a:hover{background:var(--card2);border-color:var(--line-h)}
-.footer-copy{
-  max-width:1280px;margin:28px auto 0;padding-top:20px;
-  border-top:1px solid var(--line);
-  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
-}
-.footer-copy p{font-size:0.78rem;color:var(--gray)}
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 1rem 1.8rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid var(--navy);
+    background: var(--navy);
+    color: var(--offwhite);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .btn::after {
+    content: "→";
+    transition: transform 0.35s ease;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .btn:hover { background: var(--gold); border-color: var(--gold); color: var(--navy-deep); }
+  .btn:hover::after { transform: translateX(4px); }
+  .btn.btn-ghost {
+    background: transparent;
+    border-color: rgba(250, 246, 238, 0.4);
+    color: var(--offwhite);
+  }
+  .btn.btn-ghost:hover {
+    background: var(--offwhite);
+    color: var(--navy-deep);
+    border-color: var(--offwhite);
+  }
+  .btn.btn-outline {
+    background: transparent;
+    color: var(--navy);
+  }
+  .btn.btn-outline:hover { background: var(--navy); color: var(--offwhite); }
 
-/* ─── REVEAL ANIMATIONS ─── */
-.reveal,.reveal-left,.reveal-right{opacity:0;transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
-.reveal{transform:translateY(32px)}
-.reveal-left{transform:translateX(-32px)}
-.reveal-right{transform:translateX(32px)}
-.revealed{opacity:1!important;transform:none!important}
-.stagger-1{transition-delay:0.1s}
-.stagger-2{transition-delay:0.2s}
-.stagger-3{transition-delay:0.3s}
-.stagger-4{transition-delay:0.4s}
+  .hero-meta {
+    position: absolute;
+    bottom: 2.5rem; right: var(--gutter);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+    color: rgba(250, 246, 238, 0.55);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .hero-meta .line {
+    width: 60px; height: 1px;
+    background: rgba(250, 246, 238, 0.3);
+    margin-top: 0.4rem;
+  }
 
-/* ─── MOTOCICLETAS ─── */
-#motos{background:var(--bg);border-top:1px solid var(--line)}
+  @media (max-width: 768px) {
+    .hero { min-height: 90vh; padding-bottom: 3rem; }
+    .hero-watch { width: 130%; right: -40%; opacity: 0.45; }
+    .hero-meta { display: none; }
+  }
 
-/* ─── RESPONSIVE ─── */
-@media(max-width:900px){
-  nav{padding:0 20px}
-  .nav-links{display:none}
-  .nav-cta{display:none}
-  .hamburger{display:flex}
-  section{padding:70px 20px}
-  .hero-content{padding:0 20px}
-  .hero-bottom-row{gap:24px}
-  .hero-stats{gap:24px}
-  .hero-stat-num{font-size:1.4rem}
-  .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .nosotros-inner{grid-template-columns:1fr}
-  .nosotros-img{height:280px}
-  .contact-grid{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  .footer-inner{flex-direction:column;text-align:center}
-  .footer-copy{flex-direction:column;text-align:center}
-  .sticky-wa{padding:12px 20px}
-  .sticky-wa-text{display:none}
-}
-@media(max-width:600px){
-  .hero{height:auto;min-height:auto;align-items:flex-start;padding:120px 0 52px}
-  .hero-content{padding:0 18px;max-width:100%}
-  .hero-title{font-size:2rem}
-  .hero-bottom-row{flex-direction:column;align-items:stretch;gap:24px;margin-top:0}
-  .hero-actions-group{flex-direction:column;align-items:stretch;gap:12px}
-  .hero-actions{width:100%;flex-direction:column;align-items:stretch;gap:12px}
-  .hero-actions .btn-primary,
-  .hero-actions .btn-ghost,
-  .hero-actions-group .btn-primary,
-  .hero-actions-group .btn-ghost{width:100%;display:inline-flex;justify-content:center}
-  .hero-stats{margin-top:0;justify-content:flex-start;flex-direction:column;align-items:flex-start;gap:14px}
-  .hero-stat{align-items:flex-start;text-align:left}
-  .trust-grid{grid-template-columns:1fr}
-  .nosotros-inner{grid-template-columns:1fr}
-  .nosotros-img{height:300px}
-  .contact-wa-hero{padding:32px 20px}
-  .contact-wa-btns{flex-direction:column;align-items:center}
-}
-@media(prefers-reduced-motion:reduce){
-  .hero-sub,.hero-actions{animation:none!important;opacity:1;transform:none}
-}
+  /* ============================================================
+     MARQUEE STRIP
+     ============================================================ */
+  .marquee {
+    background: var(--navy-deep);
+    color: var(--beige);
+    padding: 1.1rem 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(250, 246, 238, 0.08);
+    border-bottom: 1px solid rgba(250, 246, 238, 0.08);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 4rem;
+    white-space: nowrap;
+    animation: scroll 38s linear infinite;
+    width: max-content;
+  }
+  .marquee span {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: rgba(237, 228, 211, 0.75);
+    display: inline-flex;
+    align-items: center;
+    gap: 4rem;
+  }
+  .marquee span::after {
+    content: "✦";
+    color: var(--gold-soft);
+    font-style: normal;
+    font-size: 0.7rem;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ============================================================
+     SECTION TITLE BLOCK (shared)
+     ============================================================ */
+  .section-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: end;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 4rem;
+  }
+  .section-head .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--navy);
+    opacity: 0.6;
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+    margin: 0;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+  .section-head h2 em { font-style: italic; color: var(--gold); font-weight: 300; }
+  .section-head .meta {
+    align-self: end;
+    text-align: right;
+    color: var(--charcoal);
+    font-size: 0.85rem;
+    max-width: 32ch;
+    line-height: 1.5;
+    opacity: 0.75;
+  }
+  @media (max-width: 768px) {
+    .section-head { grid-template-columns: 1fr; gap: 1.5rem; }
+    .section-head .meta { text-align: left; }
+  }
+
+  /* ============================================================
+     INVENTORY / WATCHES
+     ============================================================ */
+  #watches {
+    padding: 7rem var(--gutter);
+    background: var(--beige);
+  }
+
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+  }
+  .filter-bar button {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid var(--line-strong);
+    color: var(--charcoal);
+    background: transparent;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+  .filter-bar button:hover { border-color: var(--navy); color: var(--navy); }
+  .filter-bar button.active {
+    background: var(--navy);
+    color: var(--offwhite);
+    border-color: var(--navy);
+  }
+
+  .watch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 3rem 2rem;
+  }
+
+  .watch-card {
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+    position: relative;
+  }
+  .watch-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+
+  .watch-image-wrap {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--beige-soft);
+    margin-bottom: 1.4rem;
+  }
+  .watch-image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease, opacity 0.6s ease;
+  }
+  .watch-card:hover .watch-image { transform: scale(1.06); filter: brightness(1.03); }
+  .watch-image-alt { opacity: 0; }
+  .watch-card:hover .watch-image-alt { opacity: 1; }
+  .watch-card:hover .watch-image:not(.watch-image-alt) { opacity: 0; }
+
+  .watch-image-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(15, 28, 51, 0.18) 100%);
+    pointer-events: none;
+  }
+
+  .badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--offwhite);
+    color: var(--navy);
+    z-index: 2;
+  }
+  .badge.available { background: var(--offwhite); color: var(--navy); }
+  .badge.sold {
+    background: var(--charcoal);
+    color: var(--beige-soft);
+  }
+
+  .sold-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 28, 51, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+  }
+  .sold-overlay span {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 2.4rem;
+    color: var(--beige-soft);
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--gold-soft);
+    border-bottom: 1px solid var(--gold-soft);
+    padding: 0.4rem 1.5rem;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  .watch-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.6rem;
+  }
+  .watch-brand {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .watch-year {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(15, 28, 51, 0.6);
+  }
+  .watch-model {
+    font-family: var(--serif);
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 0 0.6rem;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+  }
+  .watch-specs {
+    list-style: none;
+    margin: 0 0 1.4rem;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.9rem;
+    font-size: 0.78rem;
+    color: var(--charcoal);
+  }
+  .watch-specs li {
+    position: relative;
+    padding-right: 0.9rem;
+    opacity: 0.75;
+  }
+  .watch-specs li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0; top: 50%;
+    width: 1px; height: 10px;
+    background: var(--line-strong);
+    transform: translateY(-50%);
+  }
+
+  .watch-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--navy);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 0.3rem;
+    transition: border-color 0.3s ease, gap 0.3s ease;
+  }
+  .watch-action::after { content: "→"; transition: transform 0.3s ease; }
+  .watch-card:hover .watch-action { border-color: var(--navy); }
+  .watch-card:hover .watch-action::after { transform: translateX(4px); }
+  .watch-card.is-sold .watch-action { color: rgba(15, 28, 51, 0.4); }
+
+  /* ============================================================
+     ABOUT
+     ============================================================ */
+  #about {
+    padding: 8rem var(--gutter);
+    background: var(--offwhite);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-grid {
+    max-width: var(--container);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-image {
+    aspect-ratio: 4/5;
+    background-image: url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.27.04.jpeg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  .about-image::before {
+    content: "";
+    position: absolute;
+    top: -16px; left: -16px;
+    right: 16px; bottom: 16px;
+    border: 1px solid var(--gold);
+    z-index: -1;
+  }
+  .about-content h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    color: var(--navy);
+    font-weight: 700;
+    margin: 1rem 0 2rem;
+    line-height: 1.05;
+  }
+  .about-content h2 em { font-style: italic; color: var(--gold); }
+  .about-content p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    margin-bottom: 1.4rem;
+    max-width: 50ch;
+  }
+  .about-content .signature {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--navy);
+    margin-top: 2rem;
+    opacity: 0.85;
+  }
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  }
+
+  /* ============================================================
+     JOURNAL
+     ============================================================ */
+  #journal {
+    padding: 7rem var(--gutter);
+    background: var(--beige-deep);
+  }
+  .journal-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 2rem;
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+  .article {
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+  .article:hover { transform: translateY(-4px); }
+  .article.featured { grid-row: span 2; }
+  .article-image {
+    aspect-ratio: 4/5;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 1.5rem;
+    transition: filter 0.4s ease;
+  }
+  .article.featured .article-image { aspect-ratio: 4/5.4; }
+  .article:not(.featured) .article-image { aspect-ratio: 4/3; }
+  .article:hover .article-image { filter: brightness(0.95); }
+
+  .article-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .article-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--navy);
+    line-height: 1.2;
+    margin: 0 0 0.8rem;
+    font-weight: 700;
+  }
+  .article.featured .article-title { font-size: 2.2rem; }
+  .article-excerpt {
+    font-size: 0.92rem;
+    color: rgba(31, 31, 35, 0.75);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .article-date {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: rgba(15, 28, 51, 0.55);
+  }
+  @media (max-width: 1000px) {
+    .journal-grid { grid-template-columns: 1fr 1fr; }
+    .article.featured { grid-row: auto; grid-column: span 2; }
+  }
+  @media (max-width: 640px) {
+    .journal-grid { grid-template-columns: 1fr; }
+    .article.featured { grid-column: auto; }
+  }
+
+  /* ============================================================
+     SELL YOUR WATCH (split panel)
+     ============================================================ */
+  #sell {
+    padding: 0;
+    background: var(--navy-deep);
+    color: var(--offwhite);
+    position: relative;
+    overflow: hidden;
+  }
+  .sell-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+  }
+  .sell-image {
+    background-image: url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.28.11%20(1).jpeg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  .sell-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, rgba(10, 20, 38, 0.1) 0%, rgba(10, 20, 38, 0.55) 100%);
+  }
+  .sell-content {
+    padding: 6rem clamp(2rem, 5vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+  .sell-content::before {
+    content: "";
+    position: absolute;
+    top: 6rem; left: 0;
+    width: 40px; height: 1px;
+    background: var(--gold);
+  }
+  .sell-content .eyebrow { color: var(--gold-soft); margin-bottom: 1.5rem; }
+  .sell-content h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    margin: 0 0 1.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .sell-content h2 em { font-style: italic; color: var(--gold-soft); }
+  .sell-content p {
+    color: rgba(250, 246, 238, 0.78);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 48ch;
+  }
+  .sell-steps {
+    list-style: none;
+    margin: 0 0 2.5rem;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .sell-steps li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.2rem;
+    align-items: start;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(250, 246, 238, 0.1);
+    font-size: 0.95rem;
+  }
+  .sell-steps .num {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--gold-soft);
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+  @media (max-width: 900px) {
+    .sell-grid { grid-template-columns: 1fr; }
+    .sell-image { min-height: 360px; }
+  }
+
+  /* ============================================================
+     REVIEWS
+     ============================================================ */
+  #reviews {
+    padding: 7rem var(--gutter);
+    background: var(--beige);
+  }
+  .reviews-track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.5rem;
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+  .review-card {
+    background: var(--offwhite);
+    padding: 2rem;
+    border-radius: 4px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.6);
+  }
+  .review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+  .review-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+  .review-thumb {
+    width: 56px; height: 56px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+  }
+  .review-watch {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--navy);
+    line-height: 1.25;
+    margin: 0 0 0.25rem;
+    font-weight: 700;
+  }
+  .stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+  }
+  .review-text {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--charcoal);
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    flex: 1;
+    position: relative;
+    padding-left: 1.2rem;
+  }
+  .review-text::before {
+    content: "“";
+    position: absolute;
+    left: -0.2rem; top: -0.7rem;
+    font-size: 2.4rem;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.5;
+  }
+  .review-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.82rem;
+  }
+  .review-name { font-weight: 700; color: var(--navy); }
+  .review-date { color: rgba(15, 28, 51, 0.5); font-style: italic; font-family: var(--serif); }
+
+  /* ============================================================
+     TRUST PILLARS
+     ============================================================ */
+  #trust {
+    padding: 7rem var(--gutter);
+    background: var(--navy);
+    color: var(--offwhite);
+    position: relative;
+  }
+  #trust::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 0%, rgba(184, 150, 90, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .trust-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    position: relative;
+  }
+  .trust-head {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  .trust-head h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin: 1rem 0 0;
+    font-weight: 700;
+  }
+  .trust-head h2 em { font-style: italic; color: var(--gold-soft); }
+  .trust-head .eyebrow { color: var(--gold-soft); }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    border-top: 1px solid rgba(250, 246, 238, 0.15);
+    border-left: 1px solid rgba(250, 246, 238, 0.15);
+  }
+  .pillar {
+    padding: 2.5rem 1.8rem;
+    border-right: 1px solid rgba(250, 246, 238, 0.15);
+    border-bottom: 1px solid rgba(250, 246, 238, 0.15);
+    transition: background 0.4s ease;
+  }
+  .pillar:hover { background: rgba(250, 246, 238, 0.03); }
+  .pillar .icon {
+    width: 32px; height: 32px;
+    margin-bottom: 1.2rem;
+    color: var(--gold-soft);
+  }
+  .pillar .icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.2; }
+  .pillar h4 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    margin: 0 0 0.7rem;
+    font-weight: 700;
+  }
+  .pillar p {
+    font-size: 0.88rem;
+    color: rgba(250, 246, 238, 0.65);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* ============================================================
+     CONTACT
+     ============================================================ */
+  #contact {
+    padding: 7rem var(--gutter);
+    background: var(--offwhite);
+  }
+  .contact-grid {
+    max-width: var(--container);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5rem;
+  }
+  .contact-info h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--navy);
+    margin: 1rem 0 1.5rem;
+    font-weight: 700;
+  }
+  .contact-info h2 em { font-style: italic; color: var(--gold); }
+  .contact-info > p {
+    font-size: 1.02rem;
+    color: var(--charcoal);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 44ch;
+  }
+  .contact-list {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .contact-list .row {
+    padding: 1.3rem 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    transition: padding-left 0.3s ease;
+  }
+  .contact-list .row:hover { padding-left: 0.5rem; }
+  .contact-list .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(15, 28, 51, 0.55);
+    font-weight: 500;
+  }
+  .contact-list .value {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--navy);
+  }
+  .contact-list a:hover { color: var(--gold); }
+
+  .contact-form {
+    background: var(--beige-soft);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .field label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(15, 28, 51, 0.6);
+    font-weight: 500;
+  }
+  .field input, .field textarea, .field select {
+    border: none;
+    border-bottom: 1px solid var(--line-strong);
+    background: transparent;
+    padding: 0.7rem 0;
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--navy);
+    outline: none;
+    transition: border-color 0.3s ease;
+    resize: none;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--navy); }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-form { padding: 2rem; }
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer {
+    background: var(--navy-deep);
+    color: rgba(250, 246, 238, 0.7);
+    padding: 4rem var(--gutter) 2rem;
+  }
+  .footer-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(250, 246, 238, 0.1);
+  }
+  .footer-brand .logo { color: var(--offwhite); }
+  .footer-brand .logo .mark { border-color: var(--offwhite); }
+  .footer-brand .logo .mark::after { background: var(--offwhite); }
+  .footer-brand p {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    max-width: 36ch;
+    line-height: 1.6;
+  }
+  footer h5 {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--offwhite);
+    margin: 0 0 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.7rem; }
+  footer ul a {
+    font-size: 0.88rem;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+  }
+  footer ul a:hover { color: var(--gold-soft); padding-left: 0.3rem; }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    font-size: 0.78rem;
+    color: rgba(250, 246, 238, 0.4);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  @media (max-width: 768px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  /* ============================================================
+     WHATSAPP FAB
+     ============================================================ */
+  .whatsapp-fab {
+    position: fixed;
+    bottom: 1.6rem; right: 1.6rem;
+    width: 58px; height: 58px;
+    background: var(--navy);
+    color: var(--offwhite);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(15, 28, 51, 0.25);
+    z-index: 90;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .whatsapp-fab:hover { transform: translateY(-3px) scale(1.05); background: var(--gold); color: var(--navy-deep); }
+  .whatsapp-fab svg { width: 26px; height: 26px; }
+
+  /* ============================================================
+     SCROLL ANIMATIONS
+     ============================================================ */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal:nth-child(2) { transition-delay: 0.07s; }
+  .reveal:nth-child(3) { transition-delay: 0.14s; }
+  .reveal:nth-child(4) { transition-delay: 0.21s; }
+  .reveal:nth-child(5) { transition-delay: 0.28s; }
+
+  /* ============================================================
+     LANGUAGE SWAP
+     ============================================================ */
+  [data-lang-en], [data-lang-es] { display: inline; }
+  body[data-lang="en"] [data-lang-es] { display: none; }
+  body[data-lang="es"] [data-lang-en] { display: none; }
+  /* For block-level translatable elements */
+  body[data-lang="en"] [data-lang-es-block] { display: none; }
+  body[data-lang="es"] [data-lang-en-block] { display: none; }
+
+
+  /* ============================================================
+     WATCH MODAL
+     ============================================================ */
+  .watch-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 20, 38, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .watch-modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .watch-modal-card {
+    background: var(--offwhite);
+    max-width: 900px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    transform: scale(0.93) translateY(20px);
+    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+    max-height: 90vh;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 40px 100px rgba(10, 20, 38, 0.45);
+  }
+  .watch-modal-overlay.open .watch-modal-card {
+    transform: scale(1) translateY(0);
+  }
+  .modal-close {
+    position: absolute;
+    top: 1.1rem; right: 1.1rem;
+    width: 36px; height: 36px;
+    background: var(--navy);
+    color: var(--offwhite);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    z-index: 10;
+    transition: background 0.25s ease, transform 0.3s ease;
+    cursor: pointer;
+    border: none;
+    line-height: 1;
+  }
+  .modal-close:hover { background: var(--gold); color: var(--navy-deep); transform: rotate(90deg); }
+  .modal-image {
+    background-size: cover;
+    background-position: center;
+    min-height: 500px;
+  }
+  .modal-body {
+    padding: 3rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    gap: 0;
+  }
+  .modal-badge {
+    display: inline-block;
+    font-size: 0.63rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: var(--sans);
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    margin-bottom: 1.2rem;
+    align-self: flex-start;
+  }
+  .modal-badge.available { background: rgba(184,150,90,0.15); color: var(--gold); }
+  .modal-badge.sold { background: var(--charcoal); color: var(--beige-soft); }
+  .modal-brand {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: var(--sans);
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .modal-model {
+    font-family: var(--sans);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 800;
+    color: var(--navy);
+    margin: 0 0 1.8rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .modal-meta {
+    border-top: 1px solid var(--line);
+    margin-bottom: 2rem;
+  }
+  .modal-meta-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .modal-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(15, 28, 51, 0.5);
+    font-weight: 600;
+    font-family: var(--sans);
+  }
+  .modal-value {
+    font-size: 0.9rem;
+    color: var(--navy);
+    font-weight: 600;
+    font-family: var(--sans);
+  }
+  .modal-cta { width: 100%; justify-content: center; margin-top: 0.5rem; }
+  @media (max-width: 720px) {
+    .watch-modal-card { grid-template-columns: 1fr; max-height: 95vh; }
+    .modal-image { min-height: 260px; }
+    .modal-body { padding: 2rem 1.5rem; }
+  }
+
 </style>
 </head>
-<body>
+<body data-lang="en">
 
-<!-- FLOATING WA -->
-<a href="https://api.whatsapp.com/send?phone=593995393656&text=Hola%2C%20me%20interesa%20un%20veh%C3%ADculo%20de%20Q2%20Saloon" target="_blank" class="wa-float" title="Chatear por WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-
-<!-- NAV -->
-<nav id="main-nav">
-  <a href="#" class="nav-logo">
-    <img src="https://raw.githubusercontent.com/infooxbarec-star/pruebaq2saloon/refs/heads/main/logo.png" alt="Q2 Saloon Logo" class="nav-logo-img"/>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#featured">Destacados</a></li>
-    <li><a href="#inventario">Inventario</a></li>
-    <li><a href="#trust">Confianza</a></li>
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="https://api.whatsapp.com/send?phone=593995393656&text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Q2%20Saloon" target="_blank" class="nav-wa">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      WhatsApp
-    </a>
-    <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Contactar</button>
-    <button class="hamburger" id="ham" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mob-menu">
-  <button class="mobile-menu-close" id="mob-close">×</button>
-  <a href="#featured" onclick="closeMob()">Destacados</a>
-  <a href="#inventario" onclick="closeMob()">Inventario</a>
-  <a href="#trust" onclick="closeMob()">Confianza Q2 Saloon</a>
-  <a href="#nosotros" onclick="closeMob()">Nosotros</a>
-  <a href="#contacto" onclick="closeMob()">Contacto</a>
-</div>
-
-<!-- MODAL -->
-<div class="modal-ov" id="modal-ov" onclick="closeModal(event,false)">
-  <div class="modal-box" id="modal-box">
-    <button class="modal-close" onclick="closeModal(null,true)">×</button>
-    <img class="modal-img" id="modal-img" src="" alt=""/>
-    <div class="modal-body">
-      <span class="modal-badge" id="modal-badge"></span>
-      <div class="modal-title" id="modal-title"></div>
-      <div class="modal-price" id="modal-price"></div>
-      <div class="modal-specs" id="modal-specs"></div>
-      <button class="modal-wa" id="modal-wa">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Consultar este vehículo por WhatsApp
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- HERO -->
-<section class="hero" id="inicio">
-  <div class="hero-bg-wrap">
-    <img class="hero-bg" src="https://images-porsche.imgix.net/-/media/66332A6C447C474F817B23C66D6D906A_F6DDA391813D4885AC56E90EB7BE5612_CY25J5QOX0005-cayenne-turbo-e-hybrid-coupe-driving?w=1759&q=85&auto=format" alt="Q2 Saloon" onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80'"/>
-  </div>
-  <div class="hero-logo">
-    <img src="https://raw.githubusercontent.com/infooxbarec-star/pruebaq2saloon/refs/heads/main/logo.png" alt="Q2 Saloon Logo"/>
-  </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <span class="hero-badge">Quito, Ecuador · Desde 2015</span>
-    <h1 class="hero-title">Vehículos seleccionados.<br/><em>Calidad Premium.</em></h1>
-    <p class="hero-sub">Experiencia personalizada en la compra de tu próximo automóvil premium. Cada vehículo verificado, documentado y listo para ti.</p>
-    <div class="hero-bottom-row">
-      <div class="hero-actions-group">
-        <div class="hero-actions">
-          <button class="btn-primary" onclick="document.getElementById('inventario').scrollIntoView({behavior:'smooth'})">Ver inventario</button>
-          <a href="https://api.whatsapp.com/send?phone=593995393656&text=Hola%2C%20quiero%20asesor%C3%ADa%20personalizada" target="_blank" class="btn-ghost">Asesoría gratuita</a>
+  <!-- ============= NAV ============= -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#home" class="logo">
+        <span class="mark"></span>
+        <span>JDC Watches</span>
+      </a>
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" data-lang-en>Home</a><a href="#home" data-lang-es>Inicio</a></li>
+          <li><a href="#watches" data-lang-en>Watches</a><a href="#watches" data-lang-es>Relojes</a></li>
+          <li><a href="#about" data-lang-en>About</a><a href="#about" data-lang-es>Sobre Nosotros</a></li>
+          <li><a href="#journal" data-lang-en>Journal</a><a href="#journal" data-lang-es>Diario</a></li>
+          <li><a href="#sell" data-lang-en>Sell Your Watch</a><a href="#sell" data-lang-es>Vende Tu Reloj</a></li>
+          <li><a href="#contact" data-lang-en>Contact</a><a href="#contact" data-lang-es>Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button class="active" data-set-lang="en">EN</button>
+          <span class="sep">|</span>
+          <button data-set-lang="es">ES</button>
         </div>
-      </div>
-      <div class="hero-stats reveal">
-        <div class="hero-stat">
-          <div class="hero-stat-num" id="stat1">0+</div>
-          <div class="hero-stat-label">Vehículos</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num" id="stat2">0+</div>
-          <div class="hero-stat-label">Años</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num" id="stat3">0+</div>
-          <div class="hero-stat-label">Clientes</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee-strip">
-  <div class="marquee-track" id="marquee-track">
-    <span class="marquee-item">BMW</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Mercedes-Benz</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Audi</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Toyota</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Volkswagen</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Jeep</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Honda</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Yamaha</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Porsche</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Lexus</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">BMW</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Mercedes-Benz</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Audi</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Toyota</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Volkswagen</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Jeep</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Honda</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Yamaha</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Porsche</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">Lexus</span><span class="marquee-sep">·</span>
-  </div>
-</div>
-
-<!-- STICKY WA BAR -->
-<div class="sticky-wa" id="sticky-wa">
-  <div class="sticky-wa-text"><strong>¿Encontraste tu próximo vehículo?</strong> Nuestros asesores están listos para ayudarte.</div>
-  <div class="sticky-wa-btns">
-    <a href="https://api.whatsapp.com/send?phone=593995393656&text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20un%20veh%C3%ADculo" target="_blank" class="sticky-wa-btn">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Asesor 1
-    </a>
-    <a href="https://api.whatsapp.com/send?phone=593997929809&text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20un%20veh%C3%ADculo" target="_blank" class="sticky-wa-btn">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Asesor 2
-    </a>
-  </div>
-</div>
-
-<!-- FEATURED VEHICLES -->
-<section id="featured">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-label">Selección especial</div>
-      <h2 class="section-title">Vehículos destacados</h2>
-      <p class="section-sub">Una curación exclusiva de los mejores vehículos disponibles en nuestro inventario.</p>
-    </div>
-    <div class="featured-grid" id="featured-grid"></div>
-  </div>
-</section>
-
-<!-- INVENTARIO -->
-<section id="inventario">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-label">Inventario completo</div>
-      <h2 class="section-title">Todos los vehículos</h2>
-      <p class="section-sub">Filtra por marca, año o presupuesto. Resultados en tiempo real.</p>
-    </div>
-    <div class="filters reveal">
-      <select class="filter-select" id="f-brand" onchange="renderInventory()">
-        <option value="">Todas las marcas</option>
-      </select>
-      <select class="filter-select" id="f-year" onchange="renderInventory()">
-        <option value="">Todos los años</option>
-      </select>
-      <select class="filter-select" id="f-price" onchange="renderInventory()">
-        <option value="">Cualquier precio</option>
-        <option value="0-30000">Hasta $30,000</option>
-        <option value="30000-50000">$30,000 – $50,000</option>
-        <option value="50000-70000">$50,000 – $70,000</option>
-        <option value="70000-999999">Más de $70,000</option>
-      </select>
-    </div>
-    <div class="inventory-grid" id="inventory-grid"></div>
-  </div>
-</section>
-
-<!-- MOTOCICLETAS -->
-<section id="motos">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-label">Dos ruedas</div>
-      <h2 class="section-title">Motocicletas</h2>
-      <p class="section-sub">Motos premium seleccionadas con el mismo estándar de calidad.</p>
-    </div>
-    <div class="inventory-grid" id="motos-grid"></div>
-  </div>
-</section>
-
-<!-- TRUST SECTION -->
-<section id="trust">
-  <div class="container">
-    <div class="section-head reveal" style="text-align:center">
-      <div class="section-label">Por qué elegirnos</div>
-      <h2 class="section-title">Confianza Q2 Saloon</h2>
-      <p class="section-sub" style="margin:12px auto 0">Cada vehículo pasa por un proceso riguroso antes de llegar a ti.</p>
-    </div>
-    <div class="trust-grid">
-      <div class="trust-card reveal stagger-1">
-        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg></div>
-        <div class="trust-title">Vehículos verificados</div>
-        <p class="trust-desc">Cada vehículo es inspeccionado mecánica y estéticamente por nuestro equipo técnico certificado antes de publicarse.</p>
-      </div>
-      <div class="trust-card reveal stagger-2">
-        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg></div>
-        <div class="trust-title">Documentación al día</div>
-        <p class="trust-desc">Revisamos matrículas, títulos de propiedad, historial de siniestros y deudas. Tú compras con total tranquilidad.</p>
-      </div>
-      <div class="trust-card reveal stagger-3">
-        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg></div>
-        <div class="trust-title">Asesoría personalizada</div>
-        <p class="trust-desc">Nuestros asesores te acompañan en cada paso: desde la elección del vehículo hasta el trámite final de transferencia.</p>
-      </div>
-      <div class="trust-card reveal stagger-4">
-        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 8.25h19.5M3.75 5.25h16.5A1.5 1.5 0 0121.75 6.75v10.5a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V6.75a1.5 1.5 0 011.5-1.5z"/><path d="M15.75 15h2.25"/><path d="M6.75 14.25h3"/></svg></div>
-        <div class="trust-title">Opciones de financiamiento</div>
-        <p class="trust-desc">Te ayudamos a encontrar la mejor opción de financiamiento para que puedas adquirir tu vehículo de forma ágil y sin complicaciones.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VIDEO SECTION -->
-<div id="video">
-  <div class="video-bg"></div>
-  <div class="video-content reveal">
-    <h2 class="video-title">Vive la experiencia Q2 Saloon</h2>
-    <p class="video-sub">Más de 10 años siendo el referente de vehículos premium en Quito.</p>
-    <a href="https://www.youtube.com/channel/UCdUJL8k4oklT3aYGzAlbaOg" target="_blank" class="video-btn">
-      <div class="video-play">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      Ver canal de YouTube
-    </a>
-  </div>
-</div>
-
-<!-- NOSOTROS -->
-<section id="nosotros">
-  <div class="container">
-    <div class="nosotros-inner">
-      <div class="nosotros-img reveal-left">
-          <img src="https://baanvelgen.com/cdn/shop/files/novitec-carbon-front-spoiler-frontview-ferrari-296.jpg?v=1762525319&width=1460" alt="Q2 Saloon showroom" onerror="this.src='https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=900&q=80'"/>
-      </div>
-      <div class="nosotros-text reveal-right">
-        <span class="section-label">Quiénes somos</span>
-        <h2 class="section-title">Un estándar superior desde 2015</h2>
-        <div class="nosotros-list">
-          <div class="nosotros-item">
-            <div class="nosotros-dot"></div>
-            <p><strong>Más de 10 años</strong> en el mercado automotriz premium de Quito, construyendo relaciones basadas en la confianza.</p>
-          </div>
-          <div class="nosotros-item">
-            <div class="nosotros-dot"></div>
-            <p><strong>500+ clientes satisfechos</strong> que nos han confiado una de las decisiones financieras más importantes de su vida.</p>
-          </div>
-          <div class="nosotros-item">
-            <div class="nosotros-dot"></div>
-            <p><strong>Proceso transparente</strong>: precios justos, vehículos verificados y asesoría honesta sin presiones.</p>
-          </div>
-          <div class="nosotros-item">
-            <div class="nosotros-dot"></div>
-            <p><strong>Ubicados en el norte de Quito</strong>, Av. 6 de Diciembre N42-30 y Tomás de Berlanga, de fácil acceso.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section id="contacto">
-  <div class="container">
-    <div class="contact-wa-hero reveal">
-      <h2>¿Listo para encontrar tu vehículo ideal?</h2>
-      <p>Escríbenos ahora. Respuesta inmediata de lunes a sábado.</p>
-      <div class="contact-wa-btns">
-        <a href="https://api.whatsapp.com/send?phone=593995393656&text=Hola%2C%20quiero%20asesor%C3%ADa%20para%20comprar%20un%20veh%C3%ADculo" target="_blank" class="contact-wa-btn">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Asesor 1 · +593 995 393 656
-        </a>
-        <a href="https://api.whatsapp.com/send?phone=593997929809&text=Hola%2C%20quiero%20asesor%C3%ADa%20para%20comprar%20un%20veh%C3%ADculo" target="_blank" class="contact-wa-btn">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Asesor 2 · +593 997 929 809
-        </a>
-      </div>
-    </div>
-
-    <div class="contact-grid">
-      <div class="contact-info reveal-left">
-        <h3>Información de contacto</h3>
-        <div class="contact-info-list">
-          <div class="contact-info-item">
-            <div class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;color:var(--beige)"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg></div>
-            <div>
-              <div class="contact-info-label">Dirección</div>
-              <div class="contact-info-val">Av. 6 de Diciembre N42-30 y Tomás de Berlanga, Quito</div>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <div class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;color:var(--beige)"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg></div>
-            <div>
-              <div class="contact-info-label">Teléfono</div>
-              <div class="contact-info-val">022920205</div>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <div class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;color:var(--beige)"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg></div>
-            <div>
-              <div class="contact-info-label">Email</div>
-              <div class="contact-info-val">info@q2saloon.com</div>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <div class="contact-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;color:var(--beige)"><path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-            <div>
-              <div class="contact-info-label">Horario</div>
-              <div class="contact-info-val">Lun–Vie 9:00–18:00 / Sáb 10:00–14:00</div>
-            </div>
-          </div>
-        </div>
-        <div class="contact-form">
-          <h3>Envíanos un mensaje</h3>
-          <div class="form-grid">
-            <div class="form-group">
-              <label class="form-label">Nombre</label>
-              <input class="form-input" type="text" placeholder="Tu nombre"/>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Teléfono</label>
-              <input class="form-input" type="tel" placeholder="+593 999 000 000"/>
-            </div>
-            <div class="form-group full">
-              <label class="form-label">Email</label>
-              <input class="form-input" type="email" placeholder="tu@email.com"/>
-            </div>
-            <div class="form-group full">
-              <label class="form-label">Mensaje</label>
-              <textarea class="form-textarea" placeholder="¿En qué vehículo estás interesado?"></textarea>
-            </div>
-          </div>
-          <button class="form-submit" onclick="submitForm(this)">Enviar mensaje</button>
-        </div>
-      </div>
-      <div class="contact-map reveal-right">
-        <iframe src="https://maps.google.com/maps?q=-0.16698,-78.475655&z=16&output=embed" allowfullscreen loading="lazy"></iframe>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <a href="#" class="footer-logo">
-      <img src="https://raw.githubusercontent.com/infooxbarec-star/pruebaq2saloon/refs/heads/main/logo.png" alt="Q2 Saloon Logo"/>
-    </a>
-    <div class="footer-links">
-      <a href="#featured">Destacados</a>
-      <a href="#inventario">Inventario</a>
-      <a href="#trust">Confianza Q2 Saloon</a>
-      <a href="#contacto">Contacto</a>
-    </div>
-    <div class="footer-social">
-      <a href="https://www.facebook.com/q2saloonautos" target="_blank" title="Facebook">f</a>
-      <a href="https://www.instagram.com/q2saloonautos" target="_blank" title="Instagram">in</a>
-      <a href="https://www.youtube.com/channel/UCdUJL8k4oklT3aYGzAlbaOg" target="_blank" title="YouTube">▶</a>
-    </div>
-  </div>
-  <div class="footer-copy">
-    <p>© 2024 Q2 Saloon. Todos los derechos reservados.</p>
-    <p>Av. 6 de Diciembre N42-30 y Tomás de Berlanga, Quito, Ecuador</p>
-  </div>
-</footer>
-
-<script>
-/* ─── VEHICLE DATA ─── */
-const VEHICLES = [
-  {id:1, brand:'Mercedes-Benz', model:'C300', year:2019, price:49900, mileage:66367, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://di-uploads-pod7.dealerinspire.com/autohausonedens/uploads/2018/12/19CClass-CityDaytime.jpg'},
-  {id:2, brand:'Toyota', model:'Sequoia Platinum', year:2019, price:85000, mileage:42200, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://toyotacanada.scene7.com/is/image/toyotacanada/2019_Toyota_Sequoia-1?ts=1688746476245&$Media-Large$&dpr=off'},
-  {id:3, brand:'BMW', model:'X6 M Competition', year:2022, price:177000, mileage:27940, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:true, img:'https://hips.hearstapps.com/hmg-prod/images/2020-bmw-x6-m-competition-103-1569964622.jpg?crop=0.867xw:0.651xh;0.0112xw,0.281xh&resize=1200:*'},
-  {id:4, brand:'Mercedes-Benz', model:'G63 AMG', year:2017, price:195990, mileage:64147, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:true, img:'https://images.cdn.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/merc-g63-amg-2_0_0.jpg?itok=kHnI7ZVW'},
-  {id:5, brand:'BMW', model:'320i', year:2020, price:35500, mileage:88687, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://cdn.motor1.com/images/mgl/4oVxq/s1/bmw-3er-2019-modell-m-sport.webp'},
-  {id:6, brand:'Land Rover', model:'Range Rover Autobiography', year:2015, price:79990, mileage:74637, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://us-west-2.graphassets.com/ALxjZdtQIQOudrzeO6hSgz/sPBeIOSaGeIZzsZbRGHA'},
-  {id:7, brand:'Jeep', model:'Grand Cherokee Limited', year:2023, price:76999, mileage:55999, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://media.ed.edmunds-media.com/jeep/grand-cherokee-l/2022/oem/2022_jeep_grand-cherokee-l_4dr-suv_limited_fq_oem_1_1600.jpg'},
-  {id:8, brand:'Jeep', model:'Grand Cherokee Limited', year:2021, price:47900, mileage:62150, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://media.ed.edmunds-media.com/jeep/grand-cherokee/2021/oem/2021_jeep_grand-cherokee_4dr-suv_80th_fq_oem_1_1600.jpg'},
-  {id:9, brand:'Land Rover', model:'Range Rover', year:2014, price:83000, mileage:60847, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://static0.pocketlintimages.com/wordpress/wp-content/uploads/120220-cars-news-2014-range-rover-sport-unveiled-with-lighter-look-new-tech-inside-image1-rwqeh3bYB4.jpg'},
-  {id:10, brand:'Mercedes-Benz', model:'A 200', year:2020, price:29900, mileage:82235, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://cms.groupeditors.com/img/autodealer/3823_1.jpg?w=&scale=both&quality=100'},
-  {id:11, brand:'Toyota', model:'Land Cruiser 200', year:2013, price:65500, mileage:166891, mileageUnit:'Kms', transmission:'Automático', fuel:'Diésel', location:'Quito', type:'vehiculo', featured:false, img:'https://media-r2.carsandbids.com/cdn-cgi/image/width=2080,quality=70/d9b636c2ec84ddc3bc7f2eb32861b39bdd5f9683/photos/3zqLyo8B-vi9g9j1Ezk-(edit).jpg?t=170887991650'},
-  {id:12, brand:'Porsche', model:'Cayenne', year:2023, price:115990, mileage:28072, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:true, img:'https://images.pistonheads.com/nimg/47209/mceu_73425740941684170469720.jpg'},
-  {id:13, brand:'BMW', model:'325i', year:1993, price:29900, mileage:40018, mileageUnit:'Kms', transmission:'Manual', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://images.classic.com/vehicles/c5ed3ee24bd08e7fde31ec22ca8702bc2e660b6b.jpg?auto=format&fit=crop&w=600&h=384'},
-  {id:14, brand:'Land Rover', model:'Range Rover Evoque', year:2026, price:75900, mileage:0, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://hips.hearstapps.com/hmg-prod/images/2024-land-rover-range-rover-evoque-phev-108-65380163e375b.jpg?crop=0.611xw:0.611xh;0.0689xw,0.264xh&resize=1200:*'},
-  {id:15, brand:'Ford', model:'Ranger XL', year:2023, price:46499, mileage:13283, mileageUnit:'Kms', transmission:'Manual', fuel:'Diésel', location:'Quito', type:'vehiculo', featured:false, img:'https://img-ik.cars.co.za/news-site-za/images/2022/11/xlt.jpg?tr=w-1200,h-800'},
-  {id:16, brand:'Mercedes-Benz', model:'230GE', year:1985, price:58799, mileage:70000, mileageUnit:'Kms', transmission:'Manual', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://bringatrailer.com/wp-content/uploads/2024/10/1985_mercedes-benz_230ge_IMG-4481-95835-scaled.jpg'},
-  {id:17, brand:'Mercedes-Benz', model:'GLC 43 Coupe', year:2019, price:75000, mileage:57485, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/body-image/public/90-mercedes-amg-glc43-coupe-2019-reveal-hero-rear.jpg?itok=7aoXfsGt'},
-  {id:18, brand:'BMW', model:'X4 xDrive', year:2015, price:46800, mileage:58734, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://media.ed.edmunds-media.com/bmw/x4/2015/oem/2015_bmw_x4_4dr-suv_xdrive35i_fq_oem_10_1600.jpg'},
-  {id:19, brand:'Chevrolet', model:'Tahoe', year:2019, price:61990, mileage:78696, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://images.jazelc.com/uploads/spmotors-m2e/2019-tahoe-gal-ext-07.jpg'},
-  {id:20, brand:'Mercedes-Benz', model:'G63 AMG', year:2013, price:179000, mileage:26334, mileageUnit:'Kms', transmission:'Automático', fuel:'Gasolina', location:'Quito', type:'vehiculo', featured:false, img:'https://hips.hearstapps.com/hmg-prod/amv-prod-cad-assets/images/13q2/510832/2013-mercedes-benz-g63-amg-test-review-car-and-driver-photo-491165-s-original.jpg?fill=1:1&resize=1200:*'},
-  {id:21, brand:'Honda', model:'CB650R', year:2022, price:11500, mileage:6200, mileageUnit:'Kms', transmission:'Manual', fuel:'Gasolina', location:'Quito', type:'motocicleta', featured:false, img:'https://www.eicma.it/wp-content/uploads/2023/08/658bafeda8934a6f90a00aecc6ec49df_honda-cb650r_02-5.jpg'},
-  {id:22, brand:'Yamaha', model:'MT-07', year:2022, price:13200, mileage:4500, mileageUnit:'Kms', transmission:'Manual', fuel:'Gasolina', location:'Quito', type:'motocicleta', featured:false, img:'https://images.hindustantimes.com/auto/img/2021/06/25/600x338/img_1624608448746_1624608459537.jpg'}
-];
-
-/* ─── MODAL SCROLL LOCK ─── */
-let _savedScroll=0;
-function openModal(id){
-  const v=VEHICLES.find(x=>x.id===id);
-  if(!v) return;
-  _savedScroll=window.scrollY;
-  document.getElementById('modal-img').src=v.img;
-  document.getElementById('modal-img').alt=v.brand+' '+v.model;
-  document.getElementById('modal-badge').textContent=v.brand;
-  document.getElementById('modal-title').textContent=v.brand+' '+v.model+' '+v.year;
-  document.getElementById('modal-price').textContent='Desde $'+v.price.toLocaleString();
-  const specs=[
-    {label:'Año',val:v.year},
-    {label:'Recorrido',val:v.mileage===0?'0 Kms':v.mileage.toLocaleString()+' '+v.mileageUnit},
-    {label:'Transmisión',val:v.transmission},
-    {label:'Combustible',val:v.fuel},
-    {label:'Ubicación',val:v.location}
-  ];
-  document.getElementById('modal-specs').innerHTML=specs.map(s=>`
-    <div class="modal-spec">
-      <div class="modal-spec-label">${s.label}</div>
-      <div class="modal-spec-val">${s.val}</div>
-    </div>`).join('');
-  const msg=encodeURIComponent(`Hola, me interesa el ${v.brand} ${v.model} ${v.year} a $${v.price.toLocaleString()}. ¿Está disponible?`);
-  document.getElementById('modal-wa').onclick=()=>window.open(`https://api.whatsapp.com/send?phone=593995393656&text=${msg}`,'_blank');
-  document.body.style.position='fixed';
-  document.body.style.top=`-${_savedScroll}px`;
-  document.body.style.width='100%';
-  document.getElementById('modal-ov').classList.add('open');
-}
-function closeModal(e,force){
-  if(force||!e||e.target===document.getElementById('modal-ov')){
-    document.getElementById('modal-ov').classList.remove('open');
-    document.body.style.position='';
-    document.body.style.top='';
-    document.body.style.width='';
-    window.scrollTo({top:_savedScroll,behavior:'instant'});
-  }
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal(null,true)});
-
-/* ─── CARD BUILDER ─── */
-function buildCard(v,isFeatured=false){
-  const msg=encodeURIComponent(`Hola, me interesa el ${v.brand} ${v.model} ${v.year} a $${v.price.toLocaleString()}. ¿Está disponible?`);
-  return `
-  <div class="vcard" onclick="openModal(${v.id})">
-    <div class="vcard-img-wrap">
-      <img class="vcard-img" src="${v.img}" alt="${v.brand} ${v.model}" loading="lazy"/>
-      <span class="vcard-badge">${v.year}</span>
-      ${isFeatured?'<span class="vcard-feat-tag">Destacado</span>':''}
-    </div>
-    <div class="vcard-body">
-      <div class="vcard-brand">${v.brand}</div>
-      <div class="vcard-model">${v.model}</div>
-      <div class="vcard-year">${v.transmission} · ${v.fuel}</div>
-      <div class="vcard-meta">
-        <span>${v.mileage===0?'0 Kms':v.mileage.toLocaleString()+' '+v.mileageUnit}</span>
-        <span>${v.location}</span>
-      </div>
-      <div class="vcard-footer">
-        <div>
-          <div class="vcard-price-label">Desde</div>
-          <div class="vcard-price">$${v.price.toLocaleString()}</div>
-        </div>
-        <button class="vcard-wa" onclick="event.stopPropagation();window.open('https://api.whatsapp.com/send?phone=593995393656&text=${msg}','_blank')">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Consultar
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
         </button>
       </div>
     </div>
-  </div>`;
-}
+  </header>
 
-/* ─── FEATURED RENDER ─── */
-function renderFeatured(){
-  const featured=VEHICLES.filter(v=>v.featured&&v.type==='vehiculo');
-  document.getElementById('featured-grid').innerHTML=featured.map(v=>buildCard(v,true)).join('');
-}
+  <!-- ============= HERO ============= -->
+  <section class="hero" id="home">
+    <div class="hero-watch"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow eyebrow">
+        <span data-lang-en>Established · Ecuador</span>
+        <span data-lang-es>Establecidos · Ecuador</span>
+      </div>
+      <h1 class="display reveal in">
+        <span data-lang-en>Curated Timepieces.<br>Bought, Sold, and<br><em>Collected with Passion.</em></span>
+        <span data-lang-es>Relojes Seleccionados.<br>Comprados, Vendidos y<br><em>Coleccionados con Pasión.</em></span>
+      </h1>
+      <p class="lede reveal">
+        <span data-lang-en>JDC Watches sources, buys, and sells exceptional watches for collectors, enthusiasts, and first-time buyers.</span>
+        <span data-lang-es>JDC Watches busca, compra y vende relojes excepcionales para coleccionistas, entusiastas y compradores primerizos.</span>
+      </p>
+      <div class="hero-cta reveal">
+        <a href="#watches" class="btn">
+          <span data-lang-en>Explore Watches</span>
+          <span data-lang-es>Ver Relojes</span>
+        </a>
+        <a href="#sell" class="btn btn-ghost">
+          <span data-lang-en>Sell Your Watch</span>
+          <span data-lang-es>Vende Tu Reloj</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <span data-lang-en>Authenticity · Heritage</span>
+      <span data-lang-es>Autenticidad · Herencia</span>
+      <span class="line"></span>
+      <span>EC · 2024</span>
+    </div>
+  </section>
 
-/* ─── INVENTORY RENDER ─── */
-function renderInventory(){
-  const brand=document.getElementById('f-brand').value;
-  const year=document.getElementById('f-year').value;
-  const price=document.getElementById('f-price').value;
-  let cars=VEHICLES.filter(v=>v.type==='vehiculo');
-  if(brand) cars=cars.filter(v=>v.brand===brand);
-  if(year) cars=cars.filter(v=>v.year===parseInt(year));
-  if(price){
-    const[min,max]=price.split('-').map(Number);
-    cars=cars.filter(v=>v.price>=min&&v.price<=max);
-  }
-  const grid=document.getElementById('inventory-grid');
-  if(!cars.length){
-    grid.innerHTML=`<div class="no-results"><h3>Sin resultados</h3><p>Intenta con otros filtros o contáctanos para más opciones.</p></div>`;
-  }else{
-    grid.innerHTML=cars.map(v=>buildCard(v)).join('');
-  }
-}
+  <!-- ============= MARQUEE ============= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Rolex</span><span>Omega</span><span>Tag Heuer</span><span>Breitling</span><span>Authenticated</span><span>Curated</span>
+      <span>Rolex</span><span>Omega</span><span>Tag Heuer</span><span>Breitling</span><span>Authenticated</span><span>Curated</span>
+    </div>
+  </div>
 
-/* ─── MOTOS RENDER ─── */
-function renderMotos(){
-  const motos=VEHICLES.filter(v=>v.type==='motocicleta');
-  document.getElementById('motos-grid').innerHTML=motos.map(v=>buildCard(v)).join('');
-}
+  <!-- ============= WATCHES / INVENTORY ============= -->
+  <section id="watches">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="num">— 01</span>
+          <h2 class="display">
+            <span data-lang-en>The <em>Collection</em></span>
+            <span data-lang-es>La <em>Colección</em></span>
+          </h2>
+        </div>
+        <p class="meta">
+          <span data-lang-en>A rotating selection of authenticated timepieces. Each watch is hand-picked, inspected, and presented with full transparency.</span>
+          <span data-lang-es>Una selección rotativa de relojes autenticados. Cada pieza es escogida a mano, inspeccionada y presentada con total transparencia.</span>
+        </p>
+      </div>
 
-/* ─── POPULATE FILTERS ─── */
-function initFilters(){
-  const cars=VEHICLES.filter(v=>v.type==='vehiculo');
-  const brands=[...new Set(cars.map(v=>v.brand))].sort();
-  const years=[...new Set(cars.map(v=>v.year))].sort((a,b)=>b-a);
-  const bSel=document.getElementById('f-brand');
-  const ySel=document.getElementById('f-year');
-  brands.forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b;bSel.appendChild(o)});
-  years.forEach(y=>{const o=document.createElement('option');o.value=y;o.textContent=y;ySel.appendChild(o)});
-}
+      <div class="filter-bar" id="filterBar">
+        <button class="active" data-filter="all" data-lang-en>All</button>
+        <button class="active" data-filter="all" data-lang-es>Todos</button>
+        <button data-filter="available" data-lang-en>Available</button>
+        <button data-filter="available" data-lang-es>Disponibles</button>
+        <button data-filter="sold" data-lang-en>Sold</button>
+        <button data-filter="sold" data-lang-es>Vendidos</button>
+        <button data-filter="rolex">Rolex</button>
+        <button data-filter="omega">Omega</button>
+      </div>
 
-/* ─── NAV SCROLL ─── */
-window.addEventListener('scroll',()=>{
-  const nav=document.getElementById('main-nav');
-  if(window.scrollY>50) nav.classList.add('scrolled');
-  else nav.classList.remove('scrolled');
-  // sticky wa
-  const wa=document.getElementById('sticky-wa');
-  if(window.scrollY>window.innerHeight*0.7) wa.classList.add('show');
-  else wa.classList.remove('show');
-},{ passive:true });
+      <div class="watch-grid" id="watchGrid">
 
-/* ─── MOBILE MENU ─── */
-document.getElementById('ham').addEventListener('click',()=>{
-  document.getElementById('mob-menu').classList.add('open');
-});
-document.getElementById('mob-close').addEventListener('click',()=>{
-  document.getElementById('mob-menu').classList.remove('open');
-});
-function closeMob(){
-  document.getElementById('mob-menu').classList.remove('open');
-}
+        <!-- Omega Seamaster 300 -->
+        <article class="watch-card reveal" data-status="available" data-brand="omega">
+          <div class="watch-image-wrap">
+            <span class="badge available" data-lang-en>Available</span>
+            <span class="badge available" data-lang-es>Disponible</span>
+            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.27.04%20(1).jpeg')"></div>
+            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.27.04.jpeg'); opacity:0;"></div>
+          </div>
+          <div class="watch-meta-row">
+            <span class="watch-brand">Omega</span>
+            <span class="watch-year">2023</span>
+          </div>
+          <h3 class="watch-model">Seamaster 300</h3>
+          <ul class="watch-specs">
+            <li>Ref. 210.30.42.20.06.001</li>
+            <li data-lang-en>Box & Papers</li>
+            <li data-lang-es>Caja y Papeles</li>
+          </ul>
+          <span class="watch-action">
+            <span data-lang-en>Request Info</span>
+            <span data-lang-es>Solicitar Info</span>
+          </span>
+        </article>
 
-/* ─── COUNTER ANIMATION ─── */
-function animCounters(items){
-  let start=null;
-  const step=ts=>{
-    if(start===null) start=ts;
-    let done=true;
-    items.forEach(item=>{
-      const p=Math.min((ts-start)/item.dur,1);
-      const eased=1-Math.pow(1-p,2.4);
-      const value=Math.min(item.target,Math.round(item.target*eased));
-      item.el.textContent=value+item.suffix;
-      if(p<1) done=false;
+        <!-- Rolex Submariner No Date -->
+        <article class="watch-card reveal" data-status="available" data-brand="rolex">
+          <div class="watch-image-wrap">
+            <span class="badge available" data-lang-en>Available</span>
+            <span class="badge available" data-lang-es>Disponible</span>
+            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.28.11%20(1).jpeg')"></div>
+            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.28.11.jpeg'); opacity:0;"></div>
+          </div>
+          <div class="watch-meta-row">
+            <span class="watch-brand">Rolex</span>
+            <span class="watch-year">2006</span>
+          </div>
+          <h3 class="watch-model"><span data-lang-en>Submariner No Date</span><span data-lang-es>Submariner Sin Fecha</span></h3>
+          <ul class="watch-specs">
+            <li>Ref. 14060</li>
+            <li data-lang-en>Watch Only</li>
+            <li data-lang-es>Solo Reloj</li>
+          </ul>
+          <span class="watch-action">
+            <span data-lang-en>Request Info</span>
+            <span data-lang-es>Solicitar Info</span>
+          </span>
+        </article>
+
+        <!-- Omega Speedmaster (5th watch from images) -->
+        <article class="watch-card is-sold reveal" data-status="sold" data-brand="omega">
+          <div class="watch-image-wrap">
+            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.35.24%20(1).jpeg')"></div>
+            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.35.24.jpeg'); opacity:0;"></div>
+            <div class="sold-overlay"><span data-lang-en>Sold</span><span data-lang-es>Vendido</span></div>
+            <span class="badge sold" data-lang-en>Sold</span>
+            <span class="badge sold" data-lang-es>Vendido</span>
+          </div>
+          <div class="watch-meta-row">
+            <span class="watch-brand">Omega</span>
+            <span class="watch-year">2025</span>
+          </div>
+          <h3 class="watch-model">Speedmaster Professional</h3>
+          <ul class="watch-specs">
+            <li>Ref. 310.32.42.50.04.002</li>
+            <li data-lang-en>Unworn · Full Set</li>
+            <li data-lang-es>Sin Estrenar · Set Completo</li>
+          </ul>
+          <span class="watch-action">
+            <span data-lang-en>View Archive</span>
+            <span data-lang-es>Ver Archivo</span>
+          </span>
+        </article>
+
+        <!-- Rolex Air-King 5500 SOLD -->
+        <article class="watch-card is-sold reveal" data-status="sold" data-brand="rolex">
+          <div class="watch-image-wrap">
+            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.29.35%20(1).jpeg')"></div>
+            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.29.35.jpeg'); opacity:0;"></div>
+            <div class="sold-overlay"><span data-lang-en>Sold</span><span data-lang-es>Vendido</span></div>
+            <span class="badge sold" data-lang-en>Sold</span>
+            <span class="badge sold" data-lang-es>Vendido</span>
+          </div>
+          <div class="watch-meta-row">
+            <span class="watch-brand">Rolex</span>
+            <span class="watch-year">1970s</span>
+          </div>
+          <h3 class="watch-model">Air-King 5500</h3>
+          <ul class="watch-specs">
+            <li data-lang-en>34mm · Vintage</li>
+            <li data-lang-es>34mm · Vintage</li>
+            <li>Oyster Perpetual</li>
+          </ul>
+          <span class="watch-action">
+            <span data-lang-en>View Archive</span>
+            <span data-lang-es>Ver Archivo</span>
+          </span>
+        </article>
+
+        <!-- Omega Railmaster SOLD -->
+        <article class="watch-card is-sold reveal" data-status="sold" data-brand="omega">
+          <div class="watch-image-wrap">
+            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.32.21%20(1).jpeg')"></div>
+            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.32.21.jpeg'); opacity:0;"></div>
+            <div class="sold-overlay"><span data-lang-en>Sold</span><span data-lang-es>Vendido</span></div>
+            <span class="badge sold" data-lang-en>Sold</span>
+            <span class="badge sold" data-lang-es>Vendido</span>
+          </div>
+          <div class="watch-meta-row">
+            <span class="watch-brand">Omega</span>
+            <span class="watch-year">2020</span>
+          </div>
+          <h3 class="watch-model">Railmaster</h3>
+          <ul class="watch-specs">
+            <li>Ref. 220.10.40.20.06.001</li>
+            <li data-lang-en>Box & Papers</li>
+            <li data-lang-es>Caja y Papeles</li>
+          </ul>
+          <span class="watch-action">
+            <span data-lang-en>View Archive</span>
+            <span data-lang-es>Ver Archivo</span>
+          </span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= ABOUT ============= -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-image reveal" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.32.21%20(1).jpeg')"></div>
+      <div class="about-content reveal">
+        <span class="eyebrow">— 02 / <span data-lang-en>About</span><span data-lang-es>Sobre Nosotros</span></span>
+        <h2>
+          <span data-lang-en>More Than <em>Watches</em></span>
+          <span data-lang-es>Más Que <em>Relojes</em></span>
+        </h2>
+        <p data-lang-en-block>
+          JDC Watches was created from a genuine passion for mechanical watches, design, heritage, and the stories behind every timepiece. Each watch is carefully selected with attention to authenticity, condition, and long-term value.
+        </p>
+        <p data-lang-es-block>
+          JDC Watches nació de una pasión genuina por la relojería mecánica, el diseño, la herencia y las historias detrás de cada pieza. Cada reloj es cuidadosamente seleccionado con atención a la autenticidad, condición y valor a largo plazo.
+        </p>
+        <p data-lang-en-block style="opacity:0.75">
+          We believe a great watch is more than an instrument — it is a quiet companion, a connection to craftsmanship, and a bridge across generations.
+        </p>
+        <p data-lang-es-block style="opacity:0.75">
+          Creemos que un gran reloj es más que un instrumento — es un compañero silencioso, una conexión con la maestría artesanal y un puente entre generaciones.
+        </p>
+        <div class="signature">— Juan Diego Camacho</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= JOURNAL ============= -->
+  <section id="journal">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="num">— 03</span>
+          <h2 class="display">
+            <span data-lang-en>The <em>Journal</em></span>
+            <span data-lang-es>El <em>Diario</em></span>
+          </h2>
+        </div>
+        <p class="meta">
+          <span data-lang-en>Stories, references, and field notes from a life spent in mechanical watches.</span>
+          <span data-lang-es>Historias, referencias y notas de campo de una vida dedicada a la relojería mecánica.</span>
+        </p>
+      </div>
+
+      <div class="journal-grid">
+        <article class="article featured reveal">
+          <div class="article-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.32.21%20(1).jpeg')"></div>
+          <span class="article-tag" data-lang-en>Reference</span>
+          <span class="article-tag" data-lang-es>Referencia</span>
+          <h3 class="article-title">
+            <span data-lang-en>Why the Submariner 14060 Is a Collector Favorite</span>
+            <span data-lang-es>Por Qué el Submariner 14060 Es Favorito de los Coleccionistas</span>
+          </h3>
+          <p class="article-excerpt">
+            <span data-lang-en>The last of the four-line dials, the last with a tritium-free aluminum bezel, and arguably the purest expression of the Submariner — a reference that quietly stole hearts for two decades.</span>
+            <span data-lang-es>El último de los diales de cuatro líneas, el último con bisel de aluminio sin tritio, y posiblemente la expresión más pura del Submariner — una referencia que conquistó corazones durante dos décadas.</span>
+          </p>
+          <span class="article-date" data-lang-en>March 2025 · 6 min read</span>
+          <span class="article-date" data-lang-es>Marzo 2025 · 6 min de lectura</span>
+        </article>
+
+        <article class="article reveal">
+          <div class="article-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.32.21.jpeg')"></div>
+          <span class="article-tag" data-lang-en>Modern</span>
+          <span class="article-tag" data-lang-es>Moderno</span>
+          <h3 class="article-title">
+            <span data-lang-en>Seamaster 300: Tool Watch, Timeless Design</span>
+            <span data-lang-es>Seamaster 300: Reloj Herramienta, Diseño Atemporal</span>
+          </h3>
+          <span class="article-date" data-lang-en>February 2025</span>
+          <span class="article-date" data-lang-es>Febrero 2025</span>
+        </article>
+
+        <article class="article reveal">
+          <div class="article-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.35.24%20(1).jpeg')"></div>
+          <span class="article-tag" data-lang-en>Vintage</span>
+          <span class="article-tag" data-lang-es>Vintage</span>
+          <h3 class="article-title">
+            <span data-lang-en>The Beauty of Vintage Rolex</span>
+            <span data-lang-es>La Belleza del Rolex Vintage</span>
+          </h3>
+          <span class="article-date" data-lang-en>January 2025</span>
+          <span class="article-date" data-lang-es>Enero 2025</span>
+        </article>
+
+        <article class="article reveal">
+          <div class="article-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.35.24.jpeg')"></div>
+          <span class="article-tag" data-lang-en>Guide</span>
+          <span class="article-tag" data-lang-es>Guía</span>
+          <h3 class="article-title">
+            <span data-lang-en>Buying Your First Luxury Watch</span>
+            <span data-lang-es>Comprando Tu Primer Reloj de Lujo</span>
+          </h3>
+          <span class="article-date" data-lang-en>December 2024</span>
+          <span class="article-date" data-lang-es>Diciembre 2024</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SELL YOUR WATCH ============= -->
+  <section id="sell">
+    <div class="sell-grid">
+      <div class="sell-image"></div>
+      <div class="sell-content">
+        <span class="eyebrow">— 04</span>
+        <h2>
+          <span data-lang-en>Looking to <em>Sell Your Watch?</em></span>
+          <span data-lang-es>¿Quieres <em>Vender Tu Reloj?</em></span>
+        </h2>
+        <p>
+          <span data-lang-en>Send us your watch details, photos, reference number, year, and condition. JDC Watches will review your piece and provide a fair, market-based offer — discreetly and without obligation.</span>
+          <span data-lang-es>Envíanos los detalles de tu reloj, fotos, número de referencia, año y condición. JDC Watches revisará tu pieza y te brindará una oferta justa basada en el mercado — con discreción y sin compromiso.</span>
+        </p>
+        <ol class="sell-steps">
+          <li>
+            <span class="num">i.</span>
+            <div>
+              <span data-lang-en>Share photos and reference details via WhatsApp</span>
+              <span data-lang-es>Comparte fotos y detalles de referencia por WhatsApp</span>
+            </div>
+          </li>
+          <li>
+            <span class="num">ii.</span>
+            <div>
+              <span data-lang-en>Receive a market-based valuation within 48 hours</span>
+              <span data-lang-es>Recibe una valoración basada en el mercado en 48 horas</span>
+            </div>
+          </li>
+          <li>
+            <span class="num">iii.</span>
+            <div>
+              <span data-lang-en>Discreet, secure transaction once terms are agreed</span>
+              <span data-lang-es>Transacción discreta y segura una vez acordados los términos</span>
+            </div>
+          </li>
+        </ol>
+        <a href="https://wa.me/" class="btn btn-ghost">
+          <span data-lang-en>Contact via WhatsApp</span>
+          <span data-lang-es>Contactar por WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= REVIEWS ============= -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="num">— 05</span>
+          <h2 class="display">
+            <span data-lang-en>Words from <em>Collectors</em></span>
+            <span data-lang-es>Palabras de <em>Coleccionistas</em></span>
+          </h2>
+        </div>
+        <p class="meta">
+          <span data-lang-en>Real reviews from clients who have bought and sold with JDC Watches.</span>
+          <span data-lang-es>Reseñas reales de clientes que han comprado y vendido con JDC Watches.</span>
+        </p>
+      </div>
+
+      <div class="reviews-track">
+
+        <article class="review-card reveal">
+          <div class="review-head">
+            <div class="review-thumb" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.28.11.jpeg')"></div>
+            <div>
+              <h4 class="review-watch">Rolex GMT Master II</h4>
+              <span class="stars" aria-label="5 stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-text">Perfecto. Vendedor serio y muy amable. 100% recomendable.</p>
+          <div class="review-foot">
+            <span class="review-name">Daniel S.</span>
+            <span class="review-date">Feb 9, 2024</span>
+          </div>
+        </article>
+
+        <article class="review-card reveal">
+          <div class="review-head">
+            <div class="review-thumb" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.29.35%20(1).jpeg')"></div>
+            <div>
+              <h4 class="review-watch">Tag Heuer Monaco</h4>
+              <span class="stars" aria-label="5 stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-text">Todo fenomenal. Muy buena comunicación y muy servicial en todo momento. Puntual y amable. 100% recomendable.</p>
+          <div class="review-foot">
+            <span class="review-name">Bostana Group C.</span>
+            <span class="review-date">Oct 8, 2024</span>
+          </div>
+        </article>
+
+        <article class="review-card reveal">
+          <div class="review-head">
+            <div class="review-thumb" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.35.24%20(1).jpeg')"></div>
+            <div>
+              <h4 class="review-watch">Rolex Datejust 16233</h4>
+              <span class="stars" aria-label="5 stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-text">Todo perfecto con Juan, repetiré seguro.</p>
+          <div class="review-foot">
+            <span class="review-name">C. L.</span>
+            <span class="review-date">Sep 12, 2024</span>
+          </div>
+        </article>
+
+        <article class="review-card reveal">
+          <div class="review-head">
+            <div class="review-thumb" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.32.21.jpeg')"></div>
+            <div>
+              <h4 class="review-watch">Breitling Super Ocean</h4>
+              <span class="stars" aria-label="5 stars">★★★★★</span>
+            </div>
+          </div>
+          <p class="review-text">Vendedor claro y perfecto, un placer tratar con gente así.</p>
+          <div class="review-foot">
+            <span class="review-name">Jaime L.</span>
+            <span class="review-date">Oct 30, 2024</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= TRUST ============= -->
+  <section id="trust">
+    <div class="trust-inner">
+      <div class="trust-head reveal">
+        <span class="eyebrow">— 06</span>
+        <h2>
+          <span data-lang-en>How We <em>Operate</em></span>
+          <span data-lang-es>Cómo <em>Operamos</em></span>
+        </h2>
+      </div>
+
+      <div class="trust-grid">
+        <div class="pillar reveal">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2 L3 6 V12 C3 17 7 21 12 22 C17 21 21 17 21 12 V6 L12 2 Z"/><path d="M9 12 L11 14 L15 10"/></svg></div>
+          <h4><span data-lang-en>Authenticity Checked</span><span data-lang-es>Autenticidad Verificada</span></h4>
+          <p><span data-lang-en>Every watch undergoes thorough verification of references, movements, and serial numbers.</span><span data-lang-es>Cada reloj pasa por una verificación exhaustiva de referencias, movimientos y números de serie.</span></p>
+        </div>
+
+        <div class="pillar reveal">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7 V12 L15 14"/></svg></div>
+          <h4><span data-lang-en>Transparent Transactions</span><span data-lang-es>Transacciones Transparentes</span></h4>
+          <p><span data-lang-en>Clear communication on condition, history, and price. No hidden fees, no surprises.</span><span data-lang-es>Comunicación clara sobre condición, historia y precio. Sin tarifas ocultas, sin sorpresas.</span></p>
+        </div>
+
+        <div class="pillar reveal">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 7 H20 V19 H4 Z"/><path d="M4 7 L12 13 L20 7"/></svg></div>
+          <h4><span data-lang-en>Curated Selection</span><span data-lang-es>Selección Curada</span></h4>
+          <p><span data-lang-en>We choose pieces with intent — references that endure, designs that matter.</span><span data-lang-es>Elegimos piezas con intención — referencias que perduran, diseños que importan.</span></p>
+        </div>
+
+        <div class="pillar reveal">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M6 11 V8 a6 6 0 0 1 12 0 V11"/><rect x="4" y="11" width="16" height="10"/></svg></div>
+          <h4><span data-lang-en>Private & Discreet</span><span data-lang-es>Privado y Discreto</span></h4>
+          <p><span data-lang-en>Your details and transactions stay between us. Always.</span><span data-lang-es>Tus datos y transacciones quedan entre nosotros. Siempre.</span></p>
+        </div>
+
+        <div class="pillar reveal">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 4 C8 4 5 7 5 11 C5 16 12 20 12 20 C12 20 19 16 19 11 C19 7 16 4 12 4 Z"/></svg></div>
+          <h4><span data-lang-en>Passion-Driven</span><span data-lang-es>Movidos por Pasión</span></h4>
+          <p><span data-lang-en>Watches first, business second. Our standards begin with what we'd buy ourselves.</span><span data-lang-es>Los relojes primero, el negocio después. Nuestros estándares comienzan con lo que compraríamos nosotros.</span></p>
+        </div>
+
+        <div class="pillar reveal">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12 H21"/><path d="M12 3 C14.5 6 14.5 18 12 21 M12 3 C9.5 6 9.5 18 12 21"/></svg></div>
+          <h4><span data-lang-en>Worldwide Sourcing</span><span data-lang-es>Búsqueda Mundial</span></h4>
+          <p><span data-lang-en>Looking for a specific reference? We source globally for collectors with intent.</span><span data-lang-es>¿Buscas una referencia específica? Buscamos globalmente para coleccionistas con intención.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CONTACT ============= -->
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="eyebrow">— 07 / <span data-lang-en>Contact</span><span data-lang-es>Contacto</span></span>
+        <h2>
+          <span data-lang-en>Begin a <em>Conversation</em></span>
+          <span data-lang-es>Inicia una <em>Conversación</em></span>
+        </h2>
+        <p>
+          <span data-lang-en>For availability, sourcing requests, or to sell your watch, contact JDC Watches directly. We respond personally to every message.</span>
+          <span data-lang-es>Para disponibilidad, solicitudes de búsqueda o vender tu reloj, contacta directamente con JDC Watches. Respondemos personalmente a cada mensaje.</span>
+        </p>
+
+        <div class="contact-list">
+          <div class="row">
+            <span class="label">WhatsApp</span>
+            <a class="value" href="https://wa.me/" target="_blank">
+              <span data-lang-en>Open Chat</span>
+              <span data-lang-es>Abrir Chat</span>
+            </a>
+          </div>
+          <div class="row">
+            <span class="label">Instagram</span>
+            <a class="value" href="https://instagram.com/jdc_watches" target="_blank">@jdc_watches</a>
+          </div>
+          <div class="row">
+            <span class="label" data-lang-en>Location</span>
+            <span class="label" data-lang-es>Ubicación</span>
+            <span class="value">Ecuador</span>
+          </div>
+          <div class="row">
+            <span class="label" data-lang-en>Hours</span>
+            <span class="label" data-lang-es>Horario</span>
+            <span class="value">
+              <span data-lang-en>Mon–Sat · 09:00 – 19:00</span>
+              <span data-lang-es>Lun–Sáb · 09:00 – 19:00</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form reveal" onsubmit="event.preventDefault(); this.querySelector('button').textContent = (document.body.dataset.lang === 'es' ? 'Mensaje Enviado ✓' : 'Message Sent ✓');">
+        <div class="field-row">
+          <div class="field">
+            <label data-lang-en>First Name</label>
+            <label data-lang-es>Nombre</label>
+            <input type="text" required>
+          </div>
+          <div class="field">
+            <label data-lang-en>Last Name</label>
+            <label data-lang-es>Apellido</label>
+            <input type="text" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" required>
+        </div>
+        <div class="field">
+          <label data-lang-en>I'm interested in</label>
+          <label data-lang-es>Estoy interesado en</label>
+          <select>
+            <option data-lang-en>Buying a watch</option>
+            <option data-lang-es>Comprar un reloj</option>
+            <option data-lang-en>Selling my watch</option>
+            <option data-lang-es>Vender mi reloj</option>
+            <option data-lang-en>Sourcing a specific reference</option>
+            <option data-lang-es>Buscar una referencia específica</option>
+            <option data-lang-en>General inquiry</option>
+            <option data-lang-es>Consulta general</option>
+          </select>
+        </div>
+        <div class="field">
+          <label data-lang-en>Message</label>
+          <label data-lang-es>Mensaje</label>
+          <textarea rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn">
+          <span data-lang-en>Send Message</span>
+          <span data-lang-es>Enviar Mensaje</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============= FOOTER ============= -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <span class="mark"></span>
+          <span>JDC Watches</span>
+        </a>
+        <p>
+          <span data-lang-en>Curated mechanical watches. Bought, sold, and collected with passion. Based in Ecuador, sourcing globally.</span>
+          <span data-lang-es>Relojes mecánicos seleccionados. Comprados, vendidos y coleccionados con pasión. Con base en Ecuador, búsqueda global.</span>
+        </p>
+      </div>
+      <div>
+        <h5 data-lang-en>Navigate</h5>
+        <h5 data-lang-es>Navegar</h5>
+        <ul>
+          <li><a href="#watches" data-lang-en>Watches</a><a href="#watches" data-lang-es>Relojes</a></li>
+          <li><a href="#about" data-lang-en>About</a><a href="#about" data-lang-es>Sobre Nosotros</a></li>
+          <li><a href="#journal" data-lang-en>Journal</a><a href="#journal" data-lang-es>Diario</a></li>
+          <li><a href="#sell" data-lang-en>Sell Your Watch</a><a href="#sell" data-lang-es>Vende Tu Reloj</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-lang-en>Connect</h5>
+        <h5 data-lang-es>Conectar</h5>
+        <ul>
+          <li><a href="https://instagram.com/jdc_watches">Instagram</a></li>
+          <li><a href="https://wa.me/">WhatsApp</a></li>
+          <li><a href="#contact">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 JDC Watches</span>
+      <span>
+        <span data-lang-en>Crafted in Ecuador</span>
+        <span data-lang-es>Hecho en Ecuador</span>
+      </span>
+    </div>
+  </footer>
+
+
+  <!-- ============= WATCH MODAL ============= -->
+  <div class="watch-modal-overlay" id="watchModal" role="dialog" aria-modal="true">
+    <div class="watch-modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-image" id="modalImage"></div>
+      <div class="modal-body">
+        <span class="modal-badge available" id="modalBadge">Available</span>
+        <span class="modal-brand" id="modalBrand"></span>
+        <h2 class="modal-model" id="modalModel"></h2>
+        <div class="modal-meta">
+          <div class="modal-meta-row">
+            <span class="modal-label" data-lang-en>Year</span>
+            <span class="modal-label" data-lang-es>Año</span>
+            <span class="modal-value" id="modalYear"></span>
+          </div>
+          <div class="modal-meta-row">
+            <span class="modal-label" data-lang-en>Reference</span>
+            <span class="modal-label" data-lang-es>Referencia</span>
+            <span class="modal-value" id="modalRef"></span>
+          </div>
+          <div class="modal-meta-row">
+            <span class="modal-label" data-lang-en>Condition</span>
+            <span class="modal-label" data-lang-es>Condición</span>
+            <span class="modal-value" id="modalCondition"></span>
+          </div>
+        </div>
+        <a href="https://wa.me/" class="btn modal-cta" id="modalCta" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp FAB -->
+  <a href="https://wa.me/" class="whatsapp-fab" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9s-.5-.1-.7.1c-.2.3-.7.9-.9 1.1s-.3.2-.6.1c-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1s0-.5.1-.6c.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5s.1-.4 0-.5-.7-1.6-.9-2.2c-.2-.5-.5-.5-.7-.5-.2 0-.4 0-.6 0s-.5.1-.8.4c-.3.3-1 1-1 2.4s1.1 2.8 1.2 3 2.1 3.2 5.1 4.5c.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.5.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+  </a>
+
+<script>
+  // ===== Nav scroll effect =====
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ===== Mobile menu =====
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    toggle.classList.remove('open');
+    links.classList.remove('open');
+  }));
+
+  // ===== Language switch =====
+  document.querySelectorAll('.lang-switch [data-set-lang]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.setLang;
+      document.body.dataset.lang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('.lang-switch button').forEach(b =>
+        b.classList.toggle('active', b.dataset.setLang === lang)
+      );
     });
-    if(!done){
-      requestAnimationFrame(step);
-      return;
-    }
-    items.forEach(item=>{
-      item.el.textContent=item.target+item.suffix;
+  });
+
+  // ===== Scroll reveal =====
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
     });
-  };
-  requestAnimationFrame(step);
-}
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* ─── INTERSECTION OBSERVER ─── */
-const revealObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add('revealed');
+  // ===== Inventory filter =====
+  const filterBar = document.getElementById('filterBar');
+  const cards = document.querySelectorAll('#watchGrid .watch-card');
+  filterBar.addEventListener('click', e => {
+    const btn = e.target.closest('button[data-filter]');
+    if (!btn) return;
+    const filter = btn.dataset.filter;
+    // Update active state across same-filter buttons (EN+ES pair)
+    filterBar.querySelectorAll('button').forEach(b => {
+      b.classList.toggle('active', b.dataset.filter === filter);
+    });
+    cards.forEach(c => {
+      const status = c.dataset.status;
+      const brand = c.dataset.brand;
+      const show =
+        filter === 'all' ||
+        filter === status ||
+        filter === brand;
+      c.style.display = show ? '' : 'none';
+    });
   });
-},{threshold:0.12});
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>revealObs.observe(el));
 
-let countersStarted=false;
-const counterObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting&&!countersStarted){
-      countersStarted=true;
-      e.target.classList.add('revealed');
-      animCounters([
-        {el:document.getElementById('stat1'),target:200,suffix:'+',dur:1080},
-        {el:document.getElementById('stat2'),target:10,suffix:'+',dur:980},
-        {el:document.getElementById('stat3'),target:500,suffix:'+',dur:1180}
-      ]);
-      counterObs.unobserve(e.target);
+  // ===== Watch Modal =====
+  (function () {
+    const overlay   = document.getElementById('watchModal');
+    const mImage    = document.getElementById('modalImage');
+    const mBadge    = document.getElementById('modalBadge');
+    const mBrand    = document.getElementById('modalBrand');
+    const mModel    = document.getElementById('modalModel');
+    const mYear     = document.getElementById('modalYear');
+    const mRef      = document.getElementById('modalRef');
+    const mCond     = document.getElementById('modalCondition');
+    const mCta      = document.getElementById('modalCta');
+    const mClose    = document.getElementById('modalClose');
+
+    function openModal(card) {
+      const lang    = document.body.dataset.lang || 'en';
+      const imgEl   = card.querySelector('.watch-image');
+      const imgUrl  = imgEl ? imgEl.style.backgroundImage : '';
+      const brand   = card.querySelector('.watch-brand').textContent.trim();
+      const modelEl = card.querySelector('.watch-model');
+      // Get model text for active language
+      const modelEnEl = modelEl.querySelector('[data-lang-en]');
+      const modelEsEl = modelEl.querySelector('[data-lang-es]');
+      const model  = lang === 'es' && modelEsEl ? modelEsEl.textContent.trim()
+                   : modelEnEl ? modelEnEl.textContent.trim()
+                   : modelEl.textContent.trim();
+      const year   = card.querySelector('.watch-year').textContent.trim();
+      const status = card.dataset.status || 'available';
+
+      // Extract ref + condition from specs
+      let ref = '—', condition = '—';
+      card.querySelectorAll('.watch-specs li').forEach(li => {
+        const txt = li.textContent.trim();
+        if (txt.startsWith('Ref.')) {
+          ref = txt;
+        } else if (li.hasAttribute('data-lang-en') && lang !== 'es') {
+          condition = txt;
+        } else if (li.hasAttribute('data-lang-es') && lang === 'es') {
+          condition = txt;
+        }
+      });
+
+      // Populate modal
+      mImage.style.backgroundImage = imgUrl;
+      mBrand.textContent    = brand;
+      mModel.textContent    = model;
+      mYear.textContent     = year;
+      mRef.textContent      = ref;
+      mCond.textContent     = condition;
+
+      // Badge
+      const statusLabels = { available: { en: 'Available', es: 'Disponible' }, sold: { en: 'Sold', es: 'Vendido' } };
+      mBadge.className    = 'modal-badge ' + status;
+      mBadge.textContent  = (statusLabels[status] || {})[lang] || status;
+
+      // CTA text
+      if (status === 'sold') {
+        mCta.textContent = lang === 'es' ? 'Consultar sobre piezas similares →' : 'Contact About Similar Watches →';
+      } else {
+        mCta.textContent = lang === 'es' ? 'Solicitar Info por WhatsApp →' : 'Request Info via WhatsApp →';
+      }
+      mCta.href = 'https://wa.me/';
+
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
-  });
-},{threshold:0.08,rootMargin:'0px 0px -2% 0px'});
-const heroStats=document.querySelector('.hero-stats');
-if(heroStats) counterObs.observe(heroStats);
 
-/* ─── FORM ─── */
-function submitForm(btn){
-  btn.textContent='¡Mensaje enviado!';
-  btn.style.background='var(--green)';
-  btn.style.color='#fff';
-  setTimeout(()=>{btn.textContent='Enviar mensaje';btn.style.background='';btn.style.color=''},3000);
-}
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
-/* ─── INIT ─── */
-initFilters();
-renderFeatured();
-renderInventory();
-renderMotos();
+    // Attach click to each card
+    document.querySelectorAll('.watch-card').forEach(card => {
+      card.addEventListener('click', function (e) {
+        // Don't interfere with existing link clicks inside card
+        if (!e.target.closest('a[href^="http"]')) openModal(card);
+      });
+    });
 
-/* ─── RE-OBSERVE AFTER RENDER ─── */
-setTimeout(()=>{
-  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>{
-    if(!el.classList.contains('revealed')) revealObs.observe(el);
-  });
-},100);
+    mClose.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+  })();
+
 </script>
+
 </body>
 </html>
