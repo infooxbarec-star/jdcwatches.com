@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>JDC Watches — Curated Timepieces</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23faf6ee'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-size='24' font-weight='700' fill='%230f1c33' letter-spacing='1'%3EJDC%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -106,30 +107,28 @@
     gap: 2rem;
   }
   .logo {
-    font-family: var(--serif);
-    font-size: 1.45rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--navy);
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    justify-content: flex-start;
+    min-height: 44px;
+    padding: 0.15rem 0;
+    transition: transform 300ms ease, opacity 300ms ease;
+    transform-origin: left center;
   }
-  .logo .mark {
-    display: inline-block;
-    width: 26px; height: 26px;
-    border: 1px solid var(--navy);
-    border-radius: 50%;
-    position: relative;
+  .logo:hover {
+    transform: scale(1.02);
+    opacity: 0.92;
   }
-  .logo .mark::after {
-    content: "";
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 6px; height: 6px;
-    background: var(--navy);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
+  .logo-img {
+    display: block;
+    width: auto;
+    height: 34px;
+    max-width: 220px;
+    object-fit: contain;
+  }
+  .logo.logo-on-dark .logo-img {
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
   }
   .nav-links {
     display: flex;
@@ -1438,9 +1437,12 @@
     padding-bottom: 3rem;
     border-bottom: 1px solid rgba(250, 246, 238, 0.1);
   }
-  .footer-brand .logo { color: var(--offwhite); }
-  .footer-brand .logo .mark { border-color: var(--offwhite); }
-  .footer-brand .logo .mark::after { background: var(--offwhite); }
+  .footer-brand .logo { min-height: 40px; }
+  .footer-brand .logo-img {
+    height: 28px;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+  }
   .footer-brand p {
     margin-top: 1rem;
     font-size: 0.9rem;
@@ -1661,8 +1663,7 @@
   <header class="nav" id="nav">
     <div class="nav-inner">
       <a href="#home" class="logo">
-        <span class="mark"></span>
-        <span>JDC Watches</span>
+        <img class="logo-img" src="https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/ChatGPT%20Image%20Apr%2028%2C%202026%20at%2012_11_14%20PM.png" alt="JDC Watches logo">
       </a>
       <nav>
         <ul class="nav-links" id="navLinks">
@@ -2267,8 +2268,7 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="#home" class="logo">
-          <span class="mark"></span>
-          <span>JDC Watches</span>
+          <img class="logo-img" src="https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/ChatGPT%20Image%20Apr%2028%2C%202026%20at%2012_11_14%20PM.png" alt="JDC Watches logo">
         </a>
         <p>
           <span data-lang-en>Curated mechanical watches. Bought, sold, and collected with passion. Based in Ecuador, sourcing globally.</span>
