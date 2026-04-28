@@ -859,6 +859,38 @@
     border: 1px solid rgba(20, 22, 26, 0.08);
     box-shadow: var(--shadow-lg);
     backdrop-filter: blur(14px);
+    position: relative;
+    padding-top: 4.5rem;
+  }
+  .journal-article-controls {
+    position: absolute;
+    top: 1.4rem;
+    left: 1.6rem;
+    right: 1.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    z-index: 3;
+  }
+  .journal-article-close {
+    margin-left: auto;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: var(--navy);
+    color: var(--offwhite);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .journal-article-close:hover {
+    background: #183153;
+    transform: translateY(-1px);
   }
   .journal-article-hero {
     position: relative;
@@ -896,14 +928,19 @@
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--navy);
-    margin-bottom: 1.15rem;
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: var(--navy);
+    color: var(--offwhite);
+    font-size: 0.84rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: background 0.25s ease, transform 0.25s ease;
   }
-  .journal-article-back:hover { color: var(--gold); }
+  .journal-article-back:hover {
+    background: #183153;
+    transform: translateY(-1px);
+  }
   .journal-article-kicker {
     display: block;
     margin-bottom: 0.9rem;
@@ -1026,6 +1063,12 @@
     .journal-related-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
+    .journal-article-shell { padding-top: 5rem; }
+    .journal-article-controls {
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+    }
     .journal-grid { grid-template-columns: 1fr; }
     .article.featured { grid-column: auto; }
     .journal-article-intro {
@@ -2569,14 +2612,17 @@
 
       return [
         '<div class="journal-article-shell">',
+          '<div class="journal-article-controls article-reveal">',
+            '<button class="journal-article-back" id="journalArticleBack" type="button">',
+              '<span data-lang-en>← Return to Journal</span>',
+              '<span data-lang-es>← Volver al Diario</span>',
+            '</button>',
+            '<button class="journal-article-close" id="journalArticleClose" type="button" aria-label="Close Article" title="Close Article">✕</button>',
+          '</div>',
           '<div class="journal-article-hero article-reveal in">',
             '<div class="journal-article-hero-media" data-journal-parallax style="background-image:url(\'', article.image, '\')"></div>',
           '</div>',
           '<div class="journal-article-intro article-reveal">',
-            '<button class="journal-article-back" id="journalArticleBack" type="button">',
-              '<span data-lang-en>← Back to Journal</span>',
-              '<span data-lang-es>← Volver al Diario</span>',
-            '</button>',
             '<span class="journal-article-kicker">', article.category, '</span>',
             '<h3 class="journal-article-title">', article.title, '</h3>',
             '<div class="journal-article-meta">',
@@ -2616,8 +2662,12 @@
 
     function bindArticleViewEvents() {
       const backButton = document.getElementById('journalArticleBack');
+      const closeButton = document.getElementById('journalArticleClose');
       if (backButton) {
         backButton.addEventListener('click', closeArticleView);
+      }
+      if (closeButton) {
+        closeButton.addEventListener('click', closeArticleView);
       }
       journalView.querySelectorAll('[data-related-article]').forEach(function (button) {
         button.addEventListener('click', function () {
