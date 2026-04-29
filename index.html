@@ -2046,6 +2046,42 @@
     </div>
   </section>
 
+  <!-- ============= SOLD ARCHIVE ============= -->
+  <section id="sold-archive">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="num eyebrow" style="color:var(--gold)">— 02</span>
+          <h2 class="display">
+            <span data-lang-en>Sold <em>Archive</em></span>
+            <span data-lang-es>Archivo <em>Vendido</em></span>
+          </h2>
+        </div>
+        <p class="meta">
+          <span data-lang-en>A curated record of timepieces previously sold by JDC Watches.</span>
+          <span data-lang-es>Un registro curado de piezas previamente vendidas por JDC Watches.</span>
+        </p>
+      </div>
+
+      <div class="archive-grid" id="archiveGrid">
+        <!-- Populated by soldArchive in script -->
+      </div>
+
+      <!-- CTA -->
+      <div class="archive-cta-wrap">
+        <p>
+          <span data-lang-en><em>Looking for a similar piece?</em> Contact us.</span>
+          <span data-lang-es><em>¿Buscas una pieza similar?</em> Escríbenos.</span>
+        </p>
+        <a href="https://wa.me/593982210111?text=Hola%21%20Me%20interesa%20una%20pieza%20del%20archivo%20vendido." target="_blank" rel="noopener" class="archive-cta-btn">
+          <span data-lang-en>WhatsApp Us</span>
+          <span data-lang-es>Escríbenos</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ============= ABOUT ============= -->
   <section id="about">
     <div class="about-grid">
@@ -2539,6 +2575,108 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ===== Sold archive data + render =====
+  const soldArchive = [
+    {
+      image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2012.29.38%20(1).jpeg',
+      brand: 'Panerai',
+      model: 'Luminor Marina',
+      year: '2008',
+      reference: 'PAM00104',
+      status: 'SOLD'
+    },
+    {
+      image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2012.29.38.jpeg',
+      brand: '—',
+      model: 'Sold Piece',
+      year: '—',
+      reference: '',
+      status: 'SOLD'
+    },
+    {
+      image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2012.29.39%20(1).jpeg',
+      brand: '—',
+      model: 'Sold Piece',
+      year: '—',
+      reference: '',
+      status: 'SOLD'
+    },
+    {
+      image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2012.29.39%20(2).jpeg',
+      brand: '—',
+      model: 'Sold Piece',
+      year: '—',
+      reference: '',
+      status: 'SOLD'
+    },
+    {
+      image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2012.29.39%20(3).jpeg',
+      brand: '—',
+      model: 'Sold Piece',
+      year: '—',
+      reference: '',
+      status: 'SOLD'
+    },
+    {
+      image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2012.29.39%20(4).jpeg',
+      brand: '—',
+      model: 'Sold Piece',
+      year: '—',
+      reference: '',
+      status: 'SOLD'
+    },
+    {
+      image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2012.29.39%20(5).jpeg',
+      brand: '—',
+      model: 'Sold Piece',
+      year: '—',
+      reference: '',
+      status: 'SOLD'
+    }
+  ];
+
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function renderSoldArchive() {
+    const archiveGrid = document.getElementById('archiveGrid');
+    if (!archiveGrid) return;
+
+    archiveGrid.innerHTML = soldArchive.map(item => {
+      const refMarkup = item.reference
+        ? '<span class="archive-ref">' + escapeHtml(item.reference) + '</span>'
+        : '<span class="archive-ref"></span>';
+
+      return [
+        '<article class="archive-card reveal">',
+          '<div class="archive-img-wrap">',
+            '<span class="archive-badge" data-lang-en>' + escapeHtml(item.status || 'SOLD') + '</span>',
+            '<span class="archive-badge" data-lang-es>VENDIDO</span>',
+            '<div class="archive-img" style="background-image:url(\'' + escapeHtml(item.image) + '\')"></div>',
+          '</div>',
+          '<div class="archive-body">',
+            '<div class="archive-meta-row">',
+              '<span class="archive-brand">' + escapeHtml(item.brand) + '</span>',
+              '<span class="archive-year">' + escapeHtml(item.year) + '</span>',
+            '</div>',
+            '<h3 class="archive-model">' + escapeHtml(item.model) + '</h3>',
+            refMarkup,
+          '</div>',
+        '</article>'
+      ].join('');
+    }).join('');
+
+    archiveGrid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+
+  renderSoldArchive();
 
   // ===== Inventory filter =====
   const filterBar = document.getElementById('filterBar');
