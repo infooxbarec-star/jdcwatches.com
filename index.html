@@ -659,6 +659,139 @@
   .watch-card.is-sold .watch-action { color: rgba(15, 28, 51, 0.4); }
 
   /* ============================================================
+     SOLD ARCHIVE
+     ============================================================ */
+  #sold-archive {
+    padding: 7rem var(--gutter);
+    background: var(--navy-deep);
+    position: relative;
+  }
+  #sold-archive .section-head { margin-bottom: 3.5rem; }
+  #sold-archive .section-head h2 { color: var(--beige-soft); }
+  #sold-archive .section-head h2 em { color: var(--gold-soft); font-style: italic; }
+  #sold-archive .num { color: var(--gold); }
+  #sold-archive .meta span { color: rgba(237,228,211,0.6); }
+
+  .archive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 2rem;
+    margin-bottom: 4rem;
+  }
+  @media (max-width: 900px) { .archive-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 560px) { .archive-grid { grid-template-columns: 1fr; } }
+
+  .archive-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(237,228,211,0.1);
+    transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease, border-color 0.4s ease;
+  }
+  .archive-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 60px -20px rgba(0,0,0,0.55);
+    border-color: rgba(184,150,90,0.35);
+  }
+
+  .archive-img-wrap {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: rgba(255,255,255,0.04);
+  }
+  .archive-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.9s cubic-bezier(0.22,1,0.36,1), filter 0.5s ease;
+    filter: grayscale(20%) brightness(0.88);
+  }
+  .archive-card:hover .archive-img { transform: scale(1.07); filter: grayscale(0%) brightness(0.96); }
+  .archive-img-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10,20,38,0.6) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .archive-badge {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    padding: 0.38rem 0.85rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: var(--charcoal);
+    color: var(--beige-soft);
+    z-index: 2;
+    border: 1px solid rgba(184,150,90,0.4);
+  }
+
+  .archive-body { padding: 1.4rem 1.5rem 1.6rem; }
+  .archive-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .archive-brand {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .archive-year {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: rgba(237,228,211,0.45);
+  }
+  .archive-model {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--beige-soft);
+    margin: 0 0 0.45rem;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+  }
+  .archive-ref {
+    font-size: 0.73rem;
+    color: rgba(237,228,211,0.4);
+    letter-spacing: 0.06em;
+  }
+
+  .archive-cta-wrap {
+    text-align: center;
+    border-top: 1px solid rgba(237,228,211,0.1);
+    padding-top: 3.5rem;
+  }
+  .archive-cta-wrap p {
+    font-size: 1.05rem;
+    color: rgba(237,228,211,0.65);
+    margin: 0 0 1.5rem;
+  }
+  .archive-cta-wrap p em { color: var(--beige-soft); font-style: normal; }
+  .archive-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 2rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--beige-soft);
+    border: 1px solid var(--gold);
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .archive-cta-btn:hover { background: var(--gold); color: var(--navy-deep); }
+  .archive-cta-btn::after { content: "→"; margin-left: 0.3rem; transition: transform 0.3s ease; display: inline-block; }
+  .archive-cta-btn:hover::after { transform: translateX(4px); }
+
+  /* ============================================================
      ABOUT
      ============================================================ */
   #about {
