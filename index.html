@@ -2562,6 +2562,7 @@
       document.querySelectorAll('.lang-switch button').forEach(b =>
         b.classList.toggle('active', b.dataset.setLang === lang)
       );
+      document.dispatchEvent(new CustomEvent('jdc:langchange', { detail: { lang } }));
     });
   });
 
@@ -2897,6 +2898,99 @@
       }
     };
 
+    const journalArticlesEs = {
+      'submariner-14060': {
+        category: 'REFERENCIA',
+        title: 'Por Qué el Submariner 14060 Es Favorito de los Coleccionistas',
+        date: 'Marzo 2025',
+        readTime: '6 min de lectura',
+        paragraphs: [
+          'Hay relojes que definen categorías — y luego hay relojes que definen silenciosamente el gusto. El Submariner 14060 pertenece al segundo grupo. Nunca fue el Rolex más llamativo del salón, ni el más complicado, ni el más publicitado. Y sin embargo, entre coleccionistas se ha convertido en algo mucho más importante: un punto de referencia.',
+          'No se trata de estatus. Se trata de claridad.',
+          'En esencia, el 14060 representa al Submariner en su forma más destilada. Sin ventana de fecha que interrumpa el dial. Sin lupa ciclope que magnifique nada innecesariamente. Solo simetría, equilibrio y propósito. Se siente intencional de una manera que los relojes modernos a menudo no logran replicar.',
+          'El bisel de aluminio juega un papel silencioso pero crucial. A diferencia de la cerámica, envejece. Se desvanece. Cuenta una historia. Con el tiempo, el negro profundo puede suavizarse en algo más cálido, más personal. Esa transformación no es un defecto — es el punto central. Cada pieza se vuelve única para su dueño.',
+          'Producido en los años 90 y principios de los 2000, el 14060 se sitúa en una era de transición. Conserva proporciones vintage pero se beneficia de la fiabilidad moderna. Cristal de zafiro. Ingeniería sólida. Usabilidad cotidiana. Es un reloj con el que puedes vivir — no solo guardar.',
+          'Y luego está cómo se lleva en la muñeca.',
+          'Con 40mm, se asienta más cerca de la muñeca que sus contrapartes modernas. La ausencia de elementos pulidos lo mantiene discreto. No exige atención — la gana lentamente.',
+          'Los coleccionistas a menudo debaten entre las variantes de dial de dos líneas y cuatro líneas. Pero ese debate es parte de lo que mantiene viva esta referencia. Invita a la matización. Recompensa la atención.',
+          'En un mundo donde los relojes son diseñados cada vez más para ser notados, el 14060 hace lo contrario. Desaparece. Y de alguna manera, eso es exactamente por qué destaca.'
+        ]
+      },
+      'seamaster-300': {
+        category: 'MODERNO',
+        title: 'Seamaster 300: Reloj Herramienta, Diseño Atemporal',
+        date: 'Febrero 2025',
+        readTime: '6 min de lectura',
+        paragraphs: [
+          'Algunos relojes evolucionan. Otros se adaptan. Y unos pocos logran hacer ambas cosas sin perder su identidad. El Seamaster 300 es uno de ellos.',
+          'De lejos, es inmediatamente reconocible. El dial con ondas. La válvula de escape de helio. Las agujas e índices en negrita. Pero lo que hace al Seamaster moderno convincente no es solo su diseño — es con qué confianza combina herencia e innovación.',
+          'Este no es un relanzamiento nostálgico. Es un reloj herramienta orientado al futuro.',
+          'El bisel y el dial de cerámica aportan durabilidad y profundidad. La luz juega sobre la superficie de una manera que se siente dinámica, casi arquitectónica. No es estático como los antiguos relojes de buceo — se mueve contigo.',
+          'Luego está el movimiento. Precisión, resistencia antimagnética y fiabilidad en el mundo real. Este es un reloj construido para entornos modernos, no solo para la exploración subacuática.',
+          'Y sin embargo, a pesar de toda esa tecnología, nunca se siente sobre-ingeniado.',
+          'El Seamaster se lleva con presencia. Ligeramente más grande, ligeramente más atrevido que los buzos tradicionales, pero equilibrado. Es confiado sin ser agresivo.',
+          'También es versátil de una manera que muchos relojes herramienta no son. Brazalete de acero, correa de goma — se adapta. Casual, viajes, negocios — encaja.',
+          'El genio del Seamaster 300 es que no intenta ser vintage. Respeta su pasado, pero está claramente construido para hoy.',
+          'Y eso es exactamente por qué funciona.'
+        ]
+      },
+      'vintage-rolex': {
+        category: 'VINTAGE',
+        title: 'La Belleza del Rolex Vintage',
+        date: 'Enero 2025',
+        readTime: '6 min de lectura',
+        paragraphs: [
+          'El Rolex vintage no se trata de perfección. Se trata de carácter.',
+          'Cada marca, cada desvanecimiento, cada imperfección cuenta una historia. Y en un mundo obsesionado con acabados impecables, esa historia se vuelve increíblemente valiosa.',
+          'Lo que define a un Rolex vintage no es solo la edad — es la presencia. La manera en que el dial ha envejecido. El calor de los marcadores de tritio. Las ligeras inconsistencias que la manufactura moderna ha eliminado.',
+          'Estos relojes se sienten humanos.',
+          'También hay cierta imprevisibilidad. No hay dos piezas idénticas. Incluso referencias producidas en el mismo año pueden envejecer de manera completamente diferente. Esa individualidad crea conexión. La propiedad se vuelve personal.',
+          'Pero más allá de la estética, hay algo más profundo: la contención.',
+          'Los relojes Rolex vintage fueron construidos primero como herramientas. La función dictaba el diseño. Las proporciones eran prácticas. Los materiales se elegían por su propósito, no por el lujo.',
+          'Esa filosofía es cada vez más rara.',
+          'Llevar un Rolex vintage es una experiencia diferente. Más ligero. Más sencillo. Más táctil. No intenta impresionar — simplemente existe.',
+          'Y al hacerlo, crea un tipo diferente de apreciación. Una que no es inmediata, sino que crece con el tiempo.',
+          'Esa es la belleza de lo vintage. No grita. Permanece.'
+        ]
+      },
+      'buying-first-luxury-watch': {
+        category: 'GUÍA',
+        title: 'Comprando Tu Primer Reloj de Lujo',
+        date: 'Diciembre 2024',
+        readTime: '6 min de lectura',
+        paragraphs: [
+          'Comprar tu primer reloj de lujo no es solo una compra — es un punto de entrada.',
+          'Es fácil sentirse abrumado. Marcas, referencias, movimientos, valor de reventa. El ruido es interminable. Pero la verdad es mucho más simple de lo que parece.',
+          'Empieza por cómo te hace sentir.',
+          'Un gran reloj no se define por el precio ni la complejidad. Se define por la conexión. El momento en que te lo pones y se siente bien — eso es lo que importa.',
+          'Por supuesto, hay consideraciones prácticas.',
+          'El tamaño es fundamental. Un reloj debe sentarse cómodamente en tu muñeca. Ni muy grande, ni muy pequeño. La proporción importa más que las tendencias.',
+          'La versatilidad es otro factor clave. Tu primer reloj debe funcionar en múltiples entornos. Uso diario, viajes, ocasiones formales. Cuanto más adaptable sea, más valor aporta.',
+          'Luego viene la marca y la historia. No por estatus — sino por comprensión. Saber de dónde viene un reloj añade profundidad a la propiedad.',
+          'Y finalmente, paciencia.',
+          'El reloj correcto no siempre es el primero que ves. Tómate tu tiempo. Investiga. Pruébate piezas. Deja que tu gusto se desarrolle.',
+          'Porque una vez que compras el primero, raramente se detiene ahí.',
+          'Una colección de relojes no comienza con la lógica.',
+          'Comienza con el instinto.'
+        ]
+      }
+    };
+
+    function getCurrentLang() {
+      return document.body.dataset.lang === 'es' ? 'es' : 'en';
+    }
+
+    function getArticleData(articleId) {
+      const base = journalArticles[articleId];
+      if (!base) return null;
+      const lang = getCurrentLang();
+      if (lang === 'es') {
+        const es = journalArticlesEs[articleId];
+        if (es) return Object.assign({}, es, { image: base.image });
+      }
+      return base;
+    }
+
     const articleOrder = ['submariner-14060', 'seamaster-300', 'vintage-rolex', 'buying-first-luxury-watch'];
     let activeArticleId = null;
     let activeHeroMedia = null;
@@ -2906,7 +3000,7 @@
       return articleOrder
         .filter(function (articleId) { return articleId !== currentArticleId; })
         .map(function (articleId) {
-          const article = journalArticles[articleId];
+          const article = getArticleData(articleId);
           return [
             '<button class="journal-related-card" type="button" data-related-article="', articleId, '">',
               '<div class="journal-related-image" style="background-image:url(\'', article.image, '\')"></div>',
@@ -2922,8 +3016,12 @@
     }
 
     function renderArticle(articleId) {
-      const article = journalArticles[articleId];
+      const article = getArticleData(articleId);
       if (!article) return '';
+      const lang = getCurrentLang();
+      const backLabel = lang === 'es' ? '← Volver al Diario' : '← Return to Journal';
+      const relatedLabel = lang === 'es' ? 'Artículos Relacionados' : 'Related Articles';
+      const continueLabel = lang === 'es' ? 'Seguir Leyendo' : 'Continue Reading';
 
       const paragraphs = article.paragraphs.map(function (paragraph) {
         return '<p class="journal-article-paragraph article-reveal">' + paragraph + '</p>';
@@ -2932,10 +3030,7 @@
       return [
         '<div class="journal-article-shell">',
           '<div class="journal-article-controls article-reveal">',
-            '<button class="journal-article-back" id="journalArticleBack" type="button">',
-              '<span data-lang-en>← Return to Journal</span>',
-              '<span data-lang-es>← Volver al Diario</span>',
-            '</button>',
+            '<button class="journal-article-back" id="journalArticleBack" type="button">', backLabel, '</button>',
             '<button class="journal-article-close" id="journalArticleClose" type="button" aria-label="Close Article" title="Close Article">✕</button>',
           '</div>',
           '<div class="journal-article-hero article-reveal in">',
@@ -2952,8 +3047,8 @@
           '<div class="journal-article-body">', paragraphs, '</div>',
           '<div class="journal-article-related article-reveal">',
             '<div class="journal-related-head">',
-              '<span class="eyebrow"><span data-lang-en>Related Articles</span><span data-lang-es>Artículos Relacionados</span></span>',
-              '<h3><span data-lang-en>Continue Reading</span><span data-lang-es>Seguir Leyendo</span></h3>',
+              '<span class="eyebrow">', relatedLabel, '</span>',
+              '<h3>', continueLabel, '</h3>',
             '</div>',
             '<div class="journal-related-grid">', renderRelatedCards(articleId), '</div>',
           '</div>',
@@ -2995,13 +3090,15 @@
       });
     }
 
-    function mountArticle(articleId) {
+    function mountArticle(articleId, noScroll) {
       journalView.innerHTML = renderArticle(articleId);
       bindArticleViewEvents();
       requestAnimationFrame(function () {
         journalView.classList.add('active');
         revealArticleContent();
-        journalView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (!noScroll) {
+          journalView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       });
     }
 
@@ -3059,6 +3156,12 @@
     });
 
     window.addEventListener('scroll', updateArticleParallax, { passive: true });
+
+    document.addEventListener('jdc:langchange', function () {
+      if (activeArticleId) {
+        mountArticle(activeArticleId, true);
+      }
+    });
   })();
 
 </script>
