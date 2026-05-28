@@ -571,16 +571,68 @@
   }
 
   .watch-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  .brand-group {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .brand-group-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem 1.25rem;
+    align-items: end;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(15, 28, 51, 0.14);
+  }
+
+  .brand-group-order {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: rgba(15, 28, 51, 0.55);
+  }
+
+  .brand-group-title {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(1.65rem, 3.5vw, 2.4rem);
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .brand-group-note {
+    margin: 0.35rem 0 0;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(15, 28, 51, 0.58);
+  }
+
+  .brand-group-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 3rem 2rem;
   }
 
+  .brand-group.sold-group .brand-group-head {
+    border-bottom-color: rgba(15, 28, 51, 0.22);
+  }
+
   .watch-card {
-    background: transparent;
+    background: linear-gradient(180deg, #132644 0%, #0f1c33 100%);
+    border: 1px solid rgba(15, 28, 51, 0.18);
+    box-shadow: 0 18px 40px -28px rgba(10, 20, 38, 0.55);
     cursor: pointer;
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
     position: relative;
+    overflow: hidden;
+    padding-bottom: 1.5rem;
   }
   .watch-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
 
@@ -588,7 +640,7 @@
     position: relative;
     aspect-ratio: 4 / 5;
     overflow: hidden;
-    background: var(--beige-soft);
+    background: #d8cfbf;
     margin-bottom: 1.4rem;
   }
   .watch-image {
@@ -656,6 +708,7 @@
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 0.6rem;
+    padding: 0 1.4rem;
   }
   .watch-brand {
     font-size: 0.72rem;
@@ -668,39 +721,49 @@
     font-family: var(--serif);
     font-style: italic;
     font-size: 0.95rem;
-    color: rgba(15, 28, 51, 0.6);
+    color: rgba(250, 246, 238, 0.68);
   }
   .watch-model {
     font-family: var(--serif);
     font-size: 1.65rem;
     font-weight: 700;
-    color: var(--navy);
+    color: var(--offwhite);
     margin: 0 0 0.6rem;
     line-height: 1.15;
     letter-spacing: -0.005em;
+    padding: 0 1.4rem;
   }
   .watch-specs {
     list-style: none;
     margin: 0 0 1.4rem;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 0.9rem;
-    font-size: 0.78rem;
-    color: var(--charcoal);
+    padding: 0 1.4rem;
+    display: grid;
+    gap: 0;
+    font-size: 0.8rem;
+    color: rgba(250, 246, 238, 0.82);
   }
   .watch-specs li {
-    position: relative;
-    padding-right: 0.9rem;
-    opacity: 0.75;
+    display: grid;
+    grid-template-columns: minmax(84px, 104px) 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.62rem 0;
+    border-top: 1px solid rgba(250, 246, 238, 0.12);
+    opacity: 1;
   }
-  .watch-specs li:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    right: 0; top: 50%;
-    width: 1px; height: 10px;
-    background: var(--line-strong);
-    transform: translateY(-50%);
+  .watch-specs li:last-child {
+    border-bottom: 1px solid rgba(250, 246, 238, 0.12);
+  }
+  .watch-spec-label {
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(201, 168, 114, 0.92);
+  }
+  .watch-spec-value {
+    color: rgba(250, 246, 238, 0.88);
+    text-align: right;
   }
 
   .watch-action {
@@ -711,15 +774,16 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     font-weight: 700;
-    color: var(--navy);
+    color: var(--offwhite);
     border-bottom: 1px solid transparent;
     padding-bottom: 0.3rem;
+    margin: 0 1.4rem;
     transition: border-color 0.3s ease, gap 0.3s ease;
   }
   .watch-action::after { content: "→"; transition: transform 0.3s ease; }
-  .watch-card:hover .watch-action { border-color: var(--navy); }
+  .watch-card:hover .watch-action { border-color: rgba(250, 246, 238, 0.75); }
   .watch-card:hover .watch-action::after { transform: translateX(4px); }
-  .watch-card.is-sold .watch-action { color: rgba(15, 28, 51, 0.4); }
+  .watch-card.is-sold .watch-action { color: rgba(250, 246, 238, 0.55); }
 
   /* ============================================================
      SOLD ARCHIVE
@@ -2022,184 +2086,144 @@
         <button class="active" data-filter="all" data-lang-es>Todos</button>
         <button data-filter="available" data-lang-en>Available</button>
         <button data-filter="available" data-lang-es>Disponibles</button>
-        <button data-filter="sold" data-lang-en>Sold</button>
-        <button data-filter="sold" data-lang-es>Vendidos</button>
         <button data-filter="rolex">Rolex</button>
         <button data-filter="omega">Omega</button>
-        <button data-filter="cartier">Cartier</button>
+        <button data-filter="longines">Longines</button>
       </div>
 
       <div class="watch-grid" id="watchGrid">
 
-        <!-- Cartier Panthère 2025 -->
-        <article class="watch-card reveal" data-status="available" data-brand="cartier">
-          <div class="watch-image-wrap">
-            <span class="badge available" data-lang-en>Available</span>
-            <span class="badge available" data-lang-es>Disponible</span>
-            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2017.54.48%20(1).jpeg')"></div>
-            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2017.54.48.jpeg'); opacity:0;"></div>
+        <section class="brand-group" data-section="rolex">
+          <div class="brand-group-head">
+            <span class="brand-group-order">01</span>
+            <div>
+              <h3 class="brand-group-title">Rolex</h3>
+              <p class="brand-group-note"><span data-lang-en>Current stock</span><span data-lang-es>Stock actual</span></p>
+            </div>
           </div>
-          <div class="watch-meta-row">
-            <span class="watch-brand">Cartier</span>
-            <span class="watch-year">2025</span>
+          <div class="brand-group-grid">
+            <!-- Rolex Datejust 36mm -->
+            <article class="watch-card reveal" data-status="available" data-brand="rolex">
+              <div class="watch-image-wrap">
+                <span class="badge available" data-lang-en>Available</span>
+                <span class="badge available" data-lang-es>Disponible</span>
+                <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-05-27%20at%2018.01.34%20(2).jpeg')"></div>
+                <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-05-27%20at%2018.01.34%20(2).jpeg'); opacity:0;"></div>
+              </div>
+              <div class="watch-meta-row">
+                <span class="watch-brand">Rolex</span>
+                <span class="watch-year">2017</span>
+              </div>
+              <h3 class="watch-model">Datejust 36mm</h3>
+              <ul class="watch-specs">
+                <li data-field="ref">
+                  <span class="watch-spec-label">Ref.</span>
+                  <span class="watch-spec-value">116200</span>
+                </li>
+                <li data-field="set">
+                  <span class="watch-spec-label"><span data-lang-en>Set</span><span data-lang-es>Set</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Box &amp; Papers</span><span data-lang-es>Caja y Papeles</span></span>
+                </li>
+                <li data-field="condition">
+                  <span class="watch-spec-label"><span data-lang-en>Condition</span><span data-lang-es>Estado</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Excellent, fresh service</span><span data-lang-es>Excelente, servicio reciente</span></span>
+                </li>
+              </ul>
+              <span class="watch-action">
+                <span data-lang-en>Request Info</span>
+                <span data-lang-es>Solicitar Info</span>
+              </span>
+            </article>
           </div>
-          <h3 class="watch-model">Panth&#232;re de Cartier</h3>
-          <ul class="watch-specs">
-            <li data-lang-en>Box &amp; Papers</li>
-            <li data-lang-es>Caja y Papeles</li>
-          </ul>
-          <span class="watch-action">
-            <span data-lang-en>Request Info</span>
-            <span data-lang-es>Solicitar Info</span>
-          </span>
-        </article>
+        </section>
 
-        <!-- Omega Seamaster 300 -->
-        <article class="watch-card reveal" data-status="available" data-brand="omega">
-          <div class="watch-image-wrap">
-            <span class="badge available" data-lang-en>Available</span>
-            <span class="badge available" data-lang-es>Disponible</span>
-            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.27.04%20(1).jpeg')"></div>
-            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.27.04.jpeg'); opacity:0;"></div>
+        <section class="brand-group" data-section="omega">
+          <div class="brand-group-head">
+            <span class="brand-group-order">02</span>
+            <div>
+              <h3 class="brand-group-title">Omega</h3>
+              <p class="brand-group-note"><span data-lang-en>Current stock</span><span data-lang-es>Stock actual</span></p>
+            </div>
           </div>
-          <div class="watch-meta-row">
-            <span class="watch-brand">Omega</span>
-            <span class="watch-year">2023</span>
+          <div class="brand-group-grid">
+            <!-- Omega Seamaster Diver 300M Peter Blake Quartz -->
+            <article class="watch-card reveal" data-status="available" data-brand="omega">
+              <div class="watch-image-wrap">
+                <span class="badge available" data-lang-en>Available</span>
+                <span class="badge available" data-lang-es>Disponible</span>
+                <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-05-27%20at%2018.01.34%20(1).jpeg')"></div>
+                <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-05-27%20at%2018.01.34%20(1).jpeg'); opacity:0;"></div>
+              </div>
+              <div class="watch-meta-row">
+                <span class="watch-brand">Omega</span>
+                <span class="watch-year">A consultar</span>
+              </div>
+              <h3 class="watch-model">Seamaster Diver 300M "Peter Blake" Quartz</h3>
+              <ul class="watch-specs">
+                <li data-field="ref">
+                  <span class="watch-spec-label">Ref.</span>
+                  <span class="watch-spec-value">2264.50.00</span>
+                </li>
+                <li data-field="set">
+                  <span class="watch-spec-label"><span data-lang-en>Set</span><span data-lang-es>Set</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Watch Only</span><span data-lang-es>Solo Reloj</span></span>
+                </li>
+                <li data-field="condition">
+                  <span class="watch-spec-label"><span data-lang-en>Condition</span><span data-lang-es>Estado</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Very good visual condition</span><span data-lang-es>Muy buen estado visual</span></span>
+                </li>
+              </ul>
+              <span class="watch-action">
+                <span data-lang-en>Request Info</span>
+                <span data-lang-es>Solicitar Info</span>
+              </span>
+            </article>
           </div>
-          <h3 class="watch-model">Seamaster 300</h3>
-          <ul class="watch-specs">
-            <li>Ref. 210.30.42.20.06.001</li>
-            <li data-lang-en>Box & Papers</li>
-            <li data-lang-es>Caja y Papeles</li>
-          </ul>
-          <span class="watch-action">
-            <span data-lang-en>Request Info</span>
-            <span data-lang-es>Solicitar Info</span>
-          </span>
-        </article>
+        </section>
 
-        <!-- Rolex Submariner No Date -->
-        <article class="watch-card reveal" data-status="available" data-brand="rolex">
-          <div class="watch-image-wrap">
-            <span class="badge available" data-lang-en>Available</span>
-            <span class="badge available" data-lang-es>Disponible</span>
-            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.28.11%20(1).jpeg')"></div>
-            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.28.11.jpeg'); opacity:0;"></div>
+        <section class="brand-group" data-section="longines">
+          <div class="brand-group-head">
+            <span class="brand-group-order">03</span>
+            <div>
+              <h3 class="brand-group-title">Longines</h3>
+              <p class="brand-group-note"><span data-lang-en>Current stock</span><span data-lang-es>Stock actual</span></p>
+            </div>
           </div>
-          <div class="watch-meta-row">
-            <span class="watch-brand">Rolex</span>
-            <span class="watch-year">2006</span>
+          <div class="brand-group-grid">
+            <!-- Longines HydroConquest -->
+            <article class="watch-card reveal" data-status="available" data-brand="longines">
+              <div class="watch-image-wrap">
+                <span class="badge available" data-lang-en>Available</span>
+                <span class="badge available" data-lang-es>Disponible</span>
+                <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-05-27%20at%2018.01.34.jpeg')"></div>
+                <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-05-27%20at%2018.01.34.jpeg'); opacity:0;"></div>
+              </div>
+              <div class="watch-meta-row">
+                <span class="watch-brand">Longines</span>
+                <span class="watch-year">2026</span>
+              </div>
+              <h3 class="watch-model">HydroConquest</h3>
+              <ul class="watch-specs">
+                <li data-field="ref">
+                  <span class="watch-spec-label">Ref.</span>
+                  <span class="watch-spec-value">L3.788.4.06.6</span>
+                </li>
+                <li data-field="set">
+                  <span class="watch-spec-label"><span data-lang-en>Set</span><span data-lang-es>Set</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Box &amp; Papers</span><span data-lang-es>Caja y Papeles</span></span>
+                </li>
+                <li data-field="condition">
+                  <span class="watch-spec-label"><span data-lang-en>Condition</span><span data-lang-es>Estado</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Brand new, unworn</span><span data-lang-es>Nuevo, sin uso</span></span>
+                </li>
+              </ul>
+              <span class="watch-action">
+                <span data-lang-en>Request Info</span>
+                <span data-lang-es>Solicitar Info</span>
+              </span>
+            </article>
           </div>
-          <h3 class="watch-model"><span data-lang-en>Submariner No Date</span><span data-lang-es>Submariner Sin Fecha</span></h3>
-          <ul class="watch-specs">
-            <li>Ref. 14060</li>
-            <li data-lang-en>Watch Only</li>
-            <li data-lang-es>Solo Reloj</li>
-          </ul>
-          <span class="watch-action">
-            <span data-lang-en>Request Info</span>
-            <span data-lang-es>Solicitar Info</span>
-          </span>
-        </article>
-
-        <!-- Panerai Luminor Marina PAM0048 -->
-        <article class="watch-card reveal" data-status="available" data-brand="panerai">
-          <div class="watch-image-wrap">
-            <span class="badge available" data-lang-en>Available</span>
-            <span class="badge available" data-lang-es>Disponible</span>
-            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2017.50.03.jpeg')"></div>
-            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2017.50.03%20(1).jpeg'); opacity:0;"></div>
-          </div>
-          <div class="watch-meta-row">
-            <span class="watch-brand">Panerai</span>
-            <span class="watch-year">2007</span>
-          </div>
-          <h3 class="watch-model">Luminor Marina</h3>
-          <ul class="watch-specs">
-            <li>Ref. PAM0048</li>
-            <li data-lang-en>Watch Only</li>
-            <li data-lang-es>Solo Reloj</li>
-          </ul>
-          <span class="watch-action">
-            <span data-lang-en>Request Info</span>
-            <span data-lang-es>Solicitar Info</span>
-          </span>
-        </article>
-
-        <!-- Omega Speedmaster (5th watch from images) -->
-        <article class="watch-card is-sold reveal" data-status="sold" data-brand="omega">
-          <div class="watch-image-wrap">
-            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.35.24%20(1).jpeg')"></div>
-            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.35.24.jpeg'); opacity:0;"></div>
-            <div class="sold-overlay"><span data-lang-en>Sold</span><span data-lang-es>Vendido</span></div>
-            <span class="badge sold" data-lang-en>Sold</span>
-            <span class="badge sold" data-lang-es>Vendido</span>
-          </div>
-          <div class="watch-meta-row">
-            <span class="watch-brand">Omega</span>
-            <span class="watch-year">2025</span>
-          </div>
-          <h3 class="watch-model">Speedmaster Professional</h3>
-          <ul class="watch-specs">
-            <li>Ref. 310.32.42.50.04.002</li>
-            <li data-lang-en>Unworn · Full Set</li>
-            <li data-lang-es>Sin Estrenar · Set Completo</li>
-          </ul>
-          <span class="watch-action">
-            <span data-lang-en>View Archive</span>
-            <span data-lang-es>Ver Archivo</span>
-          </span>
-        </article>
-
-        <!-- Rolex Air-King 5500 SOLD -->
-        <article class="watch-card is-sold reveal" data-status="sold" data-brand="rolex">
-          <div class="watch-image-wrap">
-            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.29.35%20(1).jpeg')"></div>
-            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.29.35.jpeg'); opacity:0;"></div>
-            <div class="sold-overlay"><span data-lang-en>Sold</span><span data-lang-es>Vendido</span></div>
-            <span class="badge sold" data-lang-en>Sold</span>
-            <span class="badge sold" data-lang-es>Vendido</span>
-          </div>
-          <div class="watch-meta-row">
-            <span class="watch-brand">Rolex</span>
-            <span class="watch-year">1970s</span>
-          </div>
-          <h3 class="watch-model">Air-King 5500</h3>
-          <ul class="watch-specs">
-            <li data-lang-en>34mm · Vintage</li>
-            <li data-lang-es>34mm · Vintage</li>
-            <li>Oyster Perpetual</li>
-          </ul>
-          <span class="watch-action">
-            <span data-lang-en>View Archive</span>
-            <span data-lang-es>Ver Archivo</span>
-          </span>
-        </article>
-
-        <!-- Omega Railmaster SOLD -->
-        <article class="watch-card is-sold reveal" data-status="sold" data-brand="omega">
-          <div class="watch-image-wrap">
-            <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.32.21%20(1).jpeg')"></div>
-            <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.32.21.jpeg'); opacity:0;"></div>
-            <div class="sold-overlay"><span data-lang-en>Sold</span><span data-lang-es>Vendido</span></div>
-            <span class="badge sold" data-lang-en>Sold</span>
-            <span class="badge sold" data-lang-es>Vendido</span>
-          </div>
-          <div class="watch-meta-row">
-            <span class="watch-brand">Omega</span>
-            <span class="watch-year">2020</span>
-          </div>
-          <h3 class="watch-model">Railmaster</h3>
-          <ul class="watch-specs">
-            <li>Ref. 220.10.40.20.06.001</li>
-            <li data-lang-en>Box & Papers</li>
-            <li data-lang-es>Caja y Papeles</li>
-          </ul>
-          <span class="watch-action">
-            <span data-lang-en>View Archive</span>
-            <span data-lang-es>Ver Archivo</span>
-          </span>
-        </article>
+        </section>
 
       </div>
     </div>
@@ -2865,6 +2889,7 @@
   // ===== Inventory filter =====
   const filterBar = document.getElementById('filterBar');
   const cards = document.querySelectorAll('#watchGrid .watch-card');
+  const brandGroups = document.querySelectorAll('#watchGrid .brand-group');
   filterBar.addEventListener('click', e => {
     const btn = e.target.closest('button[data-filter]');
     if (!btn) return;
@@ -2881,6 +2906,10 @@
         filter === status ||
         filter === brand;
       c.style.display = show ? '' : 'none';
+    });
+    brandGroups.forEach(group => {
+      const hasVisibleCards = Array.from(group.querySelectorAll('.watch-card')).some(card => card.style.display !== 'none');
+      group.style.display = hasVisibleCards ? '' : 'none';
     });
   });
 
@@ -2912,18 +2941,18 @@
       const year   = card.querySelector('.watch-year').textContent.trim();
       const status = card.dataset.status || 'available';
 
-      // Extract ref + condition from specs
-      let ref = '—', condition = '—';
-      card.querySelectorAll('.watch-specs li').forEach(li => {
-        const txt = li.textContent.trim();
-        if (txt.startsWith('Ref.')) {
-          ref = txt;
-        } else if (li.hasAttribute('data-lang-en') && lang !== 'es') {
-          condition = txt;
-        } else if (li.hasAttribute('data-lang-es') && lang === 'es') {
-          condition = txt;
-        }
-      });
+      // Extract ref + condition from structured spec rows
+      const refValue = card.querySelector('[data-field="ref"] .watch-spec-value');
+      const conditionValue = card.querySelector(lang === 'es'
+        ? '[data-field="condition"] .watch-spec-value [data-lang-es]'
+        : '[data-field="condition"] .watch-spec-value [data-lang-en]');
+      const fallbackCondition = card.querySelector('[data-field="condition"] .watch-spec-value');
+      const ref = refValue ? 'Ref. ' + refValue.textContent.trim() : '—';
+      const condition = conditionValue
+        ? conditionValue.textContent.trim()
+        : fallbackCondition
+          ? fallbackCondition.textContent.trim()
+          : '—';
 
       // Populate modal
       mImage.style.backgroundImage = imgUrl;
