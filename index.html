@@ -3098,8 +3098,6 @@
       const refEs = item.reference ? item.reference : 'No confirmada';
       const setEn = item.set || 'Not confirmed';
       const setEs = item.setEs || 'No confirmado';
-      const conditionEn = item.condition || 'Condition not disclosed';
-      const conditionEs = item.conditionEs || 'Condicion no indicada';
 
       return [
         '<article class="archive-card reveal">',
@@ -3117,7 +3115,6 @@
             '<ul class="archive-specs">',
               renderArchiveSpec('Ref.', 'Ref.', refEn, refEs),
               renderArchiveSpec('Set', 'Set', setEn, setEs),
-              renderArchiveSpec('Condition', 'Estado', conditionEn, conditionEs),
             '</ul>',
           '</div>',
         '</article>'
