@@ -880,14 +880,39 @@
     font-size: 1.35rem;
     font-weight: 700;
     color: var(--beige-soft);
-    margin: 0 0 0.45rem;
+    margin: 0 0 1rem;
     line-height: 1.15;
     letter-spacing: -0.005em;
   }
-  .archive-ref {
-    font-size: 0.73rem;
-    color: rgba(237,228,211,0.4);
-    letter-spacing: 0.06em;
+  .archive-specs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+  .archive-specs li {
+    display: grid;
+    grid-template-columns: minmax(82px, 98px) 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.62rem 0;
+    border-top: 1px solid rgba(237, 228, 211, 0.12);
+  }
+  .archive-specs li:last-child {
+    border-bottom: 1px solid rgba(237, 228, 211, 0.12);
+  }
+  .archive-spec-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(201, 168, 114, 0.92);
+  }
+  .archive-spec-value {
+    text-align: right;
+    color: rgba(237, 228, 211, 0.82);
+    font-size: 0.78rem;
   }
 
   .archive-cta-wrap {
@@ -2089,6 +2114,8 @@
         <button data-filter="rolex">Rolex</button>
         <button data-filter="omega">Omega</button>
         <button data-filter="longines">Longines</button>
+        <button data-filter="cartier">Cartier</button>
+        <button data-filter="panerai">Panerai</button>
       </div>
 
       <div class="watch-grid" id="watchGrid">
@@ -2134,6 +2161,39 @@
                 <span data-lang-es>Solicitar Info</span>
               </span>
             </article>
+
+            <!-- Rolex Submariner No Date -->
+            <article class="watch-card reveal" data-status="available" data-brand="rolex">
+              <div class="watch-image-wrap">
+                <span class="badge available" data-lang-en>Available</span>
+                <span class="badge available" data-lang-es>Disponible</span>
+                <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.28.11%20(1).jpeg')"></div>
+                <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.28.11.jpeg'); opacity:0;"></div>
+              </div>
+              <div class="watch-meta-row">
+                <span class="watch-brand">Rolex</span>
+                <span class="watch-year">2006</span>
+              </div>
+              <h3 class="watch-model"><span data-lang-en>Submariner No Date</span><span data-lang-es>Submariner Sin Fecha</span></h3>
+              <ul class="watch-specs">
+                <li data-field="ref">
+                  <span class="watch-spec-label">Ref.</span>
+                  <span class="watch-spec-value">14060</span>
+                </li>
+                <li data-field="set">
+                  <span class="watch-spec-label"><span data-lang-en>Set</span><span data-lang-es>Set</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Watch Only</span><span data-lang-es>Solo Reloj</span></span>
+                </li>
+                <li data-field="condition">
+                  <span class="watch-spec-label"><span data-lang-en>Condition</span><span data-lang-es>Estado</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Very good overall condition</span><span data-lang-es>Muy buen estado general</span></span>
+                </li>
+              </ul>
+              <span class="watch-action">
+                <span data-lang-en>Request Info</span>
+                <span data-lang-es>Solicitar Info</span>
+              </span>
+            </article>
           </div>
         </section>
 
@@ -2156,7 +2216,7 @@
               </div>
               <div class="watch-meta-row">
                 <span class="watch-brand">Omega</span>
-                <span class="watch-year">A consultar</span>
+                <span class="watch-year"><span data-lang-en>Year on request</span><span data-lang-es>Año a solicitud</span></span>
               </div>
               <h3 class="watch-model">Seamaster Diver 300M "Peter Blake" Quartz</h3>
               <ul class="watch-specs">
@@ -2171,6 +2231,39 @@
                 <li data-field="condition">
                   <span class="watch-spec-label"><span data-lang-en>Condition</span><span data-lang-es>Estado</span></span>
                   <span class="watch-spec-value"><span data-lang-en>Very good visual condition</span><span data-lang-es>Muy buen estado visual</span></span>
+                </li>
+              </ul>
+              <span class="watch-action">
+                <span data-lang-en>Request Info</span>
+                <span data-lang-es>Solicitar Info</span>
+              </span>
+            </article>
+
+            <!-- Omega Seamaster 300 -->
+            <article class="watch-card reveal" data-status="available" data-brand="omega">
+              <div class="watch-image-wrap">
+                <span class="badge available" data-lang-en>Available</span>
+                <span class="badge available" data-lang-es>Disponible</span>
+                <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.27.04%20(1).jpeg')"></div>
+                <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-27%20at%2013.27.04.jpeg'); opacity:0;"></div>
+              </div>
+              <div class="watch-meta-row">
+                <span class="watch-brand">Omega</span>
+                <span class="watch-year">2023</span>
+              </div>
+              <h3 class="watch-model">Seamaster 300</h3>
+              <ul class="watch-specs">
+                <li data-field="ref">
+                  <span class="watch-spec-label">Ref.</span>
+                  <span class="watch-spec-value">210.30.42.20.06.001</span>
+                </li>
+                <li data-field="set">
+                  <span class="watch-spec-label"><span data-lang-en>Set</span><span data-lang-es>Set</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Box &amp; Papers</span><span data-lang-es>Caja y Papeles</span></span>
+                </li>
+                <li data-field="condition">
+                  <span class="watch-spec-label"><span data-lang-en>Condition</span><span data-lang-es>Estado</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Excellent overall condition</span><span data-lang-es>Excelente estado general</span></span>
                 </li>
               </ul>
               <span class="watch-action">
@@ -2215,6 +2308,94 @@
                 <li data-field="condition">
                   <span class="watch-spec-label"><span data-lang-en>Condition</span><span data-lang-es>Estado</span></span>
                   <span class="watch-spec-value"><span data-lang-en>Brand new, unworn</span><span data-lang-es>Nuevo, sin uso</span></span>
+                </li>
+              </ul>
+              <span class="watch-action">
+                <span data-lang-en>Request Info</span>
+                <span data-lang-es>Solicitar Info</span>
+              </span>
+            </article>
+          </div>
+        </section>
+
+        <section class="brand-group" data-section="cartier">
+          <div class="brand-group-head">
+            <span class="brand-group-order">04</span>
+            <div>
+              <h3 class="brand-group-title">Cartier</h3>
+              <p class="brand-group-note"><span data-lang-en>Current stock</span><span data-lang-es>Stock actual</span></p>
+            </div>
+          </div>
+          <div class="brand-group-grid">
+            <!-- Cartier Panthere de Cartier -->
+            <article class="watch-card reveal" data-status="available" data-brand="cartier">
+              <div class="watch-image-wrap">
+                <span class="badge available" data-lang-en>Available</span>
+                <span class="badge available" data-lang-es>Disponible</span>
+                <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2017.54.48%20(1).jpeg')"></div>
+                <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2017.54.48.jpeg'); opacity:0;"></div>
+              </div>
+              <div class="watch-meta-row">
+                <span class="watch-brand">Cartier</span>
+                <span class="watch-year">2025</span>
+              </div>
+              <h3 class="watch-model">Panth&#232;re de Cartier</h3>
+              <ul class="watch-specs">
+                <li data-field="ref">
+                  <span class="watch-spec-label">Ref.</span>
+                  <span class="watch-spec-value"><span data-lang-en>Reference on request</span><span data-lang-es>Referencia a solicitud</span></span>
+                </li>
+                <li data-field="set">
+                  <span class="watch-spec-label"><span data-lang-en>Set</span><span data-lang-es>Set</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Box &amp; Papers</span><span data-lang-es>Caja y Papeles</span></span>
+                </li>
+                <li data-field="condition">
+                  <span class="watch-spec-label"><span data-lang-en>Condition</span><span data-lang-es>Estado</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Excellent overall condition</span><span data-lang-es>Excelente estado general</span></span>
+                </li>
+              </ul>
+              <span class="watch-action">
+                <span data-lang-en>Request Info</span>
+                <span data-lang-es>Solicitar Info</span>
+              </span>
+            </article>
+          </div>
+        </section>
+
+        <section class="brand-group" data-section="panerai">
+          <div class="brand-group-head">
+            <span class="brand-group-order">05</span>
+            <div>
+              <h3 class="brand-group-title">Panerai</h3>
+              <p class="brand-group-note"><span data-lang-en>Current stock</span><span data-lang-es>Stock actual</span></p>
+            </div>
+          </div>
+          <div class="brand-group-grid">
+            <!-- Panerai Luminor Marina -->
+            <article class="watch-card reveal" data-status="available" data-brand="panerai">
+              <div class="watch-image-wrap">
+                <span class="badge available" data-lang-en>Available</span>
+                <span class="badge available" data-lang-es>Disponible</span>
+                <div class="watch-image" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2017.50.03.jpeg')"></div>
+                <div class="watch-image watch-image-alt" style="background-image:url('https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2017.50.03%20(1).jpeg'); opacity:0;"></div>
+              </div>
+              <div class="watch-meta-row">
+                <span class="watch-brand">Panerai</span>
+                <span class="watch-year">2007</span>
+              </div>
+              <h3 class="watch-model">Luminor Marina</h3>
+              <ul class="watch-specs">
+                <li data-field="ref">
+                  <span class="watch-spec-label">Ref.</span>
+                  <span class="watch-spec-value">PAM0048</span>
+                </li>
+                <li data-field="set">
+                  <span class="watch-spec-label"><span data-lang-en>Set</span><span data-lang-es>Set</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Watch Only</span><span data-lang-es>Solo Reloj</span></span>
+                </li>
+                <li data-field="condition">
+                  <span class="watch-spec-label"><span data-lang-en>Condition</span><span data-lang-es>Estado</span></span>
+                  <span class="watch-spec-value"><span data-lang-en>Very good overall condition</span><span data-lang-es>Muy buen estado general</span></span>
                 </li>
               </ul>
               <span class="watch-action">
@@ -2768,6 +2949,10 @@
       model: 'Seamaster',
       year: '—',
       reference: '196.1523',
+      set: 'Not confirmed',
+      setEs: 'No confirmado',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
       status: 'SOLD'
     },
     {
@@ -2776,6 +2961,10 @@
       model: 'Mark XVII Heritage',
       year: '—',
       reference: '327006',
+      set: 'Not confirmed',
+      setEs: 'No confirmado',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
       status: 'SOLD'
     },
     {
@@ -2784,6 +2973,10 @@
       model: 'Speedmaster Silver Snoopy Award',
       year: '—',
       reference: '',
+      set: 'Not confirmed',
+      setEs: 'No confirmado',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
       status: 'SOLD'
     },
     {
@@ -2792,6 +2985,10 @@
       model: 'Seamaster Peter Blake',
       year: '—',
       reference: '2264.50.00',
+      set: 'Not confirmed',
+      setEs: 'No confirmado',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
       status: 'SOLD'
     },
     {
@@ -2800,6 +2997,10 @@
       model: 'Constellation',
       year: '—',
       reference: '15133000',
+      set: 'Not confirmed',
+      setEs: 'No confirmado',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
       status: 'SOLD'
     },
     {
@@ -2808,6 +3009,10 @@
       model: 'Carrera Calibre 5',
       year: '—',
       reference: 'WAR201B',
+      set: 'Not confirmed',
+      setEs: 'No confirmado',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
       status: 'SOLD'
     },
     {
@@ -2816,6 +3021,10 @@
       model: 'Carbon Gold',
       year: '—',
       reference: 'BB38CLCH',
+      set: 'Not confirmed',
+      setEs: 'No confirmado',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
       status: 'SOLD'
     },
     {
@@ -2824,6 +3033,10 @@
       model: 'Admiralty',
       year: '—',
       reference: '166.038',
+      set: 'Not confirmed',
+      setEs: 'No confirmado',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
       status: 'SOLD'
     },
     {
@@ -2832,6 +3045,10 @@
       model: 'Ronde Solo',
       year: '—',
       reference: '2934',
+      set: 'Not confirmed',
+      setEs: 'No confirmado',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
       status: 'SOLD'
     },
     {
@@ -2840,6 +3057,10 @@
       model: 'Datejust 36',
       year: '—',
       reference: '16013',
+      set: 'Not confirmed',
+      setEs: 'No confirmado',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
       status: 'SOLD'
     }
   ];
@@ -2853,14 +3074,32 @@
       .replace(/'/g, '&#39;');
   }
 
+  function bilingualText(en, es) {
+    return '<span data-lang-en>' + escapeHtml(en) + '</span><span data-lang-es>' + escapeHtml(es) + '</span>';
+  }
+
+  function renderArchiveSpec(labelEn, labelEs, valueEn, valueEs) {
+    return [
+      '<li>',
+        '<span class="archive-spec-label">', bilingualText(labelEn, labelEs), '</span>',
+        '<span class="archive-spec-value">', bilingualText(valueEn, valueEs), '</span>',
+      '</li>'
+    ].join('');
+  }
+
   function renderSoldArchive() {
     const archiveGrid = document.getElementById('archiveGrid');
     if (!archiveGrid) return;
 
     archiveGrid.innerHTML = soldArchive.map(item => {
-      const refMarkup = item.reference
-        ? '<span class="archive-ref">' + escapeHtml(item.reference) + '</span>'
-        : '<span class="archive-ref"></span>';
+      const yearEn = item.year && item.year !== '—' ? item.year : 'Not confirmed';
+      const yearEs = item.year && item.year !== '—' ? item.year : 'No confirmado';
+      const refEn = item.reference ? item.reference : 'Not confirmed';
+      const refEs = item.reference ? item.reference : 'No confirmada';
+      const setEn = item.set || 'Not confirmed';
+      const setEs = item.setEs || 'No confirmado';
+      const conditionEn = item.condition || 'Condition not disclosed';
+      const conditionEs = item.conditionEs || 'Condicion no indicada';
 
       return [
         '<article class="archive-card reveal">',
@@ -2872,10 +3111,14 @@
           '<div class="archive-body">',
             '<div class="archive-meta-row">',
               '<span class="archive-brand">' + escapeHtml(item.brand) + '</span>',
-              '<span class="archive-year">' + escapeHtml(item.year) + '</span>',
+              '<span class="archive-year">' + bilingualText(yearEn, yearEs) + '</span>',
             '</div>',
             '<h3 class="archive-model">' + escapeHtml(item.model) + '</h3>',
-            refMarkup,
+            '<ul class="archive-specs">',
+              renderArchiveSpec('Ref.', 'Ref.', refEn, refEs),
+              renderArchiveSpec('Set', 'Set', setEn, setEs),
+              renderArchiveSpec('Condition', 'Estado', conditionEn, conditionEs),
+            '</ul>',
           '</div>',
         '</article>'
       ].join('');
@@ -2926,6 +3169,12 @@
     const mCta      = document.getElementById('modalCta');
     const mClose    = document.getElementById('modalClose');
 
+    function getLocalizedNodeText(container, lang) {
+      if (!container) return '—';
+      const localized = container.querySelector(lang === 'es' ? '[data-lang-es]' : '[data-lang-en]');
+      return localized ? localized.textContent.trim() : container.textContent.trim();
+    }
+
     function openModal(card) {
       const lang    = document.body.dataset.lang || 'en';
       const imgEl   = card.querySelector('.watch-image');
@@ -2938,7 +3187,7 @@
       const model  = lang === 'es' && modelEsEl ? modelEsEl.textContent.trim()
                    : modelEnEl ? modelEnEl.textContent.trim()
                    : modelEl.textContent.trim();
-      const year   = card.querySelector('.watch-year').textContent.trim();
+      const year   = getLocalizedNodeText(card.querySelector('.watch-year'), lang);
       const status = card.dataset.status || 'available';
 
       // Extract ref + condition from structured spec rows
@@ -2947,7 +3196,7 @@
         ? '[data-field="condition"] .watch-spec-value [data-lang-es]'
         : '[data-field="condition"] .watch-spec-value [data-lang-en]');
       const fallbackCondition = card.querySelector('[data-field="condition"] .watch-spec-value');
-      const ref = refValue ? 'Ref. ' + refValue.textContent.trim() : '—';
+      const ref = refValue ? 'Ref. ' + getLocalizedNodeText(refValue, lang) : '—';
       const condition = conditionValue
         ? conditionValue.textContent.trim()
         : fallbackCondition
