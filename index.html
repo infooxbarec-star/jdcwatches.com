@@ -2874,8 +2874,8 @@
       model: 'Seamaster',
       year: '—',
       reference: '196.1523',
-      set: 'Not confirmed',
-      setEs: 'No confirmado',
+      set: 'Watch Only',
+      setEs: 'Solo Reloj',
       condition: 'Condition not disclosed',
       conditionEs: 'Condicion no indicada',
       status: 'SOLD'
@@ -2886,8 +2886,8 @@
       model: 'Mark XVII Heritage',
       year: '—',
       reference: '327006',
-      set: 'Not confirmed',
-      setEs: 'No confirmado',
+      set: 'Box & Papers',
+      setEs: 'Caja y Papeles',
       condition: 'Condition not disclosed',
       conditionEs: 'Condicion no indicada',
       status: 'SOLD'
@@ -2898,8 +2898,8 @@
       model: 'Speedmaster Silver Snoopy Award',
       year: '—',
       reference: '',
-      set: 'Not confirmed',
-      setEs: 'No confirmado',
+      set: 'Watch Only',
+      setEs: 'Solo Reloj',
       condition: 'Condition not disclosed',
       conditionEs: 'Condicion no indicada',
       status: 'SOLD'
@@ -2910,8 +2910,8 @@
       model: 'Seamaster Peter Blake',
       year: '—',
       reference: '2264.50.00',
-      set: 'Not confirmed',
-      setEs: 'No confirmado',
+      set: 'Box & Papers',
+      setEs: 'Caja y Papeles',
       condition: 'Condition not disclosed',
       conditionEs: 'Condicion no indicada',
       status: 'SOLD'
@@ -2922,8 +2922,8 @@
       model: 'Constellation',
       year: '—',
       reference: '15133000',
-      set: 'Not confirmed',
-      setEs: 'No confirmado',
+      set: 'Watch Only',
+      setEs: 'Solo Reloj',
       condition: 'Condition not disclosed',
       conditionEs: 'Condicion no indicada',
       status: 'SOLD'
@@ -2934,8 +2934,8 @@
       model: 'Carrera Calibre 5',
       year: '—',
       reference: 'WAR201B',
-      set: 'Not confirmed',
-      setEs: 'No confirmado',
+      set: 'Box & Papers',
+      setEs: 'Caja y Papeles',
       condition: 'Condition not disclosed',
       conditionEs: 'Condicion no indicada',
       status: 'SOLD'
@@ -2946,8 +2946,8 @@
       model: 'Carbon Gold',
       year: '—',
       reference: 'BB38CLCH',
-      set: 'Not confirmed',
-      setEs: 'No confirmado',
+      set: 'Watch Only',
+      setEs: 'Solo Reloj',
       condition: 'Condition not disclosed',
       conditionEs: 'Condicion no indicada',
       status: 'SOLD'
@@ -2958,8 +2958,8 @@
       model: 'Admiralty',
       year: '—',
       reference: '166.038',
-      set: 'Not confirmed',
-      setEs: 'No confirmado',
+      set: 'Box & Papers',
+      setEs: 'Caja y Papeles',
       condition: 'Condition not disclosed',
       conditionEs: 'Condicion no indicada',
       status: 'SOLD'
@@ -2970,8 +2970,8 @@
       model: 'Ronde Solo',
       year: '—',
       reference: '2934',
-      set: 'Not confirmed',
-      setEs: 'No confirmado',
+      set: 'Watch Only',
+      setEs: 'Solo Reloj',
       condition: 'Condition not disclosed',
       conditionEs: 'Condicion no indicada',
       status: 'SOLD'
@@ -2982,8 +2982,8 @@
       model: 'Datejust 36',
       year: '—',
       reference: '16013',
-      set: 'Not confirmed',
-      setEs: 'No confirmado',
+      set: 'Box & Papers',
+      setEs: 'Caja y Papeles',
       condition: 'Condition not disclosed',
       conditionEs: 'Condicion no indicada',
       status: 'SOLD'
@@ -3017,8 +3017,7 @@
     if (!archiveGrid) return;
 
     archiveGrid.innerHTML = soldArchive.map(item => {
-      const yearEn = item.year && item.year !== '—' ? item.year : 'Not confirmed';
-      const yearEs = item.year && item.year !== '—' ? item.year : 'No confirmado';
+      const hasYear = item.year && item.year !== '—';
       const refEn = item.reference ? item.reference : 'Not confirmed';
       const refEs = item.reference ? item.reference : 'No confirmada';
       const setEn = item.set || 'Not confirmed';
@@ -3034,7 +3033,7 @@
           '<div class="archive-body">',
             '<div class="archive-meta-row">',
               '<span class="archive-brand">' + escapeHtml(item.brand) + '</span>',
-              '<span class="archive-year">' + bilingualText(yearEn, yearEs) + '</span>',
+              (hasYear ? '<span class="archive-year">' + bilingualText(item.year, item.year) + '</span>' : ''),
             '</div>',
             '<h3 class="archive-model">' + escapeHtml(item.model) + '</h3>',
             '<ul class="archive-specs">',
