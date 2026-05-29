@@ -801,12 +801,37 @@
 
   .archive-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem 2rem;
+    gap: 3rem;
     margin-bottom: 4rem;
   }
-  @media (max-width: 900px) { .archive-grid { grid-template-columns: repeat(2,1fr); } }
-  @media (max-width: 560px) { .archive-grid { grid-template-columns: 1fr; } }
+
+  #sold-archive .brand-group.sold-group {
+    gap: 1.8rem;
+  }
+
+  #sold-archive .brand-group.sold-group .brand-group-head {
+    border-bottom-color: rgba(237, 228, 211, 0.14);
+  }
+
+  #sold-archive .brand-group.sold-group .brand-group-order {
+    color: rgba(237, 228, 211, 0.48);
+  }
+
+  #sold-archive .brand-group.sold-group .brand-group-title {
+    color: var(--beige-soft);
+  }
+
+  #sold-archive .brand-group.sold-group .brand-group-note {
+    color: rgba(237, 228, 211, 0.58);
+  }
+
+  .archive-brand-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 2rem;
+  }
+  @media (max-width: 900px) { .archive-brand-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 560px) { .archive-brand-grid { grid-template-columns: 1fr; } }
 
   .archive-card {
     background: rgba(255,255,255,0.03);
@@ -3012,36 +3037,67 @@
     ].join('');
   }
 
+  function renderArchiveCard(item) {
+    const hasYear = item.year && item.year !== '—';
+    const refEn = item.reference ? item.reference : 'Not confirmed';
+    const refEs = item.reference ? item.reference : 'No confirmada';
+    const setEn = item.set || 'Not confirmed';
+    const setEs = item.setEs || 'No confirmado';
+
+    return [
+      '<article class="archive-card reveal">',
+        '<div class="archive-img-wrap">',
+          '<span class="archive-badge" data-lang-en>' + escapeHtml(item.status || 'SOLD') + '</span>',
+          '<span class="archive-badge" data-lang-es>VENDIDO</span>',
+          '<div class="archive-img" style="background-image:url(\'' + escapeHtml(item.image) + '\')"></div>',
+        '</div>',
+        '<div class="archive-body">',
+          '<div class="archive-meta-row">',
+            '<span class="archive-brand">' + escapeHtml(item.brand) + '</span>',
+            (hasYear ? '<span class="archive-year">' + bilingualText(item.year, item.year) + '</span>' : ''),
+          '</div>',
+          '<h3 class="archive-model">' + escapeHtml(item.model) + '</h3>',
+          '<ul class="archive-specs">',
+            renderArchiveSpec('Ref.', 'Ref.', refEn, refEs),
+            renderArchiveSpec('Set', 'Set', setEn, setEs),
+          '</ul>',
+        '</div>',
+      '</article>'
+    ].join('');
+  }
+
   function renderSoldArchive() {
     const archiveGrid = document.getElementById('archiveGrid');
     if (!archiveGrid) return;
 
-    archiveGrid.innerHTML = soldArchive.map(item => {
-      const hasYear = item.year && item.year !== '—';
-      const refEn = item.reference ? item.reference : 'Not confirmed';
-      const refEs = item.reference ? item.reference : 'No confirmada';
-      const setEn = item.set || 'Not confirmed';
-      const setEs = item.setEs || 'No confirmado';
+    const groupedArchive = soldArchive.reduce((groups, item) => {
+      const brandKey = (item.brand || 'Other').trim();
+      if (!groups[brandKey]) groups[brandKey] = [];
+      groups[brandKey].push(item);
+      return groups;
+    }, {});
+
+    const brandNames = Object.keys(groupedArchive).sort((left, right) => left.localeCompare(right));
+
+    archiveGrid.innerHTML = brandNames.map((brandName, index) => {
+      const brandItems = groupedArchive[brandName];
+      const order = String(index + 1).padStart(2, '0');
+      const noteEn = brandItems.length === 1 ? '1 piece sold' : brandItems.length + ' pieces sold';
+      const noteEs = brandItems.length === 1 ? '1 pieza vendida' : brandItems.length + ' piezas vendidas';
 
       return [
-        '<article class="archive-card reveal">',
-          '<div class="archive-img-wrap">',
-            '<span class="archive-badge" data-lang-en>' + escapeHtml(item.status || 'SOLD') + '</span>',
-            '<span class="archive-badge" data-lang-es>VENDIDO</span>',
-            '<div class="archive-img" style="background-image:url(\'' + escapeHtml(item.image) + '\')"></div>',
-          '</div>',
-          '<div class="archive-body">',
-            '<div class="archive-meta-row">',
-              '<span class="archive-brand">' + escapeHtml(item.brand) + '</span>',
-              (hasYear ? '<span class="archive-year">' + bilingualText(item.year, item.year) + '</span>' : ''),
+        '<section class="brand-group sold-group">',
+          '<div class="brand-group-head">',
+            '<span class="brand-group-order">' + order + '</span>',
+            '<div>',
+              '<h3 class="brand-group-title">' + escapeHtml(brandName) + '</h3>',
+              '<p class="brand-group-note">' + bilingualText(noteEn, noteEs) + '</p>',
             '</div>',
-            '<h3 class="archive-model">' + escapeHtml(item.model) + '</h3>',
-            '<ul class="archive-specs">',
-              renderArchiveSpec('Ref.', 'Ref.', refEn, refEs),
-              renderArchiveSpec('Set', 'Set', setEn, setEs),
-            '</ul>',
           '</div>',
-        '</article>'
+          '<div class="archive-brand-grid">',
+            brandItems.map(renderArchiveCard).join(''),
+          '</div>',
+        '</section>'
       ].join('');
     }).join('');
 
