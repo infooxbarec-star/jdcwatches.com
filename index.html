@@ -2894,6 +2894,18 @@
       status: 'SOLD'
     },
     {
+      image: 'http://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-05-29%20at%2015.23.48.jpeg',
+      brand: 'Rolex',
+      model: 'Explorer I',
+      year: '—',
+      reference: '14270',
+      set: 'Box & Papers',
+      setEs: 'Caja y Papeles',
+      condition: 'Condition not disclosed',
+      conditionEs: 'Condicion no indicada',
+      status: 'SOLD'
+    },
+    {
       image: 'https://raw.githubusercontent.com/infooxbarec-star/jdcwatches.com/refs/heads/main/WhatsApp%20Image%202026-04-28%20at%2012.29.39.jpeg',
       brand: 'Omega',
       model: 'Seamaster',
@@ -3077,7 +3089,19 @@
       return groups;
     }, {});
 
-    const brandNames = Object.keys(groupedArchive).sort((left, right) => left.localeCompare(right));
+    const brandPriority = ['Rolex'];
+    const brandNames = Object.keys(groupedArchive).sort((left, right) => {
+      const leftPriority = brandPriority.indexOf(left);
+      const rightPriority = brandPriority.indexOf(right);
+
+      if (leftPriority !== -1 || rightPriority !== -1) {
+        if (leftPriority === -1) return 1;
+        if (rightPriority === -1) return -1;
+        return leftPriority - rightPriority;
+      }
+
+      return left.localeCompare(right);
+    });
 
     archiveGrid.innerHTML = brandNames.map((brandName, index) => {
       const brandItems = groupedArchive[brandName];
